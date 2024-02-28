@@ -25,26 +25,9 @@ def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow
     
 
 def main(src_exam_id: int):
-# def main(last_idx: int):
     engine_import = create_and_check_engine(database_url=database_destination_url)
     engine_log = create_and_check_engine(database_url=database_id_mapping_url)
-    # with open('id_import_2.txt', 'r') as file:
-    #     id_list = []
-    #     for line in file:
-    #         id = line.strip()
-    #         id_list.append(int(id))
-    # if last_idx != 0: last_idx += 1
-    # idx = 0 + last_idx
-    # error = []
-    # for id in id_list[last_idx:]:
-    #     try:
-    #         with get_session_from_engine(engine) as session:
-    #             exam_id = import_exam_bank(session, page=id)
-    #             print(f'{exam_id}   {idx}')
-    #             idx += 1
-    #     except:
-    #         error.append(id)
-    # print(error)
+
     with get_sessions_from_engines(engine_import, engine_log) as (session_import, session_log): 
         exam_id = import_exam_bank(session_import, session_log, exam_id=src_exam_id)
         print(exam_id)

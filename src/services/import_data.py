@@ -9,26 +9,6 @@ import requests
 import asyncio
 import aiohttp
 
-class PaperExamDownloader:
-    def __init__(self, api_authentication_token: str, url: str):
-        self.api_authentication_token = api_authentication_token
-        self.url = url
-
-    # async def extract_data(self, exam_id: int):
-    def extract_data(self, exam_id: int):
-        url = self.url.format(EXAM_ID=exam_id)
-        headers = {
-            'Authorization': f'Bearer {self.api_authentication_token}'
-        }
-        # async with aiohttp.ClientSession() as session:
-        with aiohttp.ClientSession() as session:
-            # async with session.get(url, headers=headers) as response:
-            with session.get(url, headers=headers) as response:
-                if response.status == 200:
-                    # return await response.json()
-                    return response.json()
-                return dict()
-
 
 
 class PrepExamData:
@@ -46,23 +26,10 @@ class PrepExamData:
 
 
 class ExamParser:
-    def __init__(self, session_import: Session, session_log: Session, 
-                #  exam_downloader: PaperExamDownloader
-                 ):
+    def __init__(self, session_import: Session, session_log: Session):
         self.session_import = session_import
         self.session_log = session_log
-        # self.exam_downloader = exam_downloader
         
-    # def extract_data(self, page):
-    #     auth_token = settings.api_authentication_token
-    #     url = settings.api_get_by_page.format(PAGE=page)
-    #     headers = {
-    #         'Authorization': f'Bearer {auth_token}'
-    #     }
-    #     response = requests.get(url, headers=headers)
-    #     if response.status_code == 200:
-    #         return response.json().get('data')[0]
-    #     return dict()
         
     def extract_data(self, exam_id):
         auth_token = settings.api_authentication_token
@@ -75,14 +42,10 @@ class ExamParser:
             return response.json().get('data')
         return dict()
 
-    # async def parse_as_dict_collections(self, exam_id) -> Optional[PrepExamData]:
     def parse_as_dict_collections(self, exam_id) -> Optional[PrepExamData]:
         exam_data = self.extract_data(exam_id=exam_id)
-        # exam_data = await self.exam_downloader.extract_data(exam_id)
-        # exam_data = self.exam_downloader.extract_data(exam_id)
         
         if exam_data:
-            # exam_data = exam_data.get('data')
             exam = Exam(
                 title=exam_data.get('title'),
                 term=exam_data.get('examTerm'),
@@ -427,15 +390,14 @@ class ExamParser:
 
         return question_group, quiz_questions, group_quiz_info_list
 
-    # async def import_exam(self, exam_id: int) -> int:
     def import_exam(self, exam_id: int) -> int:
-        # exam_data = await self.parse_as_dict_collections(exam_id)
         exam_data = self.parse_as_dict_collections(exam_id)
         if exam_data:
             quiz_info_list = exam_data.quiz_info_list
             quiz_info_idx = 0
             logs_list = []
             uniqid_idx = 0
+
             # Register all related ids for the current exam
             uniqid_list = exam_data.uniqid_list
             self.session_import.add_all(uniqid_list)
@@ -497,10 +459,6 @@ class ExamParser:
         return 0
     
 def import_exam_bank(session_import: Session, session_log: Session, exam_id: int):
-    # exam_downloader = PaperExamDownloader(settings.api_authentication_token, settings.api_get_by_exam_id)
-    # exam_parser = ExamParser(session_import, session_log, exam_downloader)
-    # loop = asyncio.get_event_loop()
-    # exam_id = loop.run_until_complete(exam_parser.import_exam(exam_id))
     exam_parser = ExamParser(session_import, session_log)
     exam_id = exam_parser.import_exam(exam_id)
     return exam_id

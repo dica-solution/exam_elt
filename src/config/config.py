@@ -17,4 +17,3 @@ def get_settings() -> Settings:
 
 
 settings = get_settings()
-# settings.db_destination
