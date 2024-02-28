@@ -1,6 +1,6 @@
 import json
 from typing import Any, Dict, List, Optional, Tuple
-from commons import (
+from src.commons import (
     ObjectTypeStrMapping,
     ExamType,
     QuizTypeSingleChoice,
@@ -11,7 +11,7 @@ from commons import (
     GradeIDMapping,
     SubjectIDMapping,
 )
-from exam_bank_models import (
+from src.models.exam_bank_models import (
     Exam,
     Uniqid,
     QuizQuestion,
@@ -26,9 +26,8 @@ from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.engine.base import Engine
 import requests
 import asyncio
-import pandas as pd
 import typer
-from import_exam_bank_by_exam_id import PrepExamData, ExamParser
+from exam_elt.src.services.import_data import PrepExamData, ExamParser
 
 quizz_database_url = "postgresql://postgres:3FGae34ggFIg@dica-server:54321/exam_bank"
 engine = create_engine(
@@ -175,12 +174,3 @@ class ExamUpdater(ExamParser):
                 order += 1
                 self.session.add(logs)
                 self.session.commit()
-
-
-def main(src_exam_id: int):
-    with get_session_from_engine(engine) as session:
-        exam_updater = ExamUpdater(session)
-        exam_data_update = exam_updater.update_exam(src_exam_id)
-
-if __name__=="__main__":
-    typer.run(main)
