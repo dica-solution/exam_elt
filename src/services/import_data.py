@@ -503,5 +503,4 @@ def import_exam_bank(session_import: Session, session_log: Session, exam_id: int
     # exam_id = loop.run_until_complete(exam_parser.import_exam(exam_id))
     exam_parser = ExamParser(session_import, session_log)
     exam_id = exam_parser.import_exam(exam_id)
-    print("ok")
     return exam_id

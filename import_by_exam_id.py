@@ -26,7 +26,7 @@ def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow
 
 def main(src_exam_id: int):
 # def main(last_idx: int):
-    engine_import = create_and_check_engine(database_url=database_destination_url),
+    engine_import = create_and_check_engine(database_url=database_destination_url)
     engine_log = create_and_check_engine(database_url=database_id_mapping_url)
     # with open('id_import_2.txt', 'r') as file:
     #     id_list = []
@@ -48,11 +48,5 @@ def main(src_exam_id: int):
     with get_sessions_from_engines(engine_import, engine_log) as (session_import, session_log): 
         exam_id = import_exam_bank(session_import, session_log, exam_id=src_exam_id)
         print(exam_id)
-    # session_import = get_session_from_engine(engine_import)
-    # session_log = get_session_from_engine(engine_log)
-    # exam_id = import_exam_bank(session_import, session_log, exam_id=src_exam_id)
-    # print(exam_id)
-
-
 if __name__=="__main__":
     typer.run(main)

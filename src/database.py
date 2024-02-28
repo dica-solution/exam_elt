@@ -22,7 +22,7 @@ def get_session_from_engine(from_engine):
 @contextmanager
 def get_sessions_from_engines(engine1, engine2):
     session1 = scoped_session(sessionmaker(bind=engine1))
-    session2 = scoped_session(sessionmaker(bind=engine2))
+    session2 = scoped_session(sessionmaker(bind=engine2)) 
     
     try:
         yield session1, session2
