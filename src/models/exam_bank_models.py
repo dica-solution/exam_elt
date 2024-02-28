@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy import Column, String, Integer, Date, DateTime, func, Text, Numeric, Boolean, BigInteger
 
-from database import Base
+from src.database import Base
 
 
 class Exam(Base):
@@ -10,8 +10,8 @@ class Exam(Base):
 
     created_at = Column(DateTime, default=datetime.now(), server_default=func.now())
     updated_at = Column(DateTime, default=datetime.now(), onupdate=func.now(), server_default=func.now())
-    created_by = Column(Integer, default=1)
-    updated_by = Column(Integer, default=1)
+    created_by = Column(BigInteger, default=1)
+    updated_by = Column(BigInteger, default=1)
 
     title = Column(String(255))
     term = Column(String(255))
@@ -33,8 +33,8 @@ class ExamQuestion(Base):
     id = Column(Integer, primary_key=True)
     created_at = Column(DateTime, default=datetime.now(), server_default=func.now())
     updated_at = Column(DateTime, default=datetime.now(), onupdate=func.now(), server_default=func.now())
-    exam_id = Column(Integer)
-    quiz_question_id = Column(Integer)
+    exam_id = Column(BigInteger)
+    quiz_question_id = Column(BigInteger)
     order = Column(Integer)
     is_checkpoint = Column(Boolean)
 
@@ -56,7 +56,7 @@ class QuizQuestion(Base):
 
     created_at = Column(DateTime, default=datetime.now(), server_default=func.now())
     updated_at = Column(DateTime, default=datetime.now(), onupdate=func.now(), server_default=func.now())
-    user_id = Column(Integer, default=1)
+    user_id = Column(BigInteger, default=1)
     quiz_question_group_id = Column(Integer)
     original_text = Column(Text, nullable=True)
     parsed_text = Column(Text, nullable=True)

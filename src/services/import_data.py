@@ -1,13 +1,15 @@
 import json
 from typing import Any, Dict, List, Optional, Tuple
-from commons import ObjectTypeStrMapping, ExamType, QuizTypeSingleChoice, QuizTypeSingleEssay, \
+from src.commons import ObjectTypeStrMapping, ExamType, QuizTypeSingleChoice, QuizTypeSingleEssay, \
     QuizTypeMultipleChoice, QuizTypeBlankFilling, QuizQuestionType, GradeIDMapping, SubjectIDMapping
-from exam_bank_models import Exam, Uniqid, QuizQuestion, QuizQuestionGroup, ExamQuestion, TrackingLogs, Base
-
+from src.models.exam_bank_models import Exam, Uniqid, QuizQuestion, QuizQuestionGroup, ExamQuestion, TrackingLogs, Base
+from src.config.config import settings
 from sqlalchemy.orm import Session
 import requests
-import typer
-import time
+import asyncio
+import aiohttp
+
+
 
 class PrepExamData:
     def __init__(self,
@@ -24,23 +26,14 @@ class PrepExamData:
 
 
 class ExamParser:
-    def __init__(self, session: Session,):
-        self.session = session
+    def __init__(self, session_import: Session, session_log: Session):
+        self.session_import = session_import
+        self.session_log = session_log
         
-    # def extract_data(self, page=1):
-    #     auth_token = "90ada831257ab7d972cd7f2b7c8e84d604dc3c81e9c90537ab1d4707bf7aca57e67d31536162b1fe8650a1ed11b656a25e945d72181a4eb00b0dbe1caf4d3d8f5205c40f6eda47093663c59bad2d5c15ea0946174ffda0445697471a14bebeccc53873d5107d80f7e2897f753c4e2b2c45091bf1591edfe7dbad41ffb031bf6b"
-    #     url = f"https://quizz.giainhanh.io/api/paper-exams?populate[0]=grade&populate[1]=subject&populate[3]=school&populate[4]=relatedItems.questionImages&populate[5]=relatedItems.relatedEssays&populate[6]=relatedItems.groupImages&populate[7]=relatedItems.relatedEntries&populate[8]=relatedItems.relatedEntries.questionImages&populate[9]=relatedItems.relatedQuizzes.questionImages&populate[10]=relatedItems.relatedEssays.questionImages&pagination[page]={page}&pagination[pageSize]=1&sort=id:asc"
-    #     headers = {
-    #         'Authorization': f'Bearer {auth_token}'
-    #     }
-    #     response = requests.get(url, headers=headers)
-    #     if response.status_code == 200:
-    #         return response.json().get('data')[0]
-    #     return dict()
         
-    def extract_data(self, page):
-        auth_token = "90ada831257ab7d972cd7f2b7c8e84d604dc3c81e9c90537ab1d4707bf7aca57e67d31536162b1fe8650a1ed11b656a25e945d72181a4eb00b0dbe1caf4d3d8f5205c40f6eda47093663c59bad2d5c15ea0946174ffda0445697471a14bebeccc53873d5107d80f7e2897f753c4e2b2c45091bf1591edfe7dbad41ffb031bf6b"
-        url = f"https://quizz.giainhanh.io/api/paper-exams/{page}?populate[0]=grade&populate[1]=subject&populate[3]=school&populate[4]=relatedItems.questionImages&populate[5]=relatedItems.relatedEssays&populate[6]=relatedItems.groupImages&populate[7]=relatedItems.relatedEntries&populate[8]=relatedItems.relatedEntries.questionImages&populate[9]=relatedItems.relatedQuizzes.questionImages&populate[10]=relatedItems.relatedEssays.questionImages"
+    def extract_data(self, exam_id):
+        auth_token = settings.api_authentication_token
+        url = settings.api_get_by_exam_id.format(EXAM_ID=exam_id)
         headers = {
             'Authorization': f'Bearer {auth_token}'
         }
@@ -49,9 +42,9 @@ class ExamParser:
             return response.json().get('data')
         return dict()
 
-    def parse_as_dict_collections(self, page) -> Optional[PrepExamData]:
-        # exam_json = await self.exam_downloader.download(exam_id)
-        exam_data = self.extract_data(page=page)
+    def parse_as_dict_collections(self, exam_id) -> Optional[PrepExamData]:
+        exam_data = self.extract_data(exam_id=exam_id)
+        
         if exam_data:
             exam = Exam(
                 title=exam_data.get('title'),
@@ -397,25 +390,26 @@ class ExamParser:
 
         return question_group, quiz_questions, group_quiz_info_list
 
-    def import_exam(self, page: int) -> int:
-        exam_data = self.parse_as_dict_collections(page)
+    def import_exam(self, exam_id: int) -> int:
+        exam_data = self.parse_as_dict_collections(exam_id)
         if exam_data:
             quiz_info_list = exam_data.quiz_info_list
             quiz_info_idx = 0
             logs_list = []
             uniqid_idx = 0
+
             # Register all related ids for the current exam
             uniqid_list = exam_data.uniqid_list
-            self.session.add_all(uniqid_list)
-            self.session.commit()
+            self.session_import.add_all(uniqid_list)
+            self.session_import.commit()
 
             # Specify exam id and store it
             exam = exam_data.exam
             exam.id = uniqid_list[uniqid_idx].to_uniqid_number()
             exam.num_quizzes = len(exam_data.quiz_question_list)
             uniqid_idx += 1
-            self.session.add(exam)
-            self.session.commit()
+            self.session_import.add(exam)
+            self.session_import.commit()
 
             # Store all quiz_question_group_list
             ref_quiz_groups = dict()
@@ -423,8 +417,8 @@ class ExamParser:
             for group in quiz_question_group_list:
                 group_id = group.id
                 group.id = None
-                self.session.add(group)
-                self.session.commit()
+                self.session_import.add(group)
+                self.session_import.commit()
                 ref_quiz_groups[group_id] = group.id
 
             # Specify related quizzes and store them
@@ -449,24 +443,22 @@ class ExamParser:
                     task_name = 'insert', # "insert", "update" or "delete"
                     order = idx,
                 ))
-            self.session.add_all(quiz_question_list)
-            # self.session.commit()
-            self.session.add_all(logs_list)
-            self.session.commit()
+            self.session_import.add_all(quiz_question_list)
+            self.session_import.commit()
+            self.session_log.add_all(logs_list)
+            self.session_log.commit()
 
             exam_question_list = []
             for idx, question in enumerate(quiz_question_list):
                 exam_question = ExamQuestion(exam_id=exam.id, quiz_question_id=question.id, order=idx, is_checkpoint=False)
                 exam_question_list.append(exam_question)
 
-            self.session.add_all(exam_question_list)
-            self.session.commit()
+            self.session_import.add_all(exam_question_list)
+            self.session_import.commit()
             return exam.id
         return 0
     
-def import_exam_bank(session: Session, page: int):
-    exam_parser = ExamParser(session)
-    # loop = asyncio.get_event_loop()
-    # exam_id = loop.run_until_complete(exam_parser.import_exam(exam_id))
-    exam_id = exam_parser.import_exam(page)
+def import_exam_bank(session_import: Session, session_log: Session, exam_id: int):
+    exam_parser = ExamParser(session_import, session_log)
+    exam_id = exam_parser.import_exam(exam_id)
     return exam_id
