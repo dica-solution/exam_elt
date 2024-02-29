@@ -7,7 +7,6 @@ from src.config.config import settings
 from sqlalchemy.orm import Session
 import requests
 import asyncio
-import aiohttp
 
 
 
