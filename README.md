@@ -19,20 +19,22 @@ DATABASE_URL
 
 
 ## Usage
-- Import exam with single `ID`
+- Create the `tracking_logs` table if not existed
 ```bash
+python create_id_mapping_table.py
+```
+- Depending on specific requirements, you will choose one from the following commands:
+```bash
+# Import exam with single `ID`
 python import.py --id [ID]
-```
-- Import exam with list IDs (contained in a text file)
-```bash
+
+# Import exam with list IDs (contained in a text file)
 python import.py --file [file_path]
-```
-- Sync exam with single `ID`
-```bash
+
+# Sync exam with single `ID`
 python sync.py --id [ID]
-```
-- Sync exam with list IDs (contained in a text file)
-```bash
+
+# Sync exam with list IDs (contained in a text file)
 python sync.py --file [file_path]
 ```
 
