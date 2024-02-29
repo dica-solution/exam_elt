@@ -12,7 +12,7 @@ poetry install
 ```
 
 ## Environment configuration
-Set up the Environment variables in the `.env.dev` depend on the installed environment
+Set up the Environment variables in the `.env.dev` depend on the installed environment. If the installed environment is on `dica-server`, you can skip this step.
 ```bash
 DATABASE_URL
 ```
