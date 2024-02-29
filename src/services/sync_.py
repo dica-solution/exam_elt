@@ -23,7 +23,7 @@ from src.models.exam_bank_models import (
 from sqlalchemy import and_, asc
 from sqlalchemy.orm import Session
 import requests
-from src.services.import_data import ExamParser
+from src.services.import_ import ExamParser
 from src.config.config import settings
 
 
@@ -154,3 +154,11 @@ class ExamUpdater(ExamParser):
                 order += 1
                 self.session_log.add(logs)
                 self.session_log.commit()
+            return des_exam_id
+        return 0
+
+
+def sync_exam_bank(session_import: Session, session_log: Session, exam_id: int):
+    exam_updater = ExamUpdater(session_import, session_log)
+    exam_id = exam_updater.update_exam(exam_id)
+    return exam_id
