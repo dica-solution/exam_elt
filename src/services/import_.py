@@ -133,10 +133,10 @@ class ExamParser:
             return 0
 
     def parse_single_quiz_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
-        original_text = item.get('questionContent')
+        original_text = item.get('questionContent') if item.get('questionContent') is not None else ""
         parsed_text = original_text
         quiz_type = QuizTypeMultipleChoice if quiz_question_group_id else QuizTypeSingleChoice
-        explanation = item.get('longAnswer', '')
+        explanation = item.get('longAnswer') if item.get('longAnswer') is not None else ""
         links = {"audio_links": [], "video_links": [], "image_links": []}
         question_audio = item.get('questionAudio')
         if question_audio:
@@ -200,11 +200,11 @@ class ExamParser:
         return question_group, quiz_questions, group_quiz_info_list
 
     def parse_single_essay_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
-        original_text = item.get('questionContent')
+        original_text = item.get('questionContent') if item.get('questionContent') is not None else ""
         parsed_text = original_text
         # quiz_type = QuizTypeGroupEssay if quiz_question_group_id else QuizTypeSingleEssay
         quiz_type = QuizTypeSingleEssay
-        explanation = item.get('longAnswer', '')
+        explanation = item.get('longAnswer') if item.get('longAnswer') is not None else ""
         links = {"audio_links": [], "video_links": [], "image_links": []}
         question_audio = item.get('questionAudio')
         if question_audio:
@@ -261,10 +261,10 @@ class ExamParser:
         return question_group, quiz_questions, group_quiz_info_list
 
     def parse_single_text_entry_question(self, item: Dict[str, Any], exam_id: int, quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
-        original_text = item.get('questionContent')
+        original_text = item.get('questionContent') if item.get('questionContent') is not None else ""
         parsed_text = original_text
         quiz_type = QuizTypeBlankFilling
-        explanation = item.get('longAnswer', '')
+        explanation = item.get('longAnswer') if item.get('longAnswer') is not None else ""
         links = {"audio_links": [], "video_links": [], "image_links": []}
         question_audio = item.get('questionAudio')
         if question_audio:
@@ -322,10 +322,10 @@ class ExamParser:
         return question_group, quiz_questions, group_quiz_info_list
     
     def parse_single_true_false_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
-        original_text = item.get('questionContent')
+        original_text = item.get('questionContent') if item.get('questionContent') is not None else ""
         parsed_text = original_text
         quiz_type = QuizTypeMultipleChoice if quiz_question_group_id else QuizTypeSingleChoice
-        explanation = item.get('longAnswer', '')
+        explanation = item.get('longAnswer') if item.get('longAnswer') is not None else ""
         links = {"audio_links": [], "video_links": [], "image_links": []}
         question_audio = item.get('questionAudio')
         if question_audio:

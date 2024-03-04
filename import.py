@@ -71,7 +71,7 @@ def import_by_text_file(database_destination_url, database_id_mapping_url, file_
                 file.write(str(error_id) + '\n')
             file.close()
 
-def import_by_id(database_destination_url, database_id_mapping_url, id):
+def import_by_id(database_destination_url, database_id_mapping_url, id: int):
 
     if not os.path.exists('exam_ids/exam_ids_imported.txt'):
         with open('exam_ids/exam_ids_imported.txt', 'w'):
