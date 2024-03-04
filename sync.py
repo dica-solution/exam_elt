@@ -31,7 +31,7 @@ def sync_by_text_file(database_destination_url, database_id_mapping_url, file_pa
     # if exam_ids_synced:
     #     exam_ids_to_sync = [line.strip() for line in open(file_path, 'r') if line.strip() not in exam_ids_synced]
     exam_ids_to_sync = [line.strip() for line in open(file_path, 'r')]
-
+    print(f'{len(exam_ids_to_sync)} IDs are ready to sync!')
     ids_synced = []
     errors = []
 
@@ -41,15 +41,17 @@ def sync_by_text_file(database_destination_url, database_id_mapping_url, file_pa
     for i in range(len(exam_ids_to_sync)):
         with get_sessions_from_engines(engine_sync, engine_log) as (session_sync, session_log):
             try:
-                src_exam_id = exam_ids_to_sync[i]
-                exam_id = sync_exam_bank(session_sync, session_log, exam_id=int(src_exam_id))
+                src_exam_id = int(exam_ids_to_sync[i])
+                exam_id = sync_exam_bank(session_sync, session_log, exam_id=src_exam_id)
                 if exam_id != 0:
                     ids_synced.append(src_exam_id)
+                    print(f'destination ID: {exam_id}   , source ID{src_exam_id: 10}, state: success')
                 if exam_id == 0:
                     errors.append(src_exam_id)
-                print(f'{exam_id}   {src_exam_id}  {i}')
+                    print(f'destination ID: {exam_id}   , source ID{src_exam_id: 10}, state: fail')
             except:
                 errors.append(src_exam_id)
+                print(f'destination ID: {0:15}, source ID{src_exam_id: 15}, state: fail')
 
     if ids_synced:
         ids_synced = [id_synced for id_synced in ids_synced if id_synced not in exam_ids_synced]
@@ -85,11 +87,13 @@ def sync_by_id(database_destination_url, database_id_mapping_url, id):
             exam_id = sync_exam_bank(session_sync, session_log, exam_id=id)
             if exam_id != 0:
                 ids_synced.append(id)
+                print(f'destination ID: {exam_id:15}, source ID{id: 10}, state: success')
             if exam_id == 0:
                 errors.append(id)
-            print(f'{exam_id}   {id}  {0}')
+                print(f'destination ID: {exam_id:15}, source ID{id: 10}, state: fail')
     except:
         errors.append(id)
+        print(f'destination ID: {0:15}, source ID{id: 15}, state: fail')
 
     if ids_synced:
         ids_synced = [id_synced for id_synced in ids_synced if str(id_synced) not in exam_ids_synced]

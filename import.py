@@ -28,9 +28,12 @@ def import_by_text_file(database_destination_url, database_id_mapping_url, file_
             pass
 
     exam_ids_imported = [line.strip() for line in open('exam_ids/exam_ids_imported.txt', 'r')]
+    print(f'{len(exam_ids_imported)} IDs have been imported in db!')
     if exam_ids_imported:
         exam_ids_to_import = [line.strip() for line in open(file_path, 'r') if line.strip() not in exam_ids_imported]
-    exam_ids_to_import = [line.strip() for line in open(file_path, 'r')]
+    else:
+        exam_ids_to_import = [line.strip() for line in open(file_path, 'r')]
+    print(f'{len(exam_ids_to_import)} IDs are ready to import!')
 
     ids_imported = []
     errors = []
@@ -41,15 +44,17 @@ def import_by_text_file(database_destination_url, database_id_mapping_url, file_
     for i in range(len(exam_ids_to_import)):
         with get_sessions_from_engines(engine_import, engine_log) as (session_import, session_log):
             try:
-                src_exam_id = exam_ids_to_import[i]
-                exam_id = import_exam_bank(session_import, session_log, exam_id=int(src_exam_id))
+                src_exam_id = int(exam_ids_to_import[i])
+                exam_id = import_exam_bank(session_import, session_log, exam_id=src_exam_id)
                 if exam_id != 0:
                     ids_imported.append(src_exam_id)
+                    print(f'destination ID: {exam_id}   , source ID{src_exam_id: 10}, state: success')
                 if exam_id == 0:
                     errors.append(src_exam_id)
-                print(f'{exam_id}   {src_exam_id}  {i}')
+                    print(f'destination ID: {exam_id}   , source ID{src_exam_id: 10}, state: fail')
             except:
                 errors.append(src_exam_id)
+                print(f'destination ID: {0:15}, source ID{src_exam_id: 15}, state: fail')
 
     if ids_imported:
         ids_imported = [id_imported for id_imported in ids_imported if id_imported not in exam_ids_imported]
@@ -85,11 +90,13 @@ def import_by_id(database_destination_url, database_id_mapping_url, id):
             exam_id = import_exam_bank(session_import, session_log, exam_id=id)
             if exam_id != 0:
                 ids_imported.append(id)
+                print(f'destination ID: {exam_id:15}, source ID{id: 10}, state: success')
             if exam_id == 0:
                 errors.append(id)
-            print(f'{exam_id}   {id}  {0}')
+                print(f'destination ID: {exam_id:15}, source ID{id: 10}, state: fail')
     except:
         errors.append(id)
+        print(f'destination ID: {0:15}, source ID{id: 15}, state: fail')
 
     if ids_imported:
         ids_imported = [id_imported for id_imported in ids_imported if str(id_imported) not in exam_ids_imported]
