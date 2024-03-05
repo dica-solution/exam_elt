@@ -7,6 +7,7 @@ from src.config.config import settings
 from sqlalchemy.orm import Session
 import requests
 import asyncio
+import re
 
 
 
@@ -40,6 +41,19 @@ class ExamParser:
         if response.status_code == 200:
             return response.json().get('data')
         return dict()
+    
+    def transform_data(self, text_data):
+        # Extracts all substrings that match the given regex pattern and replaces '\[' with '(' and '\]' with ')' in each match.
+        if text_data:
+            pattern = r'<span class="math-tex">\\\[.*?\\\]</span>'
+            matches = re.findall(pattern, text_data)
+
+            for match in matches:
+                new_match = match.replace('\\[', '\\(').replace('\\]', '\\)')
+                text_data = text_data.replace(match, new_match)
+            
+            return text_data
+        return text_data
 
     def parse_as_dict_collections(self, exam_id) -> Optional[PrepExamData]:
         exam_data = self.extract_data(exam_id=exam_id)
@@ -133,10 +147,10 @@ class ExamParser:
             return 0
 
     def parse_single_quiz_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
-        original_text = item.get('questionContent') if item.get('questionContent') is not None else ""
+        original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text
         quiz_type = QuizTypeMultipleChoice if quiz_question_group_id else QuizTypeSingleChoice
-        explanation = item.get('longAnswer') if item.get('longAnswer') is not None else ""
+        explanation = self.transform_data(item.get('longAnswer') if item.get('longAnswer') is not None else "")
         links = {"audio_links": [], "video_links": [], "image_links": []}
         question_audio = item.get('questionAudio')
         if question_audio:
@@ -147,7 +161,7 @@ class ExamParser:
                 links["image_links"].append(image.get('url'))
         quiz_options = []
         for label_key in ['A', 'B', 'C', 'D']:
-            option_content = item.get(f'label{label_key}')
+            option_content = self.transform_data(item.get(f'label{label_key}'))
             if item.get('correctLabel') == f'label{label_key}':
                 quiz_options.append(dict(label=label_key, content=option_content, is_correct=True))
             else:
@@ -173,7 +187,7 @@ class ExamParser:
         quiz_questions = []
         group_quiz_info_list = []
         quiz_question_group_id = group_item.get('id')
-        group_original_text = group_item.get('groupContent', '')
+        group_original_text = self.transform_data(group_item.get('groupContent') if group_item.get('groupContent') is not None else "")
         group_parsed_text = group_original_text
 
         group_links = {"audio_links": [], "video_links": [], "image_links": []}
@@ -200,11 +214,11 @@ class ExamParser:
         return question_group, quiz_questions, group_quiz_info_list
 
     def parse_single_essay_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
-        original_text = item.get('questionContent') if item.get('questionContent') is not None else ""
+        original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text
         # quiz_type = QuizTypeGroupEssay if quiz_question_group_id else QuizTypeSingleEssay
         quiz_type = QuizTypeSingleEssay
-        explanation = item.get('longAnswer') if item.get('longAnswer') is not None else ""
+        explanation = self.transform_data(item.get('longAnswer') if item.get('longAnswer') is not None else "")
         links = {"audio_links": [], "video_links": [], "image_links": []}
         question_audio = item.get('questionAudio')
         if question_audio:
@@ -234,7 +248,7 @@ class ExamParser:
         quiz_questions = []
         group_quiz_info_list = []
         quiz_question_group_id = group_item.get('id')
-        group_original_text = group_item.get('groupContent', '')
+        group_original_text = self.transform_data(group_item.get('groupContent') if group_item.get('groupContent') is not None else "")
         group_parsed_text = group_original_text
 
         group_links = {"audio_links": [], "video_links": [], "image_links": []}
@@ -261,7 +275,7 @@ class ExamParser:
         return question_group, quiz_questions, group_quiz_info_list
 
     def parse_single_text_entry_question(self, item: Dict[str, Any], exam_id: int, quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
-        original_text = item.get('questionContent') if item.get('questionContent') is not None else ""
+        original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text
         quiz_type = QuizTypeBlankFilling
         explanation = item.get('longAnswer') if item.get('longAnswer') is not None else ""
@@ -295,7 +309,7 @@ class ExamParser:
         quiz_questions = []
         group_quiz_info_list = []
         quiz_question_group_id = group_item.get('id')
-        group_original_text = group_item.get('groupContent', '')
+        group_original_text = self.transform_data(group_item.get('groupContent') if group_item.get('groupContent') is not None else "")
         group_parsed_text = group_original_text
 
         group_links = {"audio_links": [], "video_links": [], "image_links": []}
@@ -322,7 +336,7 @@ class ExamParser:
         return question_group, quiz_questions, group_quiz_info_list
     
     def parse_single_true_false_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
-        original_text = item.get('questionContent') if item.get('questionContent') is not None else ""
+        original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text
         quiz_type = QuizTypeMultipleChoice if quiz_question_group_id else QuizTypeSingleChoice
         explanation = item.get('longAnswer') if item.get('longAnswer') is not None else ""
@@ -363,7 +377,7 @@ class ExamParser:
         quiz_questions = []
         group_quiz_info_list = []
         quiz_question_group_id = group_item.get('id')
-        group_original_text = group_item.get('groupContent', '')
+        group_original_text = self.transform_data(group_item.get('groupContent') if group_item.get('groupContent') is not None else "")
         group_parsed_text = group_original_text
 
         group_links = {"audio_links": [], "video_links": [], "image_links": []}
