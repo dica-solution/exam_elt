@@ -42,7 +42,10 @@ class ExamParser:
             return response.json().get('data')
         return dict()
     
-    def transform_data(self, text_data):
+    def transform_data(self, text_data: Optional[str]):
+        # Replace '&amp;' to '&'
+        text_data = text_data.replace('&amp;', '&')
+
         # Extracts all substrings that match the given regex pattern and replaces '\[' with '(' and '\]' with ')' in each match.
         if text_data:
             pattern = r'<span class="math-tex">\\\[.*?\\\]</span>'

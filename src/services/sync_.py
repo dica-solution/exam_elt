@@ -104,18 +104,18 @@ class ExamUpdater(ExamParser):
         exam_data_update = self.parse_as_dict_collections(src_exam_id)
         if exam_data_update:
             # Update exam
-            record_exam = self.session_import.query(Exam).filter(Exam.id == des_exam_id).first()
-            record_exam.title = exam_data_update.exam.title
-            record_exam.term = exam_data_update.exam.term
-            record_exam.description = exam_data_update.exam.description
-            record_exam.duration = exam_data_update.exam.duration
-            record_exam.school_year = exam_data_update.exam.school_year
-            record_exam.subject_id = exam_data_update.exam.subject_id
-            record_exam.grade_id = exam_data_update.exam.grade_id
-            record_exam.school_id = exam_data_update.exam.school_id
-            record_exam.subdivision_id = exam_data_update.exam.subdivision_id
-            record_exam.checkpoints = exam_data_update.exam.checkpoints
-            self.session_import.commit()
+            # record_exam = self.session_import.query(Exam).filter(Exam.id == des_exam_id).first()
+            # record_exam.title = exam_data_update.exam.title
+            # record_exam.term = exam_data_update.exam.term
+            # record_exam.description = exam_data_update.exam.description
+            # record_exam.duration = exam_data_update.exam.duration
+            # record_exam.school_year = exam_data_update.exam.school_year
+            # record_exam.subject_id = exam_data_update.exam.subject_id
+            # record_exam.grade_id = exam_data_update.exam.grade_id
+            # record_exam.school_id = exam_data_update.exam.school_id
+            # record_exam.subdivision_id = exam_data_update.exam.subdivision_id
+            # record_exam.checkpoints = exam_data_update.exam.checkpoints
+            # self.session_import.commit()
 
             # Update quiz question groups
             for quiz_question_group in exam_data_update.quiz_question_group_list:
