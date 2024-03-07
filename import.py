@@ -23,11 +23,11 @@ def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow
         return None 
     
 def import_by_text_file(database_destination_url, database_id_mapping_url, file_path):
-    if not os.path.exists('exam_ids/exam_ids_imported.txt'):
-        with open('exam_ids/exam_ids_imported.txt', 'w'):
+    if not os.path.exists('ids/exam_ids_imported.txt'):
+        with open('ids/exam_ids_imported.txt', 'w'):
             pass
 
-    exam_ids_imported = [line.strip() for line in open('exam_ids/exam_ids_imported.txt', 'r')]
+    exam_ids_imported = [line.strip() for line in open('ids/exam_ids_imported.txt', 'r')]
     print(f'{len(exam_ids_imported)} IDs have been imported in db!')
     if exam_ids_imported:
         exam_ids_to_import = [line.strip() for line in open(file_path, 'r') if line.strip() not in exam_ids_imported]
@@ -58,7 +58,7 @@ def import_by_text_file(database_destination_url, database_id_mapping_url, file_
 
     if ids_imported:
         ids_imported = [id_imported for id_imported in ids_imported if id_imported not in exam_ids_imported]
-        with open(f'exam_ids/exam_ids_imported.txt', 'a') as file:
+        with open(f'ids/exam_ids_imported.txt', 'a') as file:
             for id_imported in ids_imported:
                 file.write(str(id_imported) + '\n')
             file.close()
@@ -73,11 +73,11 @@ def import_by_text_file(database_destination_url, database_id_mapping_url, file_
 
 def import_by_id(database_destination_url, database_id_mapping_url, id: int):
 
-    if not os.path.exists('exam_ids/exam_ids_imported.txt'):
-        with open('exam_ids/exam_ids_imported.txt', 'w'):
+    if not os.path.exists('ids/exam_ids_imported.txt'):
+        with open('ids/exam_ids_imported.txt', 'w'):
             pass
 
-    exam_ids_imported = [line.strip() for line in open('exam_ids/exam_ids_imported.txt', 'r')]
+    exam_ids_imported = [line.strip() for line in open('ids/exam_ids_imported.txt', 'r')]
 
     ids_imported = []
     errors = []
@@ -100,7 +100,7 @@ def import_by_id(database_destination_url, database_id_mapping_url, id: int):
 
     if ids_imported:
         ids_imported = [id_imported for id_imported in ids_imported if str(id_imported) not in exam_ids_imported]
-        with open(f'exam_ids/exam_ids_imported.txt', 'a') as file:
+        with open(f'ids/exam_ids_imported.txt', 'a') as file:
             for id_imported in ids_imported:
                 file.write(str(id_imported) + '\n')
             file.close()

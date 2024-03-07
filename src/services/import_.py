@@ -1,6 +1,6 @@
 import json
 from typing import Any, Dict, List, Optional, Tuple
-from src.commons import ObjectTypeStrMapping, ExamType, QuizTypeSingleChoice, QuizTypeSingleEssay, \
+from src.commons import ObjectTypeStrMapping, ExamType, QuizTypeSingleChoice, QuizTypeSingleEssay, QuizTypeSingleChoiceFromQuiz,\
     QuizTypeMultipleChoice, QuizTypeBlankFilling, QuizQuestionType, GradeIDMapping, SubjectIDMapping
 from src.models.exam_bank_models import Exam, Uniqid, QuizQuestion, QuizQuestionGroup, ExamQuestion, TrackingLogs, Base
 from src.config.config import settings
@@ -43,11 +43,12 @@ class ExamParser:
         return dict()
     
     def transform_data(self, text_data: Optional[str]):
-        # Replace '&amp;' to '&'
-        text_data = text_data.replace('&amp;', '&')
-
-        # Extracts all substrings that match the given regex pattern and replaces '\[' with '(' and '\]' with ')' in each match.
+        
         if text_data:
+            # Replace '&amp;' to '&'
+            text_data = text_data.replace('&amp;', '&')
+
+            # Extracts all substrings that match the given regex pattern and replaces '\[' with '(' and '\]' with ')' in each match.
             pattern = r'<span class="math-tex">\\\[.*?\\\]</span>'
             matches = re.findall(pattern, text_data)
 
@@ -84,6 +85,13 @@ class ExamParser:
             uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[ExamType]))
             for item in exam_data.get('relatedItems'):
                 component_type = item.get('__component')
+
+                if component_type == 'exam.single-quiz-from-quiz':
+                    quiz_question, quiz_info_dict = self.parse_single_quiz_question_from_quiz(item, src_exam_id)
+                    uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+                    quiz_question_list.append(quiz_question)
+                    quiz_info_list.append(quiz_info_dict)
+
                 if component_type == 'exam.single-quiz':
                     quiz_question, quiz_info_dict = self.parse_single_quiz_question(item, src_exam_id)
                     uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
@@ -149,6 +157,43 @@ class ExamParser:
         else:
             return 0
 
+    def parse_single_quiz_question_from_quiz(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
+        original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
+        parsed_text = original_text
+        quiz_type = QuizTypeMultipleChoice if quiz_question_group_id else QuizTypeSingleChoiceFromQuiz
+        explanation = self.transform_data(item.get('longAnswer') if item.get('longAnswer') is not None else "")
+        links = {"audio_links": [], "video_links": [], "image_links": []}
+        question_audio = item.get('questionAudio')
+        if question_audio:
+            links["audio_links"].append(question_audio)
+        question_images = item.get('questionImages')
+        if question_images:
+            for image in question_images:
+                links["image_links"].append(image.get('url'))
+        quiz_options = []
+        for label_key in ['A', 'B', 'C', 'D']:
+            option_content = self.transform_data(item.get(f'label{label_key}'))
+            if item.get('correctLabel') == f'label{label_key}':
+                quiz_options.append(dict(label=label_key, content=option_content, is_correct=True))
+            else:
+                quiz_options.append(dict(label=label_key, content=option_content, is_correct=False))
+        quiz_answer = item.get('answer', '')
+        return QuizQuestion(
+            original_text=original_text,
+            parsed_text=parsed_text,
+            quiz_type=quiz_type,
+            quiz_options=json.dumps(quiz_options),
+            quiz_question_group_id=quiz_question_group_id,
+            explanation=explanation or '',
+            links=json.dumps(links),
+            quiz_answer=quiz_answer
+        ), {
+            "src_exam_id": exam_id,
+            "src_quiz_object_type": quiz_type,
+            "src_quiz_question_id": item.get('id'),
+            "src_quiz_question_group_id": quiz_question_group_id,
+        }
+    
     def parse_single_quiz_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
         original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text

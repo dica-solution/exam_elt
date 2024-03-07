@@ -36,10 +36,13 @@ python sync.py --id [ID]
 
 # Sync exam with list IDs (contained in a text file)
 python sync.py --file [file_path]
+
+# Import from `Quiz` to `Exam_bank`
+python import_filtered_ids_from_quiz.py
 ```
 ### Notes:  
 - All error IDs when import or sync are saved in folder `error_logs`
-- All imported IDs are saved in folder `exam_ids`
+- All imported IDs are saved in folder `ids`
 - If you want to import error IDs:
   ```bash
   python import.py --file [file_path_error_ids] # ex: python import.py --file error_logs/import_error_ids_2024-03-04_10-35-11.txt

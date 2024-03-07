@@ -9,6 +9,7 @@ QuizTypeSingleChoice   = 1
 QuizTypeMultipleChoice = 2
 QuizTypeSingleEssay    = 3
 QuizTypeBlankFilling   = 5
+QuizTypeSingleChoiceFromQuiz = 6
 
 
 
@@ -97,4 +98,12 @@ SubjectIDMapping = {
     # 1: 15,
     # 1: 16,
     2: 17,
+}
+
+
+QuizAnswerMapping = {
+    1: 'labelA',
+    2: 'labelB',
+    3: 'labelC',
+    4: 'labelD',
 }
