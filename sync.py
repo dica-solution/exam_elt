@@ -23,11 +23,11 @@ def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow
         return None 
     
 def sync_by_text_file(database_destination_url, database_id_mapping_url, file_path):
-    if not os.path.exists('exam_ids/exam_ids_synced.txt'):
-        with open('exam_ids/exam_ids_synced.txt', 'w'):
+    if not os.path.exists('ids/exam_ids_synced.txt'):
+        with open('ids/exam_ids_synced.txt', 'w'):
             pass
 
-    exam_ids_synced = [line.strip() for line in open('exam_ids/exam_ids_synced.txt', 'r')]
+    exam_ids_synced = [line.strip() for line in open('ids/exam_ids_synced.txt', 'r')]
     # if exam_ids_synced:
     #     exam_ids_to_sync = [line.strip() for line in open(file_path, 'r') if line.strip() not in exam_ids_synced]
     exam_ids_to_sync = [line.strip() for line in open(file_path, 'r')]
@@ -55,7 +55,7 @@ def sync_by_text_file(database_destination_url, database_id_mapping_url, file_pa
 
     if ids_synced:
         ids_synced = [id_synced for id_synced in ids_synced if id_synced not in exam_ids_synced]
-        with open(f'exam_ids/exam_ids_synced.txt', 'a') as file:
+        with open(f'ids/exam_ids_synced.txt', 'a') as file:
             for id_synced in ids_synced:
                 file.write(str(id_synced) + '\n')
             file.close()
@@ -70,11 +70,11 @@ def sync_by_text_file(database_destination_url, database_id_mapping_url, file_pa
 
 def sync_by_id(database_destination_url, database_id_mapping_url, id):
 
-    if not os.path.exists('exam_ids/exam_ids_synced.txt'):
-        with open('exam_ids/exam_ids_synced.txt', 'w'):
+    if not os.path.exists('ids/exam_ids_synced.txt'):
+        with open('ids/exam_ids_synced.txt', 'w'):
             pass
 
-    exam_ids_synced = [line.strip() for line in open('exam_ids/exam_ids_synced.txt', 'r')]
+    exam_ids_synced = [line.strip() for line in open('ids/exam_ids_synced.txt', 'r')]
 
     ids_synced = []
     errors = []
@@ -97,7 +97,7 @@ def sync_by_id(database_destination_url, database_id_mapping_url, id):
 
     if ids_synced:
         ids_synced = [id_synced for id_synced in ids_synced if str(id_synced) not in exam_ids_synced]
-        with open(f'exam_ids/exam_ids_synced.txt', 'a') as file:
+        with open(f'ids/exam_ids_synced.txt', 'a') as file:
             for id_synced in ids_synced:
                 file.write(str(id_synced) + '\n')
             file.close()
