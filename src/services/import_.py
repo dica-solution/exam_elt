@@ -43,11 +43,12 @@ class ExamParser:
         return dict()
     
     def transform_data(self, text_data: Optional[str]):
-        # Replace '&amp;' to '&'
-        text_data = text_data.replace('&amp;', '&')
-
-        # Extracts all substrings that match the given regex pattern and replaces '\[' with '(' and '\]' with ')' in each match.
+        
         if text_data:
+            # Replace '&amp;' to '&'
+            text_data = text_data.replace('&amp;', '&')
+
+            # Extracts all substrings that match the given regex pattern and replaces '\[' with '(' and '\]' with ')' in each match.
             pattern = r'<span class="math-tex">\\\[.*?\\\]</span>'
             matches = re.findall(pattern, text_data)
 
