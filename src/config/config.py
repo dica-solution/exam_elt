@@ -5,6 +5,7 @@ class Settings(BaseSettings):
     database_url: Optional[str]
     db_id_mapping: Optional[str]
     db_destination: Optional[str]
+    db_dev_quiz: Optional[str]
     api_authentication_token: Optional[str]
     api_get_by_exam_id: Optional[str]
     api_get_by_page: Optional[str]
