@@ -119,6 +119,7 @@ class ExamUpdater(ExamParser):
 
             # Update quiz question groups
             for quiz_question_group in exam_data_update.quiz_question_group_list:
+
                 record_quiz_group = self.session_import.query(QuizQuestionGroup).filter(QuizQuestionGroup.id == quiz_question_group_id_mapping[quiz_question_group.id]).first()
                 record_quiz_group.original_text = quiz_question_group.original_text
                 record_quiz_group.parsed_text = quiz_question_group.parsed_text
@@ -131,7 +132,8 @@ class ExamUpdater(ExamParser):
                 idx, quiz_info_dict = self.get_index_by_value(exam_data_update.quiz_info_list, src_info_dict)
                 update_item = exam_data_update.quiz_question_list[idx]
                 record_quiz_question = self.session_import.query(QuizQuestion).filter(QuizQuestion.id == des_question_id).first()
-                record_quiz_question.quiz_question_group_id = update_item.quiz_question_group_id
+                # record_quiz_question.quiz_question_group_id = update_item.quiz_question_group_id
+                record_quiz_question.quiz_question_group_id = 0 if update_item.quiz_question_group_id==0 else quiz_question_group_id_mapping[update_item.quiz_question_group_id]
                 record_quiz_question.original_text = update_item.original_text
                 record_quiz_question.parsed_text = update_item.parsed_text
                 record_quiz_question.quiz_type = update_item.quiz_type
@@ -147,7 +149,7 @@ class ExamUpdater(ExamParser):
                     src_quiz_question_group_id = quiz_info_dict.get('src_quiz_question_group_id'),
                     des_exam_id = des_exam_id,
                     des_quiz_question_id = des_question_id,
-                    des_quiz_question_group_id = update_item.quiz_question_group_id,
+                    des_quiz_question_group_id = 0 if update_item.quiz_question_group_id==0 else quiz_question_group_id_mapping[update_item.quiz_question_group_id],
                     task_name = 'update', # "insert", "update" or "delete"
                     order = order,
                 )
