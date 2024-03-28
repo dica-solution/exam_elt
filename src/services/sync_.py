@@ -93,7 +93,7 @@ class ExamUpdater(ExamParser):
             
 
         return des_exam_id, id_mapping, quiz_question_group_id_mapping
-    
+    @log_runtime
     def get_index_by_value(self, data_list, value_dict):
         # Make sure `inner_dict` are unique
         for index, item in enumerate(data_list):
@@ -135,6 +135,7 @@ class ExamUpdater(ExamParser):
             start_time = time.time()
             order = 0
             for des_question_id, src_info_dict in id_mapping.items():
+                start_time = time.time()
                 idx, quiz_info_dict = self.get_index_by_value(exam_data_update.quiz_info_list, src_info_dict)
                 update_item = exam_data_update.quiz_question_list[idx]
                 record_quiz_question = self.session_import.query(QuizQuestion).filter(QuizQuestion.id == des_question_id).first()
@@ -148,6 +149,8 @@ class ExamUpdater(ExamParser):
                 record_quiz_question.links = update_item.links
                 record_quiz_question.quiz_answer = update_item.quiz_answer
                 self.session_import.commit()
+                logging.info(f'Running {runtime:.15f} seconds: imported 1 quiz question')
+                start_time = time.time()
                 logs = TrackingLogs(
                     src_exam_id = quiz_info_dict.get('src_exam_id'),
                     src_quiz_object_type = quiz_info_dict.get('src_quiz_object_type'),
@@ -162,6 +165,7 @@ class ExamUpdater(ExamParser):
                 order += 1
                 self.session_log.add(logs)
                 self.session_log.commit()
+                logging.info(f'Running {runtime:.15f} seconds: imported 1 tracking log')
             runtime = time.time() - start_time
             logging.info(f'Running {runtime:.15f} seconds: Update quiz questions')
             return des_exam_id
