@@ -8,6 +8,14 @@ def log_runtime(func):
         result = func(*args, **kwargs)
         end_time = time.time()
         runtime = end_time - start_time
-        logging.info(f'Running {func.__name__} took {runtime} seconds.')
+        logging.info(f'Running {runtime:.15f} seconds: {func.__name__}')
         return result
     return wrapper
+
+def start_info():
+    start_time = time.time()
+    logging.info(f'Starting program at {time.ctime(start_time)}')
+
+def end_info():
+    end_time = time.time()
+    logging.info(f'Ending program at {time.ctime(end_time)}\n\n')
