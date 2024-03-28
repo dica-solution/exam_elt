@@ -7,7 +7,7 @@ import json
 engine = create_engine(f"{settings.database_url}{settings.db_destination}")
 
 query = """
-	select qq.id , tl.src_exam_id , tl.src_quiz_object_type , tl.src_quiz_question_id , tl.src_quiz_question_group_id  , qq.original_text as question, qq.quiz_options as options, qq.explanation
+	select qq.id , tl.src_exam_id , tl.src_quiz_object_type , tl.src_quiz_question_id , tl.src_quiz_question_group_id  , tl."order" , qq.original_text as question, qq.quiz_options as options, qq.explanation
 	from public.quiz_question qq 
 	join public.exam_question eq on qq.id = eq.quiz_question_id
 	join public.exam e on eq.exam_id = e.id
@@ -16,9 +16,10 @@ query = """
 	and qq.quiz_options != '' 
 	and qq.explanation = ''
 	and e.subject_id in (14, 17, 5, 11)
-    and qq.original_text not like '%%src%%'
+	and e.grade_id = 7
+	and qq.original_text not like '%%src%%'
 	and qq.quiz_options not like '%%src%%'
-    order by qq.id;
+	order by qq.id
 """
 
 def remove_html_with_beautifulsoup(raw_html):
@@ -51,4 +52,4 @@ df = pd.read_sql_query(query, engine)
 df['options'] = df['options'].apply(convert_options)
 df['question'] = df.apply(lambda row: combine_with_question(row['question'], row['options']), axis=1)
 df.drop(columns=['options'], inplace=True)
-df.to_json('question_empty_explanation.json', orient='records', lines=True, force_ascii=False)
+df.to_json('grade_7_question_empty_explanation.json', orient='records', lines=True, force_ascii=False)

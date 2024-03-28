@@ -5,15 +5,27 @@ from sydney import SydneyClient
 
 os.environ["BING_COOKIES"] = open('src/prompts/copilot_cookies.txt', 'r').read()
 
+import re
+
+def wrap_latex_with_span(text):
+    pattern = r'\\\((.*?)\\\)'
+
+    def replace_latex(match):
+        return r'<span class="math-tex">\({}\)</span>'.format(match.group(1))
+    
+    # Use re.sub() to replace all occurrences of LaTeX expressions
+    return re.sub(pattern, replace_latex, text)
+
 async def generate_explanation(question: str, persona_n_prompt:str) -> None:
-    question = f"If your response meet Latex, you wrap it in span tag and 'math-tex' class.\n{question}"
+    # question = f"If your response meet Latex, you wrap it in span tag and 'math-tex' class.\n{question}"
     async with SydneyClient(style='precise') as sydney:
         
         for i in range(4): # Retry 4 times
             await sydney.reset_conversation()
             response = await sydney.ask(question, context=persona_n_prompt)
             if response:
-                return response
+                return wrap_latex_with_span(response)
+                # return response
                 break
         return ""
 
