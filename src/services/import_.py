@@ -485,12 +485,15 @@ class ExamParser:
             # Store all quiz_question_group_list
             ref_quiz_groups = dict()
             quiz_question_group_list = exam_data.quiz_question_group_list
+            group_list = []
             for group in quiz_question_group_list:
                 group_id = group.id
                 group.id = None
-                self.session_import.add(group)
-                self.session_import.commit()
+                # self.session_import.add(group)
+                group_list.append(group)
                 ref_quiz_groups[group_id] = group.id
+            self.session_import.add_all(group_list)
+            self.session_import.commit()
 
             # Specify related quizzes and store them
             quiz_question_list = exam_data.quiz_question_list

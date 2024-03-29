@@ -135,20 +135,11 @@ class ExamUpdater(ExamParser):
             start_time = time.time()
             order = 0
             update_mappings = []
+            logs_list = []
             for des_question_id, src_info_dict in id_mapping.items():
                 start_time_ = time.time()
                 idx, quiz_info_dict = self.get_index_by_value(exam_data_update.quiz_info_list, src_info_dict)
                 update_item = exam_data_update.quiz_question_list[idx]
-                # record_quiz_question = self.session_import.query(QuizQuestion).filter(QuizQuestion.id == des_question_id).first()
-                # record_quiz_question.quiz_question_group_id = 0 if update_item.quiz_question_group_id==0 else quiz_question_group_id_mapping[update_item.quiz_question_group_id]
-                # record_quiz_question.original_text = update_item.original_text
-                # record_quiz_question.parsed_text = update_item.parsed_text
-                # record_quiz_question.quiz_type = update_item.quiz_type
-                # record_quiz_question.quiz_options = update_item.quiz_options
-                # record_quiz_question.explanation = update_item.explanation
-                # record_quiz_question.links = update_item.links
-                # record_quiz_question.quiz_answer = update_item.quiz_answer
-                # self.session_import.commit()
                 update_mapping = {
                     'id': des_question_id,
                     'quiz_question_group_id': 0 if update_item.quiz_question_group_id==0 else quiz_question_group_id_mapping[update_item.quiz_question_group_id],
@@ -176,13 +167,13 @@ class ExamUpdater(ExamParser):
                     order = order,
                 )
                 order += 1
-                self.session_log.add(logs)
-                # self.session_log.commit()
+                logs_list.append(logs)
                 runtime = time.time() - start_time_
                 logging.info(f'Running {runtime:.15f} seconds: prepared 1 tracking log')
 
             self.session_import.bulk_update_mappings(QuizQuestion, update_mappings)
             self.session_import.commit()
+            self.session_log.bulk_save_objects(logs_list)
             self.session_log.commit()
             runtime = time.time() - start_time
             logging.info(f'Running {runtime:.15f} seconds: Update quiz questions')
