@@ -25,13 +25,15 @@ from sqlalchemy.orm import Session
 import requests
 from src.services.import_ import ExamParser
 from src.config.config import settings
-
-
+from src.services.logger import log_runtime, start_info, end_info
+import time
+import logging
+logging.basicConfig(level=logging.INFO, filename="logs/import.log")
 
 class ExamUpdater(ExamParser):
     def __init__(self, session_import: Session, session_log: Session,):
         super().__init__(session_import, session_log)
-
+    # @log_runtime
     def extract_data(self, exam_id):
         auth_token = settings.api_authentication_token
         url = settings.api_get_by_exam_id.format(EXAM_ID=exam_id)
@@ -40,7 +42,7 @@ class ExamUpdater(ExamParser):
         if response.status_code == 200:
             return response.json().get("data")
         return dict()
-
+    # @log_runtime
     def get_destination_info(
         self, src_exam_id: int
     ) -> Tuple[int, List[int], Dict[int, int]]:
@@ -91,14 +93,14 @@ class ExamUpdater(ExamParser):
             
 
         return des_exam_id, id_mapping, quiz_question_group_id_mapping
-    
+    # @log_runtime
     def get_index_by_value(self, data_list, value_dict):
         # Make sure `inner_dict` are unique
         for index, item in enumerate(data_list):
             if item == value_dict:
                 return index, item
         return None, dict()
-
+    # @log_runtime
     def update_exam(self, src_exam_id):
         des_exam_id, id_mapping, quiz_question_group_id_mapping = self.get_destination_info(src_exam_id)
         exam_data_update = self.parse_as_dict_collections(src_exam_id)
@@ -118,6 +120,7 @@ class ExamUpdater(ExamParser):
             # self.session_import.commit()
 
             # Update quiz question groups
+            start_time = time.time()
             for quiz_question_group in exam_data_update.quiz_question_group_list:
 
                 record_quiz_group = self.session_import.query(QuizQuestionGroup).filter(QuizQuestionGroup.id == quiz_question_group_id_mapping[quiz_question_group.id]).first()
@@ -125,23 +128,33 @@ class ExamUpdater(ExamParser):
                 record_quiz_group.parsed_text = quiz_question_group.parsed_text
                 record_quiz_group.links = quiz_question_group.links
                 self.session_import.commit()
+            runtime = time.time() - start_time
+            logging.info(f'Running {runtime:.15f} seconds: Update quiz question groups')
 
             # Update quiz questions
+            start_time = time.time()
             order = 0
+            update_mappings = []
+            logs_list = []
             for des_question_id, src_info_dict in id_mapping.items():
+                start_time_ = time.time()
                 idx, quiz_info_dict = self.get_index_by_value(exam_data_update.quiz_info_list, src_info_dict)
                 update_item = exam_data_update.quiz_question_list[idx]
-                record_quiz_question = self.session_import.query(QuizQuestion).filter(QuizQuestion.id == des_question_id).first()
-                # record_quiz_question.quiz_question_group_id = update_item.quiz_question_group_id
-                record_quiz_question.quiz_question_group_id = 0 if update_item.quiz_question_group_id==0 else quiz_question_group_id_mapping[update_item.quiz_question_group_id]
-                record_quiz_question.original_text = update_item.original_text
-                record_quiz_question.parsed_text = update_item.parsed_text
-                record_quiz_question.quiz_type = update_item.quiz_type
-                record_quiz_question.quiz_options = update_item.quiz_options
-                record_quiz_question.explanation = update_item.explanation
-                record_quiz_question.links = update_item.links
-                record_quiz_question.quiz_answer = update_item.quiz_answer
-                self.session_import.commit()
+                update_mapping = {
+                    'id': des_question_id,
+                    'quiz_question_group_id': 0 if update_item.quiz_question_group_id==0 else quiz_question_group_id_mapping[update_item.quiz_question_group_id],
+                    'original_text': update_item.original_text,
+                    'parsed_text': update_item.parsed_text,
+                    'quiz_type': update_item.quiz_type,
+                    'quiz_options': update_item.quiz_options,
+                    'explanation': update_item.explanation,
+                    'links': update_item.links,
+                    'quiz_answer': update_item.quiz_answer,
+                }
+                update_mappings.append(update_mapping)
+                runtime = time.time() - start_time_
+                logging.info(f'Running {runtime:.15f} seconds: prepared 1 quiz question')
+                start_time_ = time.time()
                 logs = TrackingLogs(
                     src_exam_id = quiz_info_dict.get('src_exam_id'),
                     src_quiz_object_type = quiz_info_dict.get('src_quiz_object_type'),
@@ -154,12 +167,20 @@ class ExamUpdater(ExamParser):
                     order = order,
                 )
                 order += 1
-                self.session_log.add(logs)
-                self.session_log.commit()
+                logs_list.append(logs)
+                runtime = time.time() - start_time_
+                logging.info(f'Running {runtime:.15f} seconds: prepared 1 tracking log')
+
+            self.session_import.bulk_update_mappings(QuizQuestion, update_mappings)
+            self.session_import.commit()
+            self.session_log.bulk_save_objects(logs_list)
+            self.session_log.commit()
+            runtime = time.time() - start_time
+            logging.info(f'Running {runtime:.15f} seconds: Update quiz questions')
             return des_exam_id
         return 0
 
-
+# @log_runtime
 def sync_exam_bank(session_import: Session, session_log: Session, exam_id: int):
     exam_updater = ExamUpdater(session_import, session_log)
     exam_id = exam_updater.update_exam(exam_id)

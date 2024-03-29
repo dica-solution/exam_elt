@@ -6,8 +6,9 @@ from src.config.config import settings
 import datetime
 import argparse
 import os
+from src.services.logger import log_runtime, start_info, end_info
 
-    
+@log_runtime    
 def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow=0):
     try:
         engine = create_engine(
@@ -21,7 +22,7 @@ def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow
     except Exception as e:
         print(f"Connection failed: {e}")
         return None 
-    
+@log_runtime    
 def sync_by_text_file(database_destination_url, database_id_mapping_url, file_path):
     if not os.path.exists('ids/exam_ids_synced.txt'):
         with open('ids/exam_ids_synced.txt', 'w'):
@@ -67,7 +68,7 @@ def sync_by_text_file(database_destination_url, database_id_mapping_url, file_pa
             for error_id in errors:
                 file.write(str(error_id) + '\n')
             file.close()
-
+@log_runtime
 def sync_by_id(database_destination_url, database_id_mapping_url, id):
 
     if not os.path.exists('ids/exam_ids_synced.txt'):
@@ -111,6 +112,7 @@ def sync_by_id(database_destination_url, database_id_mapping_url, id):
             file.close()
 
 def main():
+    start_info()
     parser = argparse.ArgumentParser(description="Data syncer with CLI")
     parser.add_argument('--file', type=str, help='Path to file containing IDs to sync')
     parser.add_argument('--id', type=int, help="ID of the exam to sync")
@@ -125,7 +127,7 @@ def main():
         sync_by_id(database_destination_url, database_id_mapping_url, args.id)
     else:
         print('Please provide either --file or --id argument.')
-
+    end_info()
     
 if __name__=="__main__":
     main()

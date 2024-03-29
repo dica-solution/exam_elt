@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 import requests
 import asyncio
 import re
-
+from src.services.logger import log_runtime
 
 
 class PrepExamData:
@@ -30,7 +30,7 @@ class ExamParser:
         self.session_import = session_import
         self.session_log = session_log
         
-        
+    # @log_runtime    
     def extract_data(self, exam_id):
         auth_token = settings.api_authentication_token
         url = settings.api_get_by_exam_id.format(EXAM_ID=exam_id)
@@ -42,6 +42,7 @@ class ExamParser:
             return response.json().get('data')
         return dict()
     
+
     def transform_data(self, text_data: Optional[str]):
         
         if text_data:
@@ -58,7 +59,8 @@ class ExamParser:
             
             return text_data
         return text_data
-
+    
+    # @log_runtime
     def parse_as_dict_collections(self, exam_id) -> Optional[PrepExamData]:
         exam_data = self.extract_data(exam_id=exam_id)
         
@@ -149,7 +151,7 @@ class ExamParser:
             return PrepExamData(exam, quiz_question_group_list, quiz_question_list, uniqid_list, quiz_info_list)
         return None
     
-    
+    # @log_runtime
     def mapping_id(self, mapping_dict, id):
         mapped_id = mapping_dict.get(id)
         if mapped_id:
@@ -157,6 +159,7 @@ class ExamParser:
         else:
             return 0
 
+    # @log_runtime
     def parse_single_quiz_question_from_quiz(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
         original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text
@@ -193,7 +196,7 @@ class ExamParser:
             "src_quiz_question_id": item.get('id'),
             "src_quiz_question_group_id": quiz_question_group_id,
         }
-    
+    # @log_runtime
     def parse_single_quiz_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
         original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text
@@ -230,7 +233,7 @@ class ExamParser:
             "src_quiz_question_id": item.get('id'),
             "src_quiz_question_group_id": quiz_question_group_id,
         }
-
+    # @log_runtime
     def parse_multiple_quiz_question(self, group_item: Dict[str, Any], exam_id: int) -> Tuple[QuizQuestionGroup, List[QuizQuestion]]:
         quiz_questions = []
         group_quiz_info_list = []
@@ -261,6 +264,7 @@ class ExamParser:
 
         return question_group, quiz_questions, group_quiz_info_list
 
+    # @log_runtime
     def parse_single_essay_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
         original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text
@@ -292,6 +296,7 @@ class ExamParser:
             "src_quiz_question_group_id": quiz_question_group_id,
         }
     
+    # @log_runtime
     def parse_multiple_essay_question(self, group_item: Dict[str, Any], exam_id: int) -> Tuple[QuizQuestionGroup, List[QuizQuestion]]:
         quiz_questions = []
         group_quiz_info_list = []
@@ -322,6 +327,7 @@ class ExamParser:
 
         return question_group, quiz_questions, group_quiz_info_list
 
+    # @log_runtime
     def parse_single_text_entry_question(self, item: Dict[str, Any], exam_id: int, quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
         original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text
@@ -353,6 +359,7 @@ class ExamParser:
             "src_quiz_question_group_id": quiz_question_group_id,
         }
 
+    # @log_runtime
     def parse_multiple_text_entry_question(self, group_item: Dict[str, Any], exam_id: int) -> Tuple[QuizQuestionGroup, List[QuizQuestion]]:
         quiz_questions = []
         group_quiz_info_list = []
@@ -383,6 +390,7 @@ class ExamParser:
 
         return question_group, quiz_questions, group_quiz_info_list
     
+    # @log_runtime
     def parse_single_true_false_question(self, item: Dict[str, Any], exam_id: int , quiz_question_group_id: int = 0) -> Tuple[QuizQuestion, Dict[str, Any]]:
         original_text = self.transform_data(item.get('questionContent') if item.get('questionContent') is not None else "")
         parsed_text = original_text
@@ -421,6 +429,7 @@ class ExamParser:
             "src_quiz_question_group_id": quiz_question_group_id,
         }
     
+    # @log_runtime
     def parse_multiple_true_false_question(self, group_item: Dict[str, Any], exam_id: int) -> Tuple[QuizQuestionGroup, List[QuizQuestion]]:
         quiz_questions = []
         group_quiz_info_list = []
@@ -451,6 +460,7 @@ class ExamParser:
 
         return question_group, quiz_questions, group_quiz_info_list
 
+    # @log_runtime
     def import_exam(self, exam_id: int) -> int:
         exam_data = self.parse_as_dict_collections(exam_id)
         if exam_data:
@@ -475,12 +485,15 @@ class ExamParser:
             # Store all quiz_question_group_list
             ref_quiz_groups = dict()
             quiz_question_group_list = exam_data.quiz_question_group_list
+            group_list = []
             for group in quiz_question_group_list:
                 group_id = group.id
                 group.id = None
-                self.session_import.add(group)
-                self.session_import.commit()
+                # self.session_import.add(group)
+                group_list.append(group)
                 ref_quiz_groups[group_id] = group.id
+            self.session_import.add_all(group_list)
+            self.session_import.commit()
 
             # Specify related quizzes and store them
             quiz_question_list = exam_data.quiz_question_list
@@ -519,6 +532,7 @@ class ExamParser:
             return exam.id
         return 0
     
+# @log_runtime    
 def import_exam_bank(session_import: Session, session_log: Session, exam_id: int):
     exam_parser = ExamParser(session_import, session_log)
     exam_id = exam_parser.import_exam(exam_id)

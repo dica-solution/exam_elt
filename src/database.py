@@ -8,6 +8,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 from sqlalchemy.orm import Session, scoped_session, sessionmaker
 
+from src.services.logger import log_runtime, start_info, end_info
+
 
 @contextmanager
 def get_session_from_engine(from_engine):
@@ -18,7 +20,8 @@ def get_session_from_engine(from_engine):
         raise e from None
     finally:
         session.close()
-
+        
+# @log_runtime
 @contextmanager
 def get_sessions_from_engines(engine1, engine2):
     session1 = scoped_session(sessionmaker(bind=engine1))

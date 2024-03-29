@@ -6,8 +6,9 @@ from src.config.config import settings
 import datetime
 import argparse
 import os
+from src.services.logger import log_runtime, start_info, end_info
 
-    
+@log_runtime
 def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow=0):
     try:
         engine = create_engine(
@@ -21,7 +22,7 @@ def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow
     except Exception as e:
         print(f"Connection failed: {e}")
         return None 
-    
+@log_runtime    
 def import_by_text_file(database_destination_url, database_id_mapping_url, file_path):
     if not os.path.exists('ids/exam_ids_imported.txt'):
         with open('ids/exam_ids_imported.txt', 'w'):
@@ -71,6 +72,7 @@ def import_by_text_file(database_destination_url, database_id_mapping_url, file_
                 file.write(str(error_id) + '\n')
             file.close()
 
+@log_runtime
 def import_by_id(database_destination_url, database_id_mapping_url, id: int):
 
     if not os.path.exists('ids/exam_ids_imported.txt'):
@@ -114,6 +116,7 @@ def import_by_id(database_destination_url, database_id_mapping_url, id: int):
             file.close()
 
 def main():
+    start_info()
     parser = argparse.ArgumentParser(description="Data importer with CLI")
     parser.add_argument('--file', type=str, help='Path to file containing IDs to import')
     parser.add_argument('--id', type=int, help="ID of the exam to import")
@@ -128,6 +131,7 @@ def main():
         import_by_id(database_destination_url, database_id_mapping_url, args.id)
     else:
         print('Please provide either --file or --id argument.')
+    end_info()
 
     
 if __name__=="__main__":
