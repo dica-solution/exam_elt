@@ -33,7 +33,7 @@ logging.basicConfig(level=logging.INFO, filename="logs/import.log")
 class ExamUpdater(ExamParser):
     def __init__(self, session_import: Session, session_log: Session,):
         super().__init__(session_import, session_log)
-    @log_runtime
+    # @log_runtime
     def extract_data(self, exam_id):
         auth_token = settings.api_authentication_token
         url = settings.api_get_by_exam_id.format(EXAM_ID=exam_id)
@@ -42,7 +42,7 @@ class ExamUpdater(ExamParser):
         if response.status_code == 200:
             return response.json().get("data")
         return dict()
-    @log_runtime
+    # @log_runtime
     def get_destination_info(
         self, src_exam_id: int
     ) -> Tuple[int, List[int], Dict[int, int]]:
@@ -93,14 +93,14 @@ class ExamUpdater(ExamParser):
             
 
         return des_exam_id, id_mapping, quiz_question_group_id_mapping
-    @log_runtime
+    # @log_runtime
     def get_index_by_value(self, data_list, value_dict):
         # Make sure `inner_dict` are unique
         for index, item in enumerate(data_list):
             if item == value_dict:
                 return index, item
         return None, dict()
-    @log_runtime
+    # @log_runtime
     def update_exam(self, src_exam_id):
         des_exam_id, id_mapping, quiz_question_group_id_mapping = self.get_destination_info(src_exam_id)
         exam_data_update = self.parse_as_dict_collections(src_exam_id)
@@ -180,7 +180,7 @@ class ExamUpdater(ExamParser):
             return des_exam_id
         return 0
 
-@log_runtime
+# @log_runtime
 def sync_exam_bank(session_import: Session, session_log: Session, exam_id: int):
     exam_updater = ExamUpdater(session_import, session_log)
     exam_id = exam_updater.update_exam(exam_id)
