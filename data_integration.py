@@ -3,7 +3,7 @@ from sqlalchemy import create_engine, Table, MetaData
 from src.services.import_ import import_exam_bank
 from src.services.sync_ import sync_exam_bank
 from src.config.config import settings
-import datetime
+from datetime import datetime, timezone
 import argparse
 import os
 import glob
@@ -12,7 +12,7 @@ import time
 from tqdm import tqdm
 
 
-now = datetime.datetime.now()
+now = datetime.now(timezone.utc)
 now_str = now.strftime("%Y-%m-%d %H:%M:%S")
 # logging.basicConfig(filename=f'logs/{now_str}.log', level=logging.ERROR)
 runtime_logger = logging.getLogger('runtime_logger')
@@ -123,6 +123,8 @@ def main():
 
 
         if args.sync:
+            # idx = lst_imported_ids.index(2155)
+            # lst_id_to_sync = lst_imported_ids[idx: idx+1]
             lst_id_to_sync = lst_imported_ids
             latest_runtime = get_latest_runtime('logs/sync_log')
             print('Syncing exams...')
