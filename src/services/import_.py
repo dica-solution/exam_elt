@@ -47,7 +47,7 @@ class ExamParser:
         
         if text_data:
             # Replace '&amp;' to '&'
-            text_data = text_data.replace('&amp;', '&')
+            text_data = text_data.replace('&amp;', '&').replace('&nbsp;', ' ').replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"').replace('&apos;', "'").replace('operatorname', 'text')
 
             # Extracts all substrings that match the given regex pattern and replaces '\[' with '(' and '\]' with ')' in each match.
             pattern = r'<span class="math-tex">\\\[.*?\\\]</span>'
@@ -55,6 +55,15 @@ class ExamParser:
 
             for match in matches:
                 new_match = match.replace('\\[', '\\(').replace('\\]', '\\)')
+                text_data = text_data.replace(match, new_match)
+
+            pattern = r'\\overparen\{.*?\}'
+            matches = re.findall(pattern, text_data)
+
+            for match in matches:
+                # Extract the content inside the braces
+                content = match[11:-1]  # 11 is the length of '\overparen{', -1 is to exclude the closing brace
+                new_match = '\\text{cung } ' + content
                 text_data = text_data.replace(match, new_match)
             
             return text_data
