@@ -25,32 +25,22 @@ python create_id_mapping_table.py
 ```
 - Depending on specific requirements, you will choose one from the following commands:
 ```bash
-# Import exam with single `ID`
-python import.py --id [ID]
+# Import by list of IDs or just one ID
+python data_integration.py --file [file_path]
+python data_integration.py --id [ID]
 
-# Import exam with list IDs (contained in a text file)
-python import.py --file [file_path]
-
-# Sync exam with single `ID`
-python sync.py --id [ID]
-
-# Sync exam with list IDs (contained in a text file)
-python sync.py --file [file_path]
-
-# Import from `Quiz` to `Exam_bank`
-python import_filtered_ids_from_quiz.py
+# Sync
+python data_integration.py --sync
 ```
 ### Notes:  
-- All error IDs when import or sync are saved in folder `error_logs`
-- All imported IDs are saved in folder `ids`
-- If you want to import error IDs:
-  ```bash
-  python import.py --file [file_path_error_ids] # ex: python import.py --file error_logs/import_error_ids_2024-03-04_10-35-11.txt
-  ```
+- Runtime logs in `logs/runtime_log`  
+- Sync logs in `logs/sync_log`
 
 
 ## Examples
 ```bash
-python import.py --file example_ids.txt # import with list of IDs
-python import.py --id 99 # import with a single ID
+python data_integration.py --file example_ids.txt # import with list of IDs
+python data_integration.py --id 99 # import with a single ID
+python data_integration.py --file example_ids.txt --sync
+python data_integration.py --id 99 --sync
 ```

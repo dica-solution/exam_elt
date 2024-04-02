@@ -78,6 +78,7 @@ class ExamParser:
                 school_id=0 if exam_data.get('school') is None else exam_data.get('school').get('id'),
                 subdivision_id=0,
                 checkpoints=0,
+                updated_at=exam_data.get('updatedAt'),
             )
             src_exam_id = exam_data.get('id')
             quiz_info_list = []

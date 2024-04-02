@@ -23,17 +23,18 @@ def get_session_from_engine(from_engine):
         
 # @log_runtime
 @contextmanager
-def get_sessions_from_engines(engine1, engine2):
-    session1 = scoped_session(sessionmaker(bind=engine1))
-    session2 = scoped_session(sessionmaker(bind=engine2)) 
-    
+def get_sessions_from_engines(*engines):
+    sessions = []
     try:
-        yield session1, session2
+        for engine in engines:
+            session = scoped_session(sessionmaker(bind=engine))
+            sessions.append(session)
+        yield tuple(sessions)
     except Exception as e:
         raise e from None
     finally:
-        session1.close()
-        session2.close()
+        for session in sessions:
+            session.close()
 
 
 def resolve_table_name(name):
