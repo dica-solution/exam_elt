@@ -15,18 +15,18 @@ async def check_structured(exam_id, data):
         return exam_id, False
     
     related_items = data.get('data').get('relatedItems')
-    if len(related_items) != 5:
+    if len(related_items) != 8:
         return exam_id, False
 
-    if any(item.get('__component') != 'exam.single-essay' and item.get('__component') != 'exam.grouped-essay' for item in related_items[0:3]):
+    if any(item.get('__component') != 'exam.single-essay' and item.get('__component') != 'exam.grouped-essay' for item in related_items[0:7]):
         return exam_id, False
-    if related_items[3].get('__component') != 'exam.grouped-essay' or len(related_items[3].get('relatedEssays')) != 3:
+    if related_items[7].get('__component') != 'exam.grouped-essay' or len(related_items[7].get('relatedEssays')) != 3:
         return exam_id, False
 
     # if related_items[5].get('__component') != 'exam.single-essay':
     #     return exam_id, False
-    if related_items[4].get('__component') != 'exam.single-essay' and related_items[4].get('__component') != 'exam.grouped-essay':
-        return exam_id, False
+    # if related_items[4].get('__component') != 'exam.single-essay' and related_items[4].get('__component') != 'exam.grouped-essay':
+    #     return exam_id, False
 
     return exam_id, True
 
@@ -49,7 +49,7 @@ async def main():
                 lst_structured_exam_id.append(exam_id)
         # with open('structured_exam_id.txt', 'w') as f:
         #     f.write('\n'.join(lst_structured_exam_id))
-        with open('structured_exam_id_1.csv', 'w', newline='') as f:
+        with open('structured_exam_id_3.csv', 'w', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(['exam_id'])  # Write the column name
             for exam_id in lst_structured_exam_id:
