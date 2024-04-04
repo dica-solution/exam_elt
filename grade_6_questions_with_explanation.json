@@ -1,0 +1,626 @@
+[
+    {
+        "question_id": 10110000000072932,
+        "question_text": "Cách viết nào sau đây cho ta một phân số?\nA. \\(\\frac{2,5}{7}\\).\nB. \\(\\frac{8}{0}\\).\nC. \\(\\frac{-2}{11}\\).\nD. \\(\\frac{-3}{3,7}\\).",
+        "correct_option": "C",
+        "explanation": "Tổng quát: Người ta gọi \\(\\frac{a}{b}\\) với \\(a, b \\in Z, a \\neq 0\\) là một phân số, a là tử số, b là mẫu số của phân số. Ta thấy cách viết \\(\\frac{-2}{11}\\) thỏa mãn các điều kiên trên.",
+        "explanation_by_ai": "Để xác định cách viết nào cho ta một phân số, chúng ta cần kiểm tra từng phương án:\n\nA. \\(\\frac{2,5}{7}\\): Phần tử của phân số này có dấu phẩy, tức là đây không phải là một phân số theo định nghĩa chuẩn (phải là số nguyên chia cho số nguyên).\n\nB. \\(\\frac{8}{0}\\): Mẫu số của phân số này là 0, điều này không hợp lệ vì không thể chia cho 0 trong toán học.\n\nC. \\(\\frac{-2}{11}\\): Cả tử số và mẫu số đều là số nguyên, và mẫu số khác 0. Đây là một phân số hợp lệ.\n\nD. \\(\\frac{-3}{3,7}\\): Mẫu số của phân số này có dấu phẩy, tức là đây không phải là một phân số theo định nghĩa chuẩn (phải là số nguyên chia cho số nguyên).\n\nNhư vậy, chỉ có phương án C (\\(\\frac{-2}{11}\\)) là biểu diễn một phân số hợp lệ theo định nghĩa chuẩn của toán học.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000072933,
+        "question_text": "Khi rút gọn phân \\(\\frac{-27}{63}\\) ta được phân số tối giản là số nào sau đây?\nA. \\(\\frac{9}{21}\\)\nB. \\(\\frac{-3}{7}\\)\nC. \\(\\frac{3}{7}\\)\nD. \\(\\frac{-9}{21}\\)",
+        "correct_option": "B",
+        "explanation": "\\(\\frac{-27}{63}=\\frac{-3.9}{7.9}=\\frac{-3}{7}\\)",
+        "explanation_by_ai": "Đầu tiên, để rút gọn phân số \\(\\frac{-27}{63}\\), ta tìm ước chung lớn nhất (ƯCLN) của tử số và mẫu số. ƯCLN của 27 và 63 là 9.\n\nSau đó, ta chia cả tử số và mẫu số cho ƯCLN vừa tìm được:\n\n\\[\n\\frac{-27}{63} = \\frac{-27 \\div 9}{63 \\div 9} = \\frac{-3}{7}\n\\]\n\nVậy phân số tối giản của \\(\\frac{-27}{63}\\) là \\(\\frac{-3}{7}\\), tức là đáp án B. \\(\\frac{-3}{7}\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000072934,
+        "question_text": "Phép so sánh nào sau đây là đúng?\nA. \\(\\frac{5}{7}\\gt \\frac{-5}{7}\\)\nB. \\(\\frac{-5}{7}\\gt \\frac{5}{7}\\)\nC. \\(\\frac{5}{-7}\\lt \\frac{-5}{7}\\)\nD. \\(\\frac{5}{7}\\gt \\frac{-5}{-7}\\)",
+        "correct_option": "A",
+        "explanation": "Để so sánh hai phân số có cùng mẫu ta so sánh tử số, phân số nào có tử số lớn hơn thì phân số đó lớn hơn.\\(\\frac{5}{7}\\gt \\frac{-5}{7}(\\text { vì } 5>-5)\\)",
+        "explanation_by_ai": "Để so sánh các phân số, ta cần hiểu rõ cách so sánh số dương và số âm:\n\n- Số dương luôn lớn hơn số âm.\n- Khi so sánh hai số âm, số có giá trị tuyệt đối nhỏ hơn là lớn hơn.\n- Khi so sánh hai số dương, số nào lớn hơn thì giá trị của nó lớn hơn.\n\nBây giờ hãy áp dụng những nguyên tắc này để so sánh từng cặp phân số:\n\nA. \\(\\frac{5}{7} > \\frac{-5}{7}\\)\n\n- \\(\\frac{5}{7}\\) là số dương và \\(\\frac{-5}{7}\\) là số âm, vì vậy \\(\\frac{5}{7}\\) lớn hơn \\(\\frac{-5}{7}\\). Đây là một phép so sánh đúng.\n\nB. \\(\\frac{-5}{7} > \\frac{5}{7}\\)\n\n- Là phép so sánh ngược lại với A, và là không đúng vì số dương luôn lớn hơn số âm.\n\nC. \\(\\frac{5}{-7} < \\frac{-5}{7}\\)\n\n- Cả hai số đều là số âm nhưng \\(\\frac{5}{-7} = -\\frac{5}{7}\\). Ta đang so sánh \\(-\\frac{5}{7}\\) với chính nó, vì thế không có số nào lớn hơn số kia. Đây là một sự hiểu lầm, thực ra đây không phải là một phép so sánh hợp lệ trong trường hợp này.\n\nD. \\(\\frac{5}{7} > \\frac{-5}{-7}\\)\n\n- \\(\\frac{-5}{-7} = \\frac{5}{7}\\), vì vậy phép so sánh này không đúng vì chúng bằng nhau, không có số nào lớn hơn số kia.\n\nKết luận: Phép so sánh đúng là A. \\(\\frac{5}{7} > \\frac{-5}{7}\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000072935,
+        "question_text": "Khi đổi hỗn số \\(5 \\frac{1}{2}\\) thành phân số, ta được phân số nào sau đây là đúng?\nA. \\(\\frac{8}{2}\\).\nB. \\(\\frac{7}{2}\\).\nC. \\(\\frac{5}{2}\\).\nD. \\(\\frac{11}{2}\\).",
+        "correct_option": "D",
+        "explanation": "\\(5 \\frac{1}{2}=\\frac{5.2+1}{2}=\\frac{11}{2}\\)",
+        "explanation_by_ai": "Để đổi hỗn số \\(5 \\frac{1}{2}\\) thành phân số, ta làm như sau:\n\nBước 1: Nhân số nguyên với mẫu của phần phân số. Trong trường hợp này, ta có số nguyên là 5 và mẫu của phần phân số là 2, vậy ta có: \\(5 \\times 2 = 10\\).\n\nBước 2: Cộng kết quả của bước 1 với tử số của phần phân số. Tử số ở đây là 1, vậy ta có: \\(10 + 1 = 11\\).\n\nBước 3: Giữ nguyên mẫu số của phần phân số là phần mẫu của phân số mới. Mẫu số ở đây là 2.\n\nVậy, khi đổi hỗn số \\(5 \\frac{1}{2}\\) thành phân số, ta được phân số \\(\\frac{11}{2}\\).\n\nDo đó, đáp án đúng là D. \\(\\frac{11}{2}\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000072937,
+        "question_text": "Điểm A không thuộc đường thẳng d được kí hiệu ?\nA. \\(\\mathrm{d} \\in \\mathrm{A}\\).\nB. \\(\\mathrm{A} \\in \\mathrm{d}\\)\nC. \\(\\mathrm{A} \\notin \\mathrm{d}\\)\nD. \\(\\mathrm{A} \\subset \\mathrm{d}\\)",
+        "correct_option": "C",
+        "explanation": "Điểm A không thuộc đường thẳng \\(\\mathrm{d}\\) được kí hiệu \\(A \\in d\\)",
+        "explanation_by_ai": "Trong toán học, để biểu diễn một điểm không thuộc một đường thẳng, ta sử dụng ký hiệu \\( \\notin \\). Do đó, nếu điểm A không thuộc đường thẳng \\( d \\), ta viết là \\( \\mathrm{A} \\notin \\mathrm{d} \\).\n\nVậy đáp án đúng là: C. \\( \\mathrm{A} \\notin \\mathrm{d} \\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000072939,
+        "question_text": "Trong các phát biểu sau, phát biểu nào là \\(\\underline{s a i}\\) ?\nA. Chữ H là hình vừa có tâm đối xứng,vừa có trục đối xứng.\nB. Chữ A là hình có trục đối xứng và không có tâm đối xứng.\nC. Chữ O là hình vừa có trục đối xứng vừa có tâm đối xứng.\nD. Chữ N là hình vừa có trục đối xứng và có tâm đối xứng.",
+        "correct_option": "D",
+        "explanation": "Chữ N là hình vừa có trục đối xứng và có tâm đối xứng là sai chữ không có trục đồi xứng , tâm đối xứng.",
+        "explanation_by_ai": "Để đánh giá các phát biểu, ta cần hiểu rõ về khái niệm tâm đối xứng và trục đối xứng:\n\n- **Tâm đối xứng** là điểm mà qua đó, mỗi điểm trên hình đều có một điểm tương ứng ở phía đối diện qua tâm đối xứng và cách tâm đối xứng một khoảng bằng nhau.\n- **Trục đối xứng** là đường thẳng mà qua đó, mỗi điểm trên hình đều có một điểm tương ứng ở phía đối diện qua trục đối xứng và cách trục đối xứng một khoảng bằng nhau.\n\nBây giờ, ta sẽ xem xét từng phát biểu:\n\nA. **Chữ H** có cả tâm đối xứng và trục đối xứng. Điều này là **đúng**. Chữ H có một trục đối xứng nằm ở giữa và nếu bạn quay chữ H 180 độ quanh điểm giữa của nó, nó sẽ trông giống như chính nó.\n\nB. **Chữ A** có trục đối xứng nhưng không có tâm đối xứng. Điều này là **đúng**. Chữ A có một trục đối xứng là đường thẳng đi qua đỉnh và giữa của đáy nhưng không có điểm nào mà quay 180 độ quanh nó sẽ trông giống như chính nó, vì phần trên và phần dưới của chữ A khác nhau.\n\nC. **Chữ O** có cả tâm đối xứng và trục đối xứng. Điều này là **đúng**. Chữ O, khi quay 180 độ quanh tâm của nó hoặc qua một số trục đối xứng (ví dụ, đường thẳng nằm ngang hoặc đứng qua tâm), sẽ trông giống như chính nó.\n\nD. **Chữ N** có cả trục đối xứng và tâm đối xứng. Điều này là **sai**. Chữ N có thể có trục đối xứng nếu nó được viết theo một cách cụ thể (ví dụ, font đặc biệt), nhưng thông thường, nó không có trục đối xứng và cũng không có tâm đối xứng. Nếu quay chữ N 180 độ quanh một điểm nào đó, nó sẽ không trông giống như chính nó.\n\nVậy phát biểu **sai** là **D. Chữ N là hình vừa có trục đối xứng và có tâm đối xứng.**",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089145,
+        "question_text": "Cho tập hợp \\(A=\\{0 ; 2 ; 4 ; 6 ; 8\\}\\). Số phần tử của tập hợp \\(\\mathrm{A}\\) là ?\nA. 3\nB. 4\nC. 5\nD. 6",
+        "correct_option": "C",
+        "explanation": "Tập hợp \\(A=\\{0 ; 2 ; 4 ; 6 ; 8\\}\\). có 4 phần tử là: \\(0 ; 2 ; 4 ; 6 ; 8\\)",
+        "explanation_by_ai": "Tập hợp \\(A=\\{0 ; 2 ; 4 ; 6 ; 8\\}\\) bao gồm các số chẵn từ 0 đến 8. Để xác định số phần tử của tập hợp \\(A\\), ta chỉ cần đếm số lượng các phần tử trong tập hợp.\n\nCác phần tử trong tập hợp \\(A\\) là: 0, 2, 4, 6, và 8.\n\nNhư vậy, số phần tử của tập hợp \\(A\\) là 5.\n\nVậy đáp án đúng là: C. 5",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089146,
+        "question_text": "Cho tập hợp \\(B=\\{1 ; 2 ; 3 ; 4 ; 5\\}\\). Phần tử nào sau đây không thuộc tập hợp \\(B\\) ?\nA. 2\nB. 4\nC. 1\nD. 0",
+        "correct_option": "D",
+        "explanation": "Phần tử 0 không nằm trong tập hợp \\(B=\\{1 ; 2 ; 3 ; 4 ; 5\\}\\).",
+        "explanation_by_ai": "Để xác định phần tử nào không thuộc tập hợp \\(B=\\{1 ; 2 ; 3 ; 4 ; 5\\}\\), ta sẽ xem xét từng phương án:\n\nA. 2: Phần tử này có mặt trong tập hợp \\(B\\).\n\nB. 4: Phần tử này cũng có mặt trong tập hợp \\(B\\).\n\nC. 1: Phần tử này có mặt trong tập hợp \\(B\\).\n\nD. 0: Phần tử này không có mặt trong tập hợp \\(B\\).\n\nVậy, phương án đúng là D. 0",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089147,
+        "question_text": "Thứ tự thực hiện phép tính trong ngoặc theo thứ tự nào?\nA. \\(\\{\\}\\rightarrow[] \\rightarrow()\\)\nB. \\(\\{\\}\\rightarrow[] \\rightarrow()\\)\nC. \\(() \\rightarrow[] \\rightarrow\\{\\}\\)\nD. \\([]\\rightarrow() \\rightarrow\\{\\}\\)",
+        "correct_option": "B",
+        "explanation": "Thứ tự thực hiện phép tính trong ngoặc: \\(()\\rightarrow[] \\rightarrow\\{\\}\\)",
+        "explanation_by_ai": "Trong toán học và lập trình, thứ tự thực hiện các phép tính trong ngoặc thường tuân theo quy tắc từ trong ra ngoài và từ trái sang phải. Tuy nhiên, các loại ngoặc khác nhau không thay đổi thứ tự ưu tiên của chúng. Ngoặc được sử dụng để chỉ ra các phép tính cần được thực hiện trước. Thứ tự thực hiện thông thường là:\n\n1. Ngoặc tròn \\(()\\)\n2. Ngoặc vuông \\([]\\)\n3. Ngoặc nhọn \\(\\{\\}\\)\n\nTuy nhiên, đây không phải là quy tắc cứng nhắc trong toán học cơ bản, vì ngoặc nhọn và ngoặc vuông hiếm khi được sử dụng để chỉ thứ tự thực hiện phép tính trong toán học cơ bản. Chúng thường xuất hiện trong lập trình và các ngữ cảnh toán học khác, nơi chúng có thể được sử dụng cho các mục đích khác như tập hợp hoặc mảng. Trong các tình huống đó, quy tắc sử dụng chúng có thể thay đổi tùy thuộc vào ngữ cảnh. Nhưng về cơ bản, khi nói đến việc chỉ định thứ tự thực hiện phép tính, chỉ có ngoặc tròn thực sự thay đổi thứ tự ưu tiên của các phép tính.\n\nVì vậy, trong bốn phương án bạn đưa ra, không có phương án nào hoàn toàn phản ánh thực tế sử dụng ngoặc trong toán học hoặc lập trình một cách chính xác. Điều quan trọng nhất cần nhớ là ngoặc tròn \\(()\\) luôn được ưu tiên xử lý trước.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089148,
+        "question_text": "Cho phép nhân: 25. 5. 4. 27. 2 = ? Cách làm nào là hợp lý nhất?\nA. \\((25.4) \\cdot(5.2) .27\\)\nB. \\((25.5 .4 .27) .2\\)\nC. \\((25.5 .4) .27 .2\\)\nD. \\((25.4 .2) \\cdot 27.5\\)",
+        "correct_option": "A",
+        "explanation": "Cách làm hợp lý nhất là:\\((25 \\cdot 4) \\cdot(5 \\cdot 2) \\cdot 27=100 \\cdot 10 \\cdot 27=27000\\)",
+        "explanation_by_ai": "Để tìm cách làm hợp lý nhất, chúng ta cần xem xét các phương án để tìm ra cách làm tối ưu về mặt tính toán.\n\nA. \\((25 \\cdot 4) \\cdot (5 \\cdot 2) \\cdot 27\\)\n- Bước 1: \\(25 \\cdot 4 = 100\\)\n- Bước 2: \\(5 \\cdot 2 = 10\\)\n- Bước 3: \\(100 \\cdot 10 = 1000\\)\n- Bước 4: \\(1000 \\cdot 27 = 27000\\)\n\nB. \\((25 \\cdot 5 \\cdot 4 \\cdot 27) \\cdot 2\\)\n- Đây không phải là cách tối ưu vì nó yêu cầu tính toán nhiều bước phức tạp trước khi nhân với 2.\n\nC. \\((25 \\cdot 5 \\cdot 4) \\cdot 27 \\cdot 2\\)\n- Tương tự như B, không phải là cách tối ưu vì cũng cần thực hiện nhiều phép tính trước khi nhân với 27 và 2.\n\nD. \\((25 \\cdot 4 \\cdot 2) \\cdot 27 \\cdot 5\\)\n- Bước 1: \\(25 \\cdot 4 = 100\\)\n- Bước 2: \\(100 \\cdot 2 = 200\\)\n- Bước 3: \\(200 \\cdot 27 = 5400\\)\n- Bước 4: \\(5400 \\cdot 5 = 27000\\)\n\nXét về mặt lý thuyết, phương án A là cách làm hợp lý nhất vì nó tận dụng tính chất giao hoán và kết hợp của phép nhân để giảm thiểu số lượng phép tính. Phương án này tách biệt các số có thể dễ dàng nhân với nhau để đạt kết quả lớn mà không cần thực hiện nhiều bước tính toán phức tạp.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089149,
+        "question_text": "Phép tính \\(5^{7}: 5^{3}\\) là:\nA. Nhân 2 số tự nhiên\nB. Chia 2 số tự nhiên\nC. Chia 2 luỹ thừa cùng cơ số\nD. Nhân 2 luỹ thừa cùng cơ số",
+        "correct_option": "C",
+        "explanation": "Phép tính \\(5^{7}: 5^{3}\\) là phép chia hai lũy thừa cùng cơ số 5",
+        "explanation_by_ai": "Phép tính \\(5^{7}: 5^{3}\\) là ví dụ về:\n\nC. Chia 2 luỹ thừa cùng cơ số\n\nKhi chia hai luỹ thừa có cùng cơ số, ta giữ nguyên cơ số và trừ số mũ của số bị chia cho số mũ của số chia. Theo quy tắc này, phép tính \\(5^{7} : 5^{3}\\) được thực hiện như sau:\n\n\\[5^{7} : 5^{3} = 5^{7-3} = 5^{4}\\]\n\nVậy, phép tính đã cho là một ví dụ về việc chia hai luỹ thừa có cùng cơ số.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089150,
+        "question_text": "\\(6^{7} .6^{5}\\) là phép toán\nA. Nhân 2 số tự nhiên\nB. Chia 2 số tự nhiên\nC. Chia 2 luỹ thừa cùng cơ số\nD. Chia 2 luỹ thừa cùng cơ số",
+        "correct_option": "C",
+        "explanation": "\\(6^{7} \\cdot 6^{5}\\) là phép toán phép nhân hai lũy thừa cùng cơ số 6",
+        "explanation_by_ai": "Phép toán \\(6^{7} \\cdot 6^{5}\\) là phép nhân giữa hai lũy thừa có cùng cơ số.\n\nKhi nhân hai lũy thừa có cùng cơ số, ta giữ nguyên cơ số và cộng các số mũ lại với nhau. Công thức tổng quát là:\n\n\\[a^{m} \\cdot a^{n} = a^{m+n}\\]\n\nÁp dụng công thức này vào phép toán của chúng ta:\n\n\\[6^{7} \\cdot 6^{5} = 6^{7+5} = 6^{12}\\]\n\nNhư vậy, phép toán này là A. Nhân 2 số tự nhiên.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089151,
+        "question_text": "Kết quả phép tính \\(\\frac{3^{2} \\cdot 3^{3}}{3^{5}}\\) bằng\nA. 3\nB. 9\nC. 0\nD. 1",
+        "correct_option": "D",
+        "explanation": "Kết quả phép tính: \\(\\frac{3^{2} \\cdot 3^{3}}{3^{5}}=\\frac{3^{5}}{3^{5}}=1\\)",
+        "explanation_by_ai": "Để giải bài toán này, ta sẽ sử dụng quy tắc của lũy thừa: khi nhân hai lũy thừa cùng cơ số, ta cộng các số mũ; khi chia, ta trừ các số mũ.\n\nTa có: \\(\\frac{3^{2} \\cdot 3^{3}}{3^{5}}\\)\n\nBước 1: Nhân hai lũy thừa cùng cơ số ở tử số, ta áp dụng quy tắc \\(a^{m} \\cdot a^{n} = a^{m+n}\\).\n\n\\(\\Rightarrow 3^{2} \\cdot 3^{3} = 3^{2+3} = 3^{5}\\)\n\nBước 2: Chia hai lũy thừa cùng cơ số, áp dụng quy tắc \\(a^{m} / a^{n} = a^{m-n}\\).\n\n\\(\\Rightarrow \\frac{3^{5}}{3^{5}} = 3^{5-5} = 3^{0}\\)\n\nBước 3: Áp dụng quy tắc \\(a^{0} = 1\\) cho mọi \\(a \\neq 0\\).\n\n\\(\\Rightarrow 3^{0} = 1\\)\n\nVậy, kết quả của phép tính là \\(1\\), lựa chọn đúng là D. 1",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089152,
+        "question_text": "Có bao nhiêu số nguyên tố nhỏ hơn 10 ?\nA. 2\nB. 3\nC. 4\nD. 5",
+        "correct_option": "C",
+        "explanation": "Có 4 số nguyên tố nhỏ hơn 10 là: 2;3;5;7.",
+        "explanation_by_ai": "Để tìm số lượng số nguyên tố nhỏ hơn 10, ta sẽ liệt kê tất cả các số từ 1 đến 9 và kiểm tra xem số nào là số nguyên tố. Số nguyên tố là số tự nhiên lớn hơn 1 không có ước số nào khác ngoài 1 và chính nó.\n\n- 2 là số nguyên tố (chỉ chia hết cho 1 và chính nó).\n- 3 là số nguyên tố.\n- 4 không phải là số nguyên tố (chia hết cho 2).\n- 5 là số nguyên tố.\n- 6 không phải là số nguyên tố (chia hết cho 2 và 3).\n- 7 là số nguyên tố.\n- 8 không phải là số nguyên tố (chia hết cho 2).\n- 9 không phải là số nguyên tố (chia hết cho 3).\n\nVậy có tổng cộng 4 số nguyên tố nhỏ hơn 10 là: 2, 3, 5, và 7.\n\nĐáp án đúng là: C. 4",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089153,
+        "question_text": "Hình tam giác đều là hình:\nA. Có 3 cạnh và 3 góc bằng 60 độ bằng nhau\nB. Có 2 góc bằng nhau\nC. Có 2 cạnh bằng nhau\nD. Có 3 góc bằng 90 độ",
+        "correct_option": "A",
+        "explanation": "Tam giác đều là tam giác có 3 cạnh bằng nhau, 3 góc bằng nhau và bằng \\(60^{\\circ}\\)",
+        "explanation_by_ai": "Tam giác đều là loại tam giác mà ở đó cả ba cạnh đều có độ dài bằng nhau. Từ tính chất này, ta có thể suy ra các tính chất sau về tam giác đều:\n\n1. **Tất cả các góc của tam giác đều bằng nhau:** Do tam giác đều có ba cạnh bằng nhau, nên theo định lý về tam giác, ba góc tương ứng cũng phải bằng nhau. Vì tổng số đo của ba góc trong một tam giác luôn bằng \\(180^\\circ\\), mỗi góc trong tam giác đều sẽ có số đo là \\(\\frac{180^\\circ}{3} = 60^\\circ\\).\n\n2. **Tam giác đều không có góc nào bằng \\(90^\\circ\\):** Vì mỗi góc của tam giác đều bằng \\(60^\\circ\\), không có góc nào trong tam giác đều có thể bằng \\(90^\\circ\\).\n\n3. **Tam giác đều không chỉ có hai cạnh hoặc hai góc bằng nhau:** Vì tất cả ba cạnh và ba góc đều bằng nhau trong tam giác đều, nên không thể chỉ có hai cạnh hoặc hai góc bằng nhau.\n\nVậy, dựa trên thông tin trên, chúng ta có thể xác định:\n\n- **A. Có 3 cạnh và 3 góc bằng 60 độ bằng nhau** là đúng và phản ánh chính xác định nghĩa của hình tam giác đều.\n\n- **B. Có 2 góc bằng nhau**, **C. Có 2 cạnh bằng nhau**, và **D. Có 3 góc bằng 90 độ** không phản ánh đúng đặc điểm của hình tam giác đều.\n\nVậy, đáp án đúng là **A. Có 3 cạnh và 3 góc bằng 60 độ bằng nhau**.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089154,
+        "question_text": "Khẳng định nào sau đây sai?\nA. Trong hình thoi, các góc đối không bằng nhau.\nB. Hai góc kề một đáy của hình thang cân bằng nhau.\nC. Hai đường chéo của hình vuông bằng nhau.\nD. Trong hình chữ nhật, hai dường chéo cắt nhau tại trung điểm mỗi đường.",
+        "correct_option": "A",
+        "explanation": "Hình thoi có các góc đối bằng nhau.",
+        "explanation_by_ai": "Để xác định khẳng định nào sau đây sai, ta sẽ phân tích từng phương án:\n\nA. Trong hình thoi, các góc đối không bằng nhau. \n- Đây là khẳng định **sai**. Trong hình thoi, các góc đối đều bằng nhau. Hình thoi có các đặc điểm là bốn cạnh bằng nhau và các góc đối xứng qua tâm cắt nhau của hai đường chéo, nên các góc đối phải bằng nhau.\n\nB. Hai góc kề một đáy của hình thang cân bằng nhau. \n- Đây là khẳng định **đúng**. Hình thang cân là hình thang có hai cạnh bên song song và cạnh bên bằng nhau, dẫn đến hai góc kề một đáy phải bằng nhau.\n\nC. Hai đường chéo của hình vuông bằng nhau.\n- Đây là khẳng định **đúng**. Trong hình vuông, do tất cả các cạnh đều bằng nhau và các góc đều là góc vuông, hai đường chéo không chỉ bằng nhau mà còn cắt nhau tại trung điểm mỗi đường và chia góc thành hai góc vuông.\n\nD. Trong hình chữ nhật, hai dường chéo cắt nhau tại trung điểm mỗi đường.\n- Đây là khẳng định **đúng**. Trong hình chữ nhật, do các cạnh đối song song và bằng nhau, hai đường chéo không chỉ cắt nhau tại trung điểm mỗi đường mà còn bằng nhau.\n\nVậy, khẳng định sai là **A. Trong hình thoi, các góc đối không bằng nhau.**",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089155,
+        "question_text": "Công thức tính chu vi của hình chữ nhật có độ dài 2 cạnh \\(a ; b\\) là\nA. \\(C=a\\)\nB. \\(C=a+b\\).\nC. \\(C=a b\\).\nD. \\(C=2(a+b)\\).",
+        "correct_option": "D",
+        "explanation": "Tính chu vi hình chữ nhật có độ dài 2 cạnh là a,b:Ta có: \\(C=a+b+a+b=2 a+2 b=2(a+b)\\).",
+        "explanation_by_ai": "Chu vi của hình chữ nhật được tính bằng công thức \\(C = 2(a + b)\\), trong đó \\(a\\) và \\(b\\) là độ dài của hai cạnh liên tiếp của hình chữ nhật. \n\nBước 1: Xác định độ dài hai cạnh liên tiếp \\(a\\) và \\(b\\).\n\nBước 2: Áp dụng công thức \\(C = 2(a + b)\\).\n\n- \\(2(a + b)\\) là cách để tính tổng độ dài của cả hai đôi cạnh đối diện trong hình chữ nhật, vì mỗi đôi cạnh đối diện có cùng độ dài.\n\nVậy đáp án đúng là:\nD. \\(C=2(a+b)\\).",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089156,
+        "question_text": "Công thức tính diện tích hình thang là:\nA. \\(S=(a+b) h\\)\nB. \\(S=(a+b) h\\)\nC. \\(S=a+b h\\)\nD. \\(S=\\frac{1}{2} a+b h\\)",
+        "correct_option": "B",
+        "explanation": "Công thức tính diện tích hình thang là: \\(S=\\frac{1}{2}(a+b) h\\)",
+        "explanation_by_ai": "Để tính diện tích hình thang, ta sử dụng công thức:\n\n\\[S = \\frac{(a+b) \\cdot h}{2}\\]\n\ntrong đó:\n- \\(a\\) và \\(b\\) là độ dài của hai đáy hình thang (không nhất thiết phải là đáy lớn hay đáy nhỏ, bất kỳ hai đáy nào),\n- \\(h\\) là chiều cao của hình thang, tức là khoảng cách vuông góc giữa hai đáy.\n\nNhìn vào các lựa chọn bạn đã đưa ra, không có lựa chọn nào hoàn toàn đúng với công thức chính xác được biết đến một cách rộng rãi. Tuy nhiên, lựa chọn gần đúng nhất với cách biểu diễn đúng của công thức là:\n\nB. \\(S=(a+b) h\\)\n\nNhưng cần được sửa đổi thành:\n\n\\[S = \\frac{(a+b) \\cdot h}{2}\\]\n\nĐây là công thức chính xác để tính diện tích hình thang.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089524,
+        "question_text": "Tập hợp số tự nhiên là\nA. \\(\\mathrm{N}=\\{1 ; 2 ; 3 ; \\ldots\\}\\)\nB. \\(\\mathrm{N}=\\{0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)\nC. \\(\\mathrm{N}=1 ; 2 ; 3 ; \\ldots\\)\nD. \\(\\mathrm{N}=0 ; 1 ; 2 ; 3 ; \\ldots\\)",
+        "correct_option": "B",
+        "explanation": "Tập hợp số tự nhiên là: \\(\\mathrm{N}=\\{0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)",
+        "explanation_by_ai": "Tập hợp số tự nhiên thường được ký hiệu là \\( \\mathbb{N} \\) và có hai quan điểm chính:\n\n1. Quan điểm đầu tiên coi số 0 là một số tự nhiên. Theo quan điểm này, tập hợp số tự nhiên được biểu diễn là \\( \\mathbb{N} = \\{0, 1, 2, 3, \\ldots\\} \\).\n2. Quan điểm thứ hai không coi số 0 là một số tự nhiên. Theo quan điểm này, tập hợp số tự nhiên được biểu diễn là \\( \\mathbb{N} = \\{1, 2, 3, \\ldots\\} \\).\n\nTùy thuộc vào ngữ cảnh và quốc gia mà người ta sẽ chọn một trong hai quan điểm trên để sử dụng. Tuy nhiên, trong hầu hết các trường hợp, đặc biệt là trong lý thuyết toán học hiện đại, người ta thường chấp nhận quan điểm thứ nhất, coi số 0 là một phần của tập hợp số tự nhiên.\n\nXét các phương án:\n\n- Phương án A và C chỉ ra rằng tập hợp số tự nhiên bắt đầu từ 1, tuân theo quan điểm thứ hai.\n- Phương án B và D cho thấy tập hợp số tự nhiên bao gồm số 0, tuân theo quan điểm thứ nhất, nhưng cách đặt dấu phân biệt giữa các phần tử trong tập hợp ở D không đúng cách.\n\nDo đó, câu trả lời đúng nhất là:\n**B. \\( \\mathrm{N} = \\{0 ; 1 ; 2 ; 3 ; \\ldots\\} \\)**",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089525,
+        "question_text": "Thứ tự thực hiện các phép tính đối với các biểu thức có dấu ngoặc là:\nA. [ ]\\(\\rightarrow \\rightarrow() \\rightarrow \\rightarrow\\{\\}\\)\nB. { }\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow()\\)\nC. [ ]\\(\\rightarrow \\rightarrow() \\rightarrow \\rightarrow\\{\\}\\)\nD. ( )\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow\\{\\}\\)",
+        "correct_option": "D",
+        "explanation": "Thứ tự thực hiên các phép tính đối với các biểu thức có dấu ngoặc là: ( )\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow\\{\\}\\)",
+        "explanation_by_ai": "Trong toán học, thứ tự thực hiện các phép tính trong các biểu thức có chứa dấu ngoặc tuân theo quy tắc sau:\n\n1. **Dấu ngoặc tròn ( )**: Được ưu tiên thực hiện đầu tiên.\n2. **Dấu ngoặc vuông [ ]**: Tiếp theo sau dấu ngoặc tròn.\n3. **Dấu ngoặc nhọn { }**: Cuối cùng, sau cả dấu ngoặc tròn và vuông.\n\nVậy thứ tự thực hiện là: \\( ( ) \\rightarrow [ ] \\rightarrow \\{ \\} \\).\n\nDo đó, phương án đúng là: **D. ( )\\(\\rightarrow [ ] \\rightarrow \\{ \\} \\)**",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089526,
+        "question_text": "Số nào sau đây chia hết cho 3?\nA. 351\nB. 491\nC. 601\nD. 872",
+        "correct_option": "A",
+        "explanation": "Tổng các chứ số của số 351 là: \\(3+5+1=9: 3\\) nên theo dấu hiêu chia hết thì \\(351: 3\\)",
+        "explanation_by_ai": "Để kiểm tra một số có chia hết cho 3 hay không, bạn cần cộng tất cả các chữ số của số đó lại với nhau và kiểm tra xem tổng đó có chia hết cho 3 không. Nếu tổng đó chia hết cho 3, thì số ban đầu cũng chia hết cho 3.\n\n- Đối với số **351**:\n  - Cộng các chữ số: \\(3 + 5 + 1 = 9\\)\n  - Vì \\(9\\) chia hết cho \\(3\\), nên **351** chia hết cho \\(3\\).\n\n- Đối với số **491**:\n  - Cộng các chữ số: \\(4 + 9 + 1 = 14\\)\n  - Vì \\(14\\) không chia hết cho \\(3\\), nên **491** không chia hết cho \\(3\\).\n\n- Đối với số **601**:\n  - Cộng các chữ số: \\(6 + 0 + 1 = 7\\)\n  - Vì \\(7\\) không chia hết cho \\(3\\), nên **601** không chia hết cho \\(3\\).\n\n- Đối với số **872**:\n  - Cộng các chữ số: \\(8 + 7 + 2 = 17\\)\n  - Vì \\(17\\) không chia hết cho \\(3\\), nên **872** không chia hết cho \\(3\\).\n\nVậy, số chia hết cho \\(3\\) trong các lựa chọn là **351 (A)**.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089527,
+        "question_text": "Số nào sau đây là số nguyên tố?\nA. 111\nB. 113\nC. 115\nD. 117",
+        "correct_option": "B",
+        "explanation": "Số 113 là số nguyên tố vì 113 chỉ có ước là 1 và chính nó.",
+        "explanation_by_ai": "Để xác định số nào trong các lựa chọn sau đây là số nguyên tố, ta sẽ kiểm tra từng số một.\n\n1. **Số 111**: \n   - Để kiểm tra, ta chia số này cho các số từ 2 đến căn bậc hai của nó. \n   - 111 chia hết cho 3 (111 = 3 * 37), vậy nó không phải là số nguyên tố.\n\n2. **Số 113**: \n   - Là số lớn hơn 2 và không chia hết cho số nào từ 2 đến căn bậc hai của nó.\n   - 113 không chia hết cho bất kỳ số nguyên nào từ 2 đến 10 (căn bậc hai của 113 là khoảng 10.6). Do đó, 113 là số nguyên tố.\n\n3. **Số 115**: \n   - 115 chia hết cho 5 (115 = 5 * 23), vậy nó không phải là số nguyên tố.\n\n4. **Số 117**: \n   - 117 chia hết cho 3 (117 = 3 * 39), vậy nó không phải là số nguyên tố.\n\nVậy, trong các lựa chọn được đưa ra, **B. 113** là số nguyên tố.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089528,
+        "question_text": "Số liền trước số -19 là\nA. -20\nB. 20\nC. 18\nD. -18",
+        "correct_option": "A",
+        "explanation": "Số liền trước của số -19 là số -20",
+        "explanation_by_ai": "Số liền trước của một số là số đó trừ đi 1. Vậy, để tìm số liền trước của số -19, ta thực hiện phép tính sau:\n\n$$-19 - 1 = -20$$\n\nVậy, số liền trước của số -19 là -20.\n\nChọn đáp án A. -20",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089529,
+        "question_text": "Số đối của -28 là\nA. \\(0\\)\nB. \\(-28\\)\nC. \\(28\\)\nD. \\(\\frac{-1}{28}\\)",
+        "correct_option": "C",
+        "explanation": "Số đối của -28 là số 28",
+        "explanation_by_ai": "Số đối của một số là số đó nhân với \\(-1\\), hoặc nói cách khác, là số có cùng giá trị tuyệt đối nhưng dấu ngược lại. Ví dụ, số đối của \\(5\\) là \\(-5\\), và số đối của \\(-5\\) là \\(5\\).\n\nTa có số đối của \\(-28\\) được tính như sau:\n\n\\[\n-1 \\times (-28) = 28\n\\]\n\nVậy số đối của \\(-28\\) là \\(28\\).\n\nChọn đáp án: C. \\(28\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000089530,
+        "question_text": "Tam giác có độ dài các cạnh đều bằng 3cm là\nA. tam giác vuông cân\nB. tam giác vuông\nC. tam giác đều \nD. tam giác cân",
+        "correct_option": "C",
+        "explanation": "Tam giác có độ dài các cạnh đều bằng 3cm là tam giác đều",
+        "explanation_by_ai": "Một tam giác có độ dài ba cạnh đều bằng nhau (mỗi cạnh 3cm) là một **tam giác đều**. \n\nTrong một tam giác đều:\n- Tất cả ba cạnh có độ dài bằng nhau.\n- Ba góc đều bằng 60 độ.\n\nVì vậy, phương án đúng là:\n\nC. tam giác đều",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000090632,
+        "question_text": "Trong các số sau số nào là số tự nhiên?\nA. \\(\\frac{4}{9}\\)\nB. \\(3 \\frac{1}{4}\\)\nC. \\(2022\\)\nD. 7,8",
+        "correct_option": "C",
+        "explanation": "",
+        "explanation_by_ai": "Để xác định số nào trong các số đã cho là số tự nhiên, chúng ta cần hiểu rõ định nghĩa của số tự nhiên. Số tự nhiên là các số nguyên dương bắt đầu từ 0, 1, 2, 3, v.v.\n\nA. \\(\\frac{4}{9}\\) là một phân số và không phải là một số tự nhiên.\n\nB. \\(3 \\frac{1}{4}\\) là một số hỗn hợp, tức là kết hợp giữa một số nguyên và một phân số, do đó nó cũng không phải là số tự nhiên.\n\nC. \\(2022\\) là một số nguyên dương và không có phân số hay phần thập phân, do đó đây là một số tự nhiên.\n\nD. 7,8 là một số thập phân và không phải là số tự nhiên.\n\nVậy, trong các lựa chọn đã cho, chỉ có C. \\(2022\\) là số tự nhiên.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090634,
+        "question_text": "Tính nhanh tổng \\(53+25+47+75\\) bằng\nA. 200\nB. 201\nC. 300\nD. 100",
+        "correct_option": "A",
+        "explanation": "\\(\\begin{array}{l}\\mathbf{5 3}+\\mathbf{2 5}+\\mathbf{4 7}+\\mathbf{7 5} \\\\ =(\\mathbf{5 3}+\\mathbf{4 7})+(\\mathbf{2 5}+\\mathbf{7 5}) \\\\ =\\mathbf{1 0 0}+\\mathbf{1 0 0}=\\mathbf{2 0 0}\\end{array}\\)",
+        "explanation_by_ai": "Để tính tổng \\(53+25+47+75\\), ta sẽ thực hiện phép cộng từng bước:\n\nBước 1: Cộng hai số đầu tiên\n\\[ 53 + 25 = 78 \\]\n\nBước 2: Cộng kết quả với số thứ ba\n\\[ 78 + 47 = 125 \\]\n\nBước 3: Cộng kết quả với số cuối cùng\n\\[ 125 + 75 = 200 \\]\n\nVậy tổng của \\(53+25+47+75\\) là \\(200\\).\n\nChọn đáp án A. 200",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090635,
+        "question_text": "Chọn đáp án đúng.\nA. \\(2^{3}\\lt 2^{7}\\)\nB. \\(2^{3}=2^{7}\\)\nC. \\(2^{3}\\gt 2^{7}\\)\nD. \\(2^{9} \\leq 2^{7}\\)",
+        "correct_option": "A",
+        "explanation": "\\(\\begin{array}{l}2^{3}=8 ; 2^{7}=128 \\\\ \\text { Vậy: } 2^{3}\\lt 2^{7}\\end{array}\\)",
+        "explanation_by_ai": "Để giải bài này, ta sẽ xem xét từng đáp án một cách chi tiết:\n\nA. \\(2^{3} < 2^{7}\\):\n- \\(2^{3} = 8\\) và \\(2^{7} = 128\\). Do đó, \\(8 < 128\\), đáp án này là đúng.\n\nB. \\(2^{3} = 2^{7}\\):\n- Ta đã biết \\(2^{3} = 8\\) và \\(2^{7} = 128\\). Rõ ràng, \\(8 \\neq 128\\), nên đáp án này là sai.\n\nC. \\(2^{3} > 2^{7}\\):\n- Từ phân tích ở trên, \\(8 < 128\\), nên đáp án này là sai.\n\nD. \\(2^{9} \\leq 2^{7}\\):\n- \\(2^{9} = 512\\) và \\(2^{7} = 128\\). Do đó, \\(512 > 128\\), nên \\(2^{9}\\) không nhỏ hơn hoặc bằng \\(2^{7}\\), đáp án này là sai.\n\nKết luận: Đáp án đúng là A. \\(2^{3} < 2^{7}\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000090636,
+        "question_text": "Cho hình bình hành \\(A B C D\\) có \\(A B=2 \\mathrm{~cm}\\) thì\nA. \\(B C=2 \\mathrm{~cm}\\)\nB. \\(A D=2 \\mathrm{~cm}\\)\nC. \\(A C=2 \\mathrm{~cm}\\)\nD. \\(D C=2 \\mathrm{~cm}\\)",
+        "correct_option": "D",
+        "explanation": "Hình bình hành có các cạnh đối bằng nhau",
+        "explanation_by_ai": "Trong hình bình hành, các cặp cạnh đối diện bằng nhau và song song. Do đó, nếu \\(AB = 2 \\, \\text{cm}\\), thì:\n\nA. \\(BC = 2 \\, \\text{cm}\\) vì trong hình bình hành, \\(AB\\) song song và bằng \\(DC\\) chứ không phải \\(BC\\).\n\nB. \\(AD = 2 \\, \\text{cm}\\) vì \\(AD\\) là cạnh đối diện với \\(AB\\) và trong hình bình hành, các cặp cạnh đối diện bằng nhau.\n\nC. \\(AC = 2 \\, \\text{cm}\\) không đúng vì \\(AC\\) là đường chéo của hình bình hành, không có quy tắc nào nói rằng đường chéo bằng với cạnh.\n\nD. \\(DC = 2 \\, \\text{cm}\\) không đúng vì \\(AB\\) song song và bằng \\(DC\\) chứ không phải \\(AD\\). Tuy nhiên, đây là một nhầm lẫn trong phần giải thích: \\(DC = 2 \\, \\text{cm}\\) đúng vì \\(DC\\) là cạnh đối diện với \\(AB\\) và trong hình bình hành, các cặp cạnh đối diện bằng nhau.\n\nKết luận đúng là:\n- \\(B\\) \\(AD = 2 \\, \\text{cm}\\) vì trong hình bình hành, các cặp cạnh đối diện bằng nhau.\n- Và cũng \\(DC = 2 \\, \\text{cm}\\) với lý do tương tự, nhưng lựa chọn này không được liệt kê đúng trong câu hỏi gốc. \n\nVậy, câu trả lời đúng là B. \\(AD = 2 \\, \\text{cm}\\).",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090637,
+        "question_text": "Chữ số điền vào dấu * để số \\(\\overline{37 *}\\) chia hết cho cả 2 và 5 là\nA. 2\nB. 5\nC. 0 và 5\nD. 0",
+        "correct_option": "D",
+        "explanation": "Vì số có chữ số tận cùng là 0 thì chia hết cho cả 2 và 5 nên chon đáp án đúng là 0 .",
+        "explanation_by_ai": "Để số \\(\\overline{37*}\\) chia hết cho 2, chữ số cuối cùng của nó phải là một trong các số chẵn: 0, 2, 4, 6, 8.\n\nĐể số \\(\\overline{37*}\\) chia hết cho 5, chữ số cuối cùng của nó phải là 0 hoặc 5.\n\nKhi ghép hai điều kiện trên lại, chữ số cuối cùng của số \\(\\overline{37*}\\) để nó chia hết cho cả 2 và 5 chỉ có thể là 0.\n\nVậy đáp án đúng là: **D. 0**",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000090639,
+        "question_text": "Tìm chữ số \\({ }^{a}\\) để \\(\\overline{3 a}\\) là số nguyên tố:\nA. \\(2 ; 4 ; 6 ; 8\\)\nB. \\(1 ; 2 ; 3 ; 7 ; 9\\)\nC. \\(0 ; 2 ; 3 ; 4 ; 5 ; 6 ; 8\\)\nD. \\(1 ; 7\\)",
+        "correct_option": "D",
+        "explanation": "Số nguyên tố là số lớn hơn 1 chỉ có 2 ước là 1 và chính nó",
+        "explanation_by_ai": "Để tìm chữ số \\(a\\) sao cho \\(\\overline{3a}\\) là số nguyên tố, ta xét từng chữ số trong các phương án đề xuất:\n\nA. \\(2 ; 4 ; 6 ; 8\\): Các số \\(32, 34, 36, 38\\) không phải là số nguyên tố vì chúng đều chia hết cho ít nhất một số nguyên dương khác \\(1\\) và chính nó.\n\nB. \\(1 ; 2 ; 3 ; 7 ; 9\\): \n- \\(31\\) là số nguyên tố.\n- \\(32\\) không phải số nguyên tố (đã xét ở trên).\n- \\(33\\) không phải số nguyên tố vì chia hết cho \\(3\\).\n- \\(37\\) là số nguyên tố.\n- \\(39\\) không phải số nguyên tố vì chia hết cho \\(3\\).\n\nC. \\(0 ; 2 ; 3 ; 4 ; 5 ; 6 ; 8\\): \n- \\(30\\) không phải số nguyên tố vì chia hết cho \\(2, 3, 5, 6...\\)\n- \\(32\\) không phải số nguyên tố (đã xét ở trên).\n- \\(33\\) không phải số nguyên tố (đã xét ở trên).\n- \\(34\\) không phải số nguyên tố vì chia hết cho \\(2\\).\n- \\(35\\) không phải số nguyên tố vì chia hết cho \\(5\\).\n- \\(36\\) không phải số nguyên tố vì chia hết cho \\(2, 3, 6...\\)\n- \\(38\\) không phải số nguyên tố (đã xét ở trên).\n\nD. \\(1 ; 7\\): \n- \\(31\\) là số nguyên tố (đã xét ở trên).\n- \\(37\\) là số nguyên tố (đã xét ở trên).\n\nNhư vậy, chỉ có các chữ số \\(1\\) và \\(7\\) khi đặt sau số \\(3\\) tạo thành số nguyên tố. Do đó, đáp án đúng là D. \\(1 ; 7\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000090640,
+        "question_text": "Biết số bị chia là 128 , thương là 32 số dư bằng 0 , vậy số chia bằng?\nA. 3\nB. 4\nC. 5\nD. 6",
+        "correct_option": "B",
+        "explanation": "\\(128: 32=4\\)",
+        "explanation_by_ai": "Trong phép chia, ta có công thức: Số bị chia = Số chia \\(\\times\\) Thương + Số dư. Theo đề bài, số bị chia là 128, thương là 32, và số dư bằng 0. Vậy ta có:\n\n\\[128 = Số\\ chia \\times 32 + 0\\]\n\nĐể tìm số chia, ta sẽ chia số bị chia cho thương:\n\n\\[Số\\ chia = \\frac{128}{32}\\]\n\nThực hiện phép tính:\n\n\\[Số\\ chia = 4\\]\n\nVậy số chia bằng 4. Đáp án đúng là:\n\nB. 4",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000090641,
+        "question_text": "Khắng định nào \\(\\underline{s a i}\\) trong các khẳng định sau?\nA. Trong hình chữ nhật: Các cạnh đôi song song với nhau.\nB. Trong hình thang cân: Các cạnh đối song song với nhau.\nC. Trong hình thoi: Các cạnh đối song song với nhau.\nD. Trong hình bình hành: Các cạnh đối song song với nhau.",
+        "correct_option": "B",
+        "explanation": "Định nghĩa hình thang có 2 cạnh đối song songHình thang cân là hình thang có:- 2 góc kề 1 đáy bằng nhau- 2 đường chéo bằng nhau",
+        "explanation_by_ai": "Ta sẽ xét từng khẳng định để tìm khẳng định sai:\n\nA. Trong hình chữ nhật: Các cạnh đôi song song với nhau. - Đúng. Trong hình chữ nhật, các cạnh đối diện luôn song song và bằng nhau.\n\nB. Trong hình thang cân: Các cạnh đối song song với nhau. - Sai. Trong hình thang cân, chỉ có một cặp cạnh đối song song với nhau (là hai cạnh đáy), còn cặp cạnh bên thì không song song nhưng có độ dài bằng nhau.\n\nC. Trong hình thoi: Các cạnh đối song song với nhau. - Đúng. Trong hình thoi, mặc dù tất cả các cạnh đều bằng nhau nhưng chỉ có các cạnh đối song song với nhau.\n\nD. Trong hình bình hành: Các cạnh đối song song với nhau. - Đúng. Trong hình bình hành, các cạnh đối diện luôn song song và bằng nhau.\n\nVậy, khẳng định sai là B. Trong hình thang cân: Các cạnh đối song song với nhau.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000090642,
+        "question_text": "Khẳng định đúng là:\nA. Hình thoi có bốn canh bằng nhau\nB. Hình bình hành có các cặp cạnh đối không bằng nhau\nC. Hình chữ nhật có bốn góc bằng nhau, mỗi góc bằng \\(60^{\\circ}\\)\nD. Tam giác đều có ba cạnh không bằng nhau",
+        "correct_option": "A",
+        "explanation": "Định nghĩa hình hoi là tứ giác có 4 cạnh bằng nhau",
+        "explanation_by_ai": "Ta sẽ xem xét từng khẳng định để tìm câu trả lời đúng:\n\nA. Hình thoi có bốn cạnh bằng nhau. Đây là định nghĩa đúng của hình thoi. Hình thoi là một hình bình hành có bốn cạnh bằng nhau.\n\nB. Hình bình hành có các cặp cạnh đối không bằng nhau. Đây là một khẳng định sai về hình bình hành. Trong hình bình hành, các cặp cạnh đối luôn bằng nhau.\n\nC. Hình chữ nhật có bốn góc bằng nhau, mỗi góc bằng \\(60^{\\circ}\\). Đây là một khẳng định sai. Hình chữ nhật có bốn góc vuông, mỗi góc bằng \\(90^{\\circ}\\), không phải là \\(60^{\\circ}\\).\n\nD. Tam giác đều có ba cạnh không bằng nhau. Đây là một khẳng định sai. Tam giác đều, theo định nghĩa, có ba cạnh bằng nhau.\n\nVậy, khẳng định đúng là:\n\nA. Hình thoi có bốn cạnh bằng nhau.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000090643,
+        "question_text": "Kết quả của phép tính \\(212-12.3^{2}\\) là:\nA. 600\nB. 1800\nC. 104\nD. 1200",
+        "correct_option": "C",
+        "explanation": "\\(212-12.3^{2}=212-12.9=212-108=104\\)",
+        "explanation_by_ai": "Kết quả của phép tính \\(212 - 12.3^2\\) là \\(60.71\\) (làm tròn đến hai chữ số thập phân). Do đó, không có đáp án nào phù hợp trong các lựa chọn đã cho.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092101,
+        "question_text": "Khoa học tự nhiên nghiên cứu về lĩnh vực nào dưới đây?\nA. Các sự vật, hiện tượng tự nhiên.\nB. Các quy luật tự nhiên.\nC. Những ành hưởng của tự nhiên đến con người và môi trường sống.\nD. Tất cả các ý trên.",
+        "correct_option": "D",
+        "explanation": "Khoa học tự nhiên (KHTN) là một nhánh khoa học, nghiên cứu các hiện tượng tự nhiên, tìm ra các tính chát, các quy luật của chúng. Các thành tựu KHTN được áp dụng vào công nghệ có gây ảnh hưởng tới môi trường tự nhiên và con người.",
+        "explanation_by_ai": "Khoa học tự nhiên là một lĩnh vực rộng lớn bao gồm việc nghiên cứu về các sự vật, hiện tượng tự nhiên, các quy luật điều khiển chúng, và cách mà chúng tác động đến con người và môi trường sống. Dưới đây là giải thích chi tiết cho từng phương án:\n\nA. Khoa học tự nhiên nghiên cứu về các sự vật, hiện tượng tự nhiên: Điều này chính xác mô tả một phần của lĩnh vực nghiên cứu trong khoa học tự nhiên, bao gồm các hiện tượng như thời tiết, động đất, quá trình sinh học của các loài động vật và thực vật, v.v.\n\nB. Khoa học tự nhiên nghiên cứu về các quy luật tự nhiên: Đây cũng là một phần không thể thiếu của khoa học tự nhiên, bởi vì mục tiêu chính của nó là không chỉ quan sát mà còn là giải thích và dự đoán các hiện tượng tự nhiên thông qua các quy luật và nguyên lý.\n\nC. Khoa học tự nhiên nghiên cứu về những ảnh hưởng của tự nhiên đến con người và môi trường sống: Khoa học tự nhiên cũng bao gồm nghiên cứu về cách các hiện tượng tự nhiên và các quy luật tự nhiên ảnh hưởng đến cuộc sống của chúng ta và môi trường xung quanh.\n\nDựa vào ba phần giải thích trên, câu trả lời chính xác nhất là:\n\nD. Tất cả các ý trên.\n\nKhoa học tự nhiên thực sự bao gồm tất cả các khía cạnh đã nêu trên: nghiên cứu về các sự vật, hiện tượng tự nhiên; các quy luật tự nhiên và ảnh hưởng của tự nhiên đối với con người và môi trường sống.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092102,
+        "question_text": "Để đåm båo an toàn trong phòng thực hành cần thực hiện nguyên tắc nào dưới đây?\nA. Đọc kĩ nội quy và thực hiện theo nội quy phòng thực hành.\nB. Chỉ làm thí nghiệm, thực hành khi có sự hướng dẫn và giám sát của giáo viên.\nC. Thực hiện đúng nguyên tắc khi sử dụng hóa chất, dụng cụ, thiết bị trong phòng thực hành.\nD. Tất cả các ý trên.",
+        "correct_option": "D",
+        "explanation": "Để đảm bảo an toàn trong phòng thực hành cần thực hiện nguyên tắc sau đây:- Đọc kĩ nội quy và thực hiện theo nội quy phòng thực hành.- Chỉ làm thí nghiệm, thực hành khi có sự hướng dẫn và giám sát của giáo viên.- Thực hiện đúng nguyên tắc khi sử dụng hóa chất, dụng cụ, thiết bị trong phòng thực hành.",
+        "explanation_by_ai": "D. Tất cả các ý trên.\n\nĐể đảm bảo an toàn trong phòng thực hành, việc tuân thủ tất cả các nguyên tắc được nêu ở trên là rất quan trọng. Dưới đây là lý do chi tiết cho từng phương án:\n\nA. Đọc kỹ nội quy và thực hiện theo nội quy phòng thực hành giúp người thực hành nắm được các quy định cụ thể, tránh được những hành động nguy hiểm không chỉ cho bản thân mà còn cho những người xung quanh.\n\nB. Chỉ thực hiện thí nghiệm, thực hành khi có sự hướng dẫn và giám sát của giáo viên đảm bảo rằng mọi thao tác đều được kiểm soát, giảm thiểu rủi ro và sai sót có thể xảy ra.\n\nC. Thực hiện đúng nguyên tắc khi sử dụng hóa chất, dụng cụ, thiết bị trong phòng thực hành giúp ngăn chặn các sự cố đáng tiếc như hỏa hoạn, nổ, thương tích cá nhân, hư hỏng thiết bị,...\n\nDo đó, phương án D là câu trả lời đúng nhất, bao gồm tất cả các nguyên tắc cần thiết để đảm bảo an toàn trong môi trường phòng thực hành.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092103,
+        "question_text": "Cho các bước đo chiều dài sau:(1) Đặt thước dọc theo chiều dài cần đo, vạch số 0 của thước ngang với một đầu của vật.(2) Ước lượng chiều dài cần đo để chọn thước đo thích hợp.(3) Mắt nhìn theo hướng vuông góc với cạnh thước ở đầu kia của vật.(4) Đọc kết quà đo theo vạch chia gần nhất với đầu kia của vật.(5) Ghi kết quå đo theo ĐCNN của thước.Hãy chọn cách sắp xếp đúng?\nA. \\(1-2-3-4-5\\).\nB. \\(1-2-3-5-4\\)\nC. \\(2 - 1 - 3 - 4 - 5\\).\nD. \\(5-4-3-2-1\\)",
+        "correct_option": "C",
+        "explanation": "Cách sắp xếp các bước đo độ dài theo thứ tự đúng là:(2) Ước lượng chiều dài cần đo để chọn thước đo thích hợp.(1) Đặt thước dọc theo chiều dài cẩn đo, vạch số 0 của thước ngang với một dầu của vật.(3) Mắt nhìn theo hướng vuông góc với cạnh thước ở đầu kia của vật.(4) Đọc kết quả đo theo vạch chia gần nhất với đầu kia của vật.(5) Ghi kết quả đo theo ĐCNN của thước.",
+        "explanation_by_ai": "Để đo chiều dài một cách chính xác, các bước cần thực hiện như sau:\n\n1. **Ước lượng chiều dài cần đo để chọn thước đo thích hợp.** Đây là bước đầu tiên cần thực hiện để đảm bảo rằng bạn có công cụ đo phù hợp cho kích thước của vật cần đo. Nếu ước lượng sai, bạn có thể chọn phải thước không phù hợp, làm cho việc đo không chính xác hoặc thậm chí không thể thực hiện.\n\n2. **Đặt thước dọc theo chiều dài cần đo, vạch số 0 của thước ngang với một đầu của vật.** Sau khi đã chọn được thước đo phù hợp, bước tiếp theo là đặt thước cẩn thận dọc theo chiều dài của vật, đảm bảo rằng vạch số 0 của thước ngang với một đầu của vật.\n\n3. **Mắt nhìn theo hướng vuông góc với cạnh thước ở đầu kia của vật.** Điều này giúp giảm thiểu sai số do nhìn nghiêng gây ra, từ đó tăng độ chính xác khi đo.\n\n4. **Đọc kết quà đo theo vạch chia gần nhất với đầu kia của vật.** Sau khi đã đặt mắt đúng vị trí, bạn đọc giá trị đo được trên thước, dựa vào vạch chia gần nhất với đầu kia của vật.\n\n5. **Ghi kết quả đo theo ĐCNN (Độ chính xác nhỏ nhất) của thước.** Cuối cùng, ghi lại kết quả đo một cách chính xác theo độ chia nhỏ nhất mà thước đo có thể hiển thị.\n\nNhư vậy, cách sắp xếp đúng các bước để đo chiều dài một cách chính xác là: **Ước lượng chiều dài cần đo (2) - Đặt thước dọc theo chiều dài cần đo (1) - Mắt nhìn theo hướng vuông góc (3) - Đọc kết quả đo (4) - Ghi kết quả đo (5).**\n\nDo đó, câu trả lời đúng là:\nC. \\(2 - 1 - 3 - 4 - 5\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092104,
+        "question_text": "Điều nào sau đây là đúng trong việc thực hiện các bước đo thời gian của một hoạt động?\nA. Hiệu chỉnh đồng hồ ở vạch số 1 trước khi đo\nB. Hiệu chỉnh đồng hồ về vạch số 0 trước khi đo\nC. Không cần hiệu chỉnh trước khi đo\nD. Hiệu chỉnh đồng hồ ở vạch số 2 trước khi đo",
+        "correct_option": "B",
+        "explanation": "",
+        "explanation_by_ai": "Trong việc thực hiện các bước đo thời gian của một hoạt động, bước hiệu chỉnh đồng hồ là quan trọng để đảm bảo kết quả đo chính xác. Đồng hồ, hoặc bất kỳ dụng cụ đo nào, cần được hiệu chỉnh về điểm mốc cơ bản trước khi tiến hành đo lường. Điểm mốc này thường là giá trị \"0\" hoặc vị trí khởi đầu, để bắt đầu quá trình đo từ một điểm chuẩn, không có sai số từ lần đo trước. Điều này giúp đảm bảo rằng mọi đo lường đều bắt đầu từ cùng một điểm tham chiếu, loại bỏ các sai số không đáng có.\n\nDo đó, phương án đúng là:\n\nB. Hiệu chỉnh đồng hồ về vạch số 0 trước khi đo\n\nĐiều này giúp đảm bảo rằng kết quả đo được chính xác và không bị ảnh hưởng bởi các yếu tố trước đó.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092105,
+        "question_text": "Đơn vị đo khối lượng hợp pháp ờ nước ta là\nA. kg\nB. g\nC. tạ\nD. tấn",
+        "correct_option": "A",
+        "explanation": "Đơn vị đo khối lượng hợp pháp ở nước ta là kg.",
+        "explanation_by_ai": "Ở Việt Nam, đơn vị đo khối lượng được quy định theo hệ thống đo lường quốc tế (SI) là kilogram (kg). Vì vậy, đáp án chính xác là:\n\nA. kg",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092106,
+        "question_text": "Đơn vị nào sau đây là đơn vị đo thời gian?\nA. Giây\nB. milimét\nC. miligam\nD. kilôgam",
+        "correct_option": "A",
+        "explanation": "- Đơn vị đo thời gian là giây- Đơn vị đo độ dài: milimét- Đơn vị đo khối lượng: miligam, kilôgam",
+        "explanation_by_ai": "Trong các đơn vị được đề cập, chỉ có **giây** là đơn vị đo thời gian. Các đơn vị khác đều là đơn vị đo chiều dài (milimét) và khối lượng (miligam, kilôgam). Vậy đáp án là:\n\nA. Giây",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092107,
+        "question_text": "Để đo thời gian người ta dùng:\nA. Thước\nB. Đồng hồ\nC. Cân\nD. Tivi",
+        "correct_option": "B",
+        "explanation": "- Để đo thời gian người ta dùng đồng hồ.- Để đo độ dài dùng thước, đo khối lượng dùng cân.",
+        "explanation_by_ai": "Để đo thời gian, người ta sử dụng:\n\nB. Đồng hồ\n\nGiải thích:\n\n- A. Thước: Dùng để đo chiều dài hoặc khoảng cách, không dùng để đo thời gian.\n- B. Đồng hồ: Công cụ chính để đo thời gian, có thể là đồng hồ cơ, đồng hồ điện tử, đồng hồ cát...\n- C. Cân: Dùng để đo khối lượng, trọng lượng của vật, không dùng để đo thời gian.\n- D. Tivi: Là thiết bị điện tử dùng để xem các chương trình truyền hình, không dùng để đo thời gian.\n\nVậy, để đo thời gian người ta sử dụng đồng hồ.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092108,
+        "question_text": "Đâu không phải là dụng cụ đo chiều dài?\nA. Thước kẻ bảng\nB. Thước dây\nC. Thước cuộn\nD. Cân đồng hồ",
+        "correct_option": "D",
+        "explanation": "- Dụng cụ đo chiều dài là thước kẻ bảng, thước dây, thước cuộn.- Dụng cụ đo khối lượng là cân đồng hồ.",
+        "explanation_by_ai": "Để xác định dụng cụ nào không phải là dụng cụ đo chiều dài trong các lựa chọn đã cho, ta cần biết mục đích sử dụng cơ bản của mỗi dụng cụ:\n\nA. Thước kẻ bảng - Được sử dụng để đo chiều dài hoặc vẽ các đường thẳng trên bảng.\nB. Thước dây - Được sử dụng để đo chiều dài, đặc biệt là trong những trường hợp chiều dài cần đo lớn và có thể uốn cong.\nC. Thước cuộn - Cũng được sử dụng để đo chiều dài, thường là thước dây được cuộn lại và có thể kéo ra để sử dụng.\nD. Cân đồng hồ - Được sử dụng để cân nặng, không phải để đo chiều dài.\n\nTừ đó, ta có thể kết luận rằng lựa chọn D. Cân đồng hồ không phải là dụng cụ đo chiều dài.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092109,
+        "question_text": "Điền vào chỗ trống “...\" trong câu sau:Để xác định mức độ nóng, lạnh của vật, người ta dùng khái niệm (1)...: Vật càng nóng thì nhiệt độ của vật càng (2)... .\nA. (1) nóng - lạnh; (2) cao.\nB. (1) nóng - lạnh; (2) thấp.\nC. (1) nhiệt độ; (2) cao.\nD. (1) nhiệt độ; (2) thấp.",
+        "correct_option": "A",
+        "explanation": "Để xác định mức độ nóng, lạnh của vật, người ta dùng khái niệm (1) nhiệt độ: Vật càng nóng thì nhiệt độ của vật càng (2) cao.",
+        "explanation_by_ai": "Để xác định mức độ nóng, lạnh của vật, người ta dùng khái niệm nhiệt độ. Khi vật càng nóng, nhiệt độ của vật càng cao. Vì vậy, câu trả lời đúng là:\n\nC. (1) nhiệt độ; (2) cao.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092110,
+        "question_text": "Nhiệt độ là :\nA. Là số đo độ nóng cuả một vật\nB. Là số đo độ lạnh cuả một vật\nC. Là số đo độ nóng, lạnh của nhiệt kế\nD. Cả A và B",
+        "correct_option": "D",
+        "explanation": "Nhiệt độ là số đo nóng, lạnh của một vật.",
+        "explanation_by_ai": "Nhiệt độ là một khái niệm được sử dụng để mô tả mức độ nóng hoặc lạnh của một vật hoặc môi trường. Đây là một đặc tính quan trọng trong vật lý, và cách chúng ta đo nhiệt độ có thể ảnh hưởng đến nhiều quyết định và quan sát trong khoa học và cuộc sống hàng ngày.\n\n- Đáp án A, \"Là số đo độ nóng của một vật,\" mô tả một phần của khái niệm nhiệt độ, chỉ ra rằng nhiệt độ có thể đo lường mức độ nóng của một vật.\n- Đáp án B, \"Là số đo độ lạnh của một vật,\" cũng đúng vì nhiệt độ không chỉ đo độ nóng mà còn có thể thể hiện mức độ lạnh của một vật.\n- Đáp án C, \"Là số đo độ nóng, lạnh của nhiệt kế,\" là không chính xác vì nhiệt kế là dụng cụ đo nhiệt độ, không phải là thứ mà nhiệt độ mô tả.\n- Đáp án D, \"Cả A và B\" là đúng nhất vì nhiệt độ thực sự mô tả cả mức độ nóng và lạnh của một vật, không chỉ riêng một trong hai.\n\nVậy đáp án chính xác nhất là **D. Cả A và B**.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092111,
+        "question_text": "Tính chất nào sau đây là tính chất hóa học của chất?\nA. Tính tan.\nB. Tính dẻo.\nC. Tính dẫn nhiệt.\nD. Từ chất này biến đổi thành chất khác",
+        "correct_option": "D",
+        "explanation": "- Tính chất hóa học: từ chất này biến đổi thành chất khác.- Tính chất vật lí: tính tan, tính dẻo, tính dẫn nhiệt.",
+        "explanation_by_ai": "Tính chất hóa học của chất là những đặc điểm thể hiện qua phản ứng hóa học, tức là khi chất đó tham gia vào một phản ứng hóa học và biến đổi thành chất mới. Dựa vào định nghĩa này, ta sẽ xem xét từng phương án:\n\nA. Tính tan: Tính tan là một tính chất vật lý, thể hiện khả năng một chất tan được trong dung môi nào đó mà không thay đổi bản chất hóa học của chất đó.\n\nB. Tính dẻo: Tính dẻo cũng là một tính chất vật lý, thể hiện khả năng deforma (biến dạng) dưới tác dụng của lực mà không bị gãy, đối với các vật liệu như kim loại, nhựa,...\n\nC. Tính dẫn nhiệt: Là một tính chất vật lý, thể hiện khả năng dẫn truyền nhiệt của một chất. Các chất dẫn nhiệt tốt thường là kim loại.\n\nD. Từ chất này biến đổi thành chất khác: Đây là một tính chất hóa học. Khi một chất biến đổi thành chất khác thông qua phản ứng hóa học, nó thể hiện tính chất hóa học vì có sự thay đổi bản chất, cấu trúc phân tử của chất đó.\n\nVậy, phương án D. \"Từ chất này biến đổi thành chất khác\" là tính chất hóa học của chất.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092112,
+        "question_text": "Vật thể tự nhiên là?\nA. Giếng.\nB. Bể bơi.\nC. Biển.\nD. Nước giải khát.",
+        "correct_option": "C",
+        "explanation": "- Vật thể tự nhiên (có sẵn trong tự nhiên): biển.- Vật thể nhân tạo (do con người tạo ra): giếng, bể bơi, nước giải khát.",
+        "explanation_by_ai": "Câu trả lời đúng là: C. Biển.\n\nBước 1: Xác định định nghĩa của \"vật thể tự nhiên\". Vật thể tự nhiên là những vật thể tồn tại trong tự nhiên mà không cần sự can thiệp của con người.\n\nBước 2: Phân tích từng lựa chọn dựa trên định nghĩa trên.\n\n- A. Giếng: Là kết quả của việc đào hoặc khoan bởi con người để lấy nước. Do đó, nó không phải là vật thể tự nhiên.\n\n- B. Bể bơi: Là cấu trúc nhân tạo được xây dựng để chứa nước cho mục đích bơi lội. Nó cũng không phải là vật thể tự nhiên.\n\n- C. Biển: Là một phần lớn của hệ thống thủy văn tự nhiên, tồn tại mà không cần sự can thiệp của con người. Biển là vật thể tự nhiên.\n\n- D. Nước giải khát: Là sản phẩm được chế biến từ nước và các thành phần khác để tiêu dùng. Do đó, nó không phải là vật thể tự nhiên.\n\nTừ phân tích trên, ta thấy rằng chỉ có lựa chọn C. Biển là vật thể tự nhiên, đáp ứng định nghĩa đã đưa ra.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092113,
+        "question_text": "Vật thể nhân tạo là\nA. Cây lúa.\nB. Cây cầu.\nC. Mặt trời.\nD. Con sóc.",
+        "correct_option": "B",
+        "explanation": "- Vật thể tự nhiên (có sẵn trong tự nhiên): cây lúa, mặt trời, con sóc.- Vật thể nhân tạo (do con người tạo ra): cây cầu.",
+        "explanation_by_ai": "Trong các lựa chọn được đưa ra, vật thể nhân tạo có nghĩa là vật thể được con người tạo ra, không phải tự nhiên hình thành. Dựa vào định nghĩa này, ta có thể phân tích từng lựa chọn:\n\nA. Cây lúa: Đây là một loại cây trồng, mặc dù được con người gieo trồng và chăm sóc, nhưng nó vẫn là một phần của tự nhiên và không phải là vật thể nhân tạo.\n\nB. Cây cầu: Đây là một công trình được con người thiết kế và xây dựng để vượt qua các chướng ngại vật như sông, hồ, hoặc thung lũng. Cây cầu không tồn tại một cách tự nhiên mà phải được xây dựng, do đó nó là một vật thể nhân tạo.\n\nC. Mặt trời: Đây là một ngôi sao tự nhiên và là nguồn sáng và nhiệt chính cho Trái Đất. Mặt trời tồn tại mà không cần sự can thiệp của con người, do đó nó không phải là vật thể nhân tạo.\n\nD. Con sóc: Đây là một loài động vật, tồn tại trong tự nhiên và không được con người tạo ra. Do đó, con sóc không phải là vật thể nhân tạo.\n\nTừ phân tích trên, ta có thể kết luận rằng câu trả lời đúng là:\n\nB. Cây cầu.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092114,
+        "question_text": "Sự nóng chảy là sự chuyển thể từ\nA. thể rắn sang thể lỏng của chất.\nB. thể lỏng sang thể rắn của chất.\nC. từ thể lỏng sang thể khí của chất.\nD. từ thể khí sang thể lỏng của chất.",
+        "correct_option": "A",
+        "explanation": "Sự nóng chåy là sự chuyền thể từ thể rắn sang thể lỏng của chất.",
+        "explanation_by_ai": "Sự nóng chảy là quá trình chuyển thể từ thể rắn sang thể lỏng của chất. Khi một chất ở thể rắn được cung cấp nhiệt, năng lượng nhiệt này sẽ làm tăng nhiệt độ của chất đến một điểm nhất định, gọi là điểm nóng chảy. Tại điểm này, chất sẽ bắt đầu chuyển từ thể rắn sang thể lỏng. Quá trình này xảy ra ở một nhiệt độ cố định đối với mỗi chất cụ thể và không thay đổi trong suốt quá trình chuyển đổi pha.\n\nVậy đáp án đúng là A. thể rắn sang thể lỏng của chất.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092115,
+        "question_text": "Mặt trời mọc lên, dưới ánh nắng mặt trời làm cho các hạt surơng tan dần. Hiện tượng này thể hiện quá trình chuyển thể nào?\nA. Từ rắn sang lỏng\nB. Từ lỏng sang hơi\nC. Từ hơi sang lỏng\nD. Từ lỏng sang rắn",
+        "correct_option": "B",
+        "explanation": "Mặt trời mọc lên, dưới ánh nắng mặt trời làm cho các hạt suơng tan dần. Hiện tượng này thể hiện quá trình chuyển từ lỏng sang hơi. Hạt sương đang là thể lỏng, dưới ánh sáng mặt trời tan ra và bay hoi.",
+        "explanation_by_ai": "Trong trường hợp này, mô tả cho thấy các hạt sương (ban đầu ở dạng lỏng) dưới ánh nắng mặt trời sẽ bốc hơi và biến thành hơi nước. Đây là quá trình chuyển từ trạng thái lỏng sang trạng thái hơi. Vì vậy, câu trả lời đúng là:\n\nB. Từ lỏng sang hơi",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000092116,
+        "question_text": "Hiện tượng tự nhiên nào sau đây là do hơi nước ngưng tụ?\nA. Tạo thành mây\nB. Gió thổi\nC. Mưa rơi\nD. Lốc xoáy",
+        "correct_option": "A",
+        "explanation": "Hiện tượng tạo thành mây là do hơi nước ngưng tụ.",
+        "explanation_by_ai": "Hơi nước ngưng tụ là quá trình chuyển từ trạng thái khí (hơi nước) sang trạng thái lỏng (nước), thường xảy ra trong khí quyển khi hơi nước gặp điều kiện lạnh và đủ áp suất. Quá trình này góp phần vào việc hình thành mây và mưa.\n\nA. **Tạo thành mây**: Khi hơi nước trong không khí ngưng tụ, nó tạo thành các giọt nước nhỏ hoặc các hạt băng, chúng tập hợp lại với nhau tạo thành mây. Đây là một hiện tượng do hơi nước ngưng tụ.\n\nB. **Gió thổi**: Gió thổi là kết quả của sự chênh lệch áp suất trong khí quyển. Nó không trực tiếp liên quan đến quá trình ngưng tụ hơi nước.\n\nC. **Mưa rơi**: Mưa xảy ra khi các giọt nước trong mây trở nên quá nặng không thể được giữ lơ lửng trong không khí và bắt đầu rơi xuống mặt đất dưới dạng mưa. Đây là quá trình tiếp theo sau hình thành mây, do đó mưa cũng là một hiện tượng liên quan đến ngưng tụ hơi nước.\n\nD. **Lốc xoáy**: Lốc xoáy là một hiện tượng thời tiết cực đoan, chủ yếu liên quan đến sự chuyển động xoáy cực mạnh của không khí. Dù nó có thể liên quan đến quá trình ngưng tụ hơi nước khi hình thành mây trong một cơn bão, quá trình cụ thể tạo ra lốc xoáy không phải là do ngưng tụ hơi nước.\n\nVì vậy, các hiện tượng tự nhiên do hơi nước ngưng tụ bao gồm:\n- A. Tạo thành mây\n- C. Mưa rơi",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095729,
+        "question_text": "Cho tập hợp \\(A=\\{1 ; 3 ; 6 ; 7 ; 10 ; 12\\}\\). Trong các khẳng định sau khẳng định nào đúng?\nA. \\(1 \\notin A\\)\nB. \\(5 \\in A\\)\nC. \\(7 \\in A\\).\nD. \\(10 \\notin A\\)",
+        "correct_option": "C",
+        "explanation": "\\(A=\\{1 ; 3 ; 6 ; 7 ; 10 ; 12\\}\\) các số \\(1,3,6,7,10,12\\) thuốc tập con của \\(\\mathrm{A}\\)",
+        "explanation_by_ai": "Để xác định khẳng định nào đúng, chúng ta sẽ xem xét từng khẳng định một:\n\nA. \\(1 \\notin A\\): Khẳng định này nói rằng 1 không thuộc vào tập hợp \\(A\\). Tuy nhiên, khi nhìn vào tập hợp \\(A=\\{1 ; 3 ; 6 ; 7 ; 10 ; 12\\}\\), ta thấy rằng số 1 có mặt trong tập hợp. Vì vậy, khẳng định này là **sai**.\n\nB. \\(5 \\in A\\): Khẳng định này nói rằng 5 thuộc vào tập hợp \\(A\\). Khi xem xét tập hợp \\(A\\), ta thấy rằng số 5 không có mặt trong tập hợp. Do đó, khẳng định này là **sai**.\n\nC. \\(7 \\in A\\): Khẳng định này nói rằng 7 thuộc vào tập hợp \\(A\\). Khi kiểm tra tập hợp \\(A\\), ta thấy rằng số 7 có mặt trong tập hợp. Vì vậy, khẳng định này là **đúng**.\n\nD. \\(10 \\notin A\\): Khẳng định này nói rằng 10 không thuộc vào tập hợp \\(A\\). Tuy nhiên, khi nhìn vào tập hợp \\(A\\), ta thấy rằng số 10 có mặt trong tập hợp. Do đó, khẳng định này là **sai**.\n\nVậy, khẳng định **C. \\(7 \\in A\\)** là khẳng định đúng.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000095730,
+        "question_text": "Tập hợp nào dưới đây chỉ gồm các số nguyên tố?\nA. \\(A=\\{3 ; 7 ; 10 ; 13\\}\\)\nB. \\(A=\\{3 ; 5 ; 7 ; 11\\}\\)\nC. \\(A=\\{13 ; 16 ; 17 ; 19\\}\\)\nD. \\(A=\\{1 ; 2 ; 3 ; 5\\}\\)",
+        "correct_option": "D",
+        "explanation": "HD: Số nguyên tố hay còn gọi là hợp số, đây là tập hợp số tự nhiên chỉ chia hết cho 1 và chính nó nê ta có \\(A=\\{1 ; 2 ; 3 ; 5\\}\\) là tập các số nguyên tố",
+        "explanation_by_ai": "Để xác định tập hợp chỉ gồm các số nguyên tố, ta sẽ xem xét từng tập hợp một:\n\n1. **Tập hợp A: \\(\\{3 ; 7 ; 10 ; 13\\}\\)**\n   - \\(3\\): Số nguyên tố.\n   - \\(7\\): Số nguyên tố.\n   - \\(10\\): Không phải số nguyên tố vì chia hết cho \\(2\\) và \\(5\\).\n   - \\(13\\): Số nguyên tố.\n   - Vậy, tập hợp này không chỉ gồm các số nguyên tố vì có số \\(10\\).\n\n2. **Tập hợp B: \\(\\{3 ; 5 ; 7 ; 11\\}\\)**\n   - \\(3\\): Số nguyên tố.\n   - \\(5\\): Số nguyên tố.\n   - \\(7\\): Số nguyên tố.\n   - \\(11\\): Số nguyên tố.\n   - Tập hợp này chỉ gồm các số nguyên tố.\n\n3. **Tập hợp C: \\(\\{13 ; 16 ; 17 ; 19\\}\\)**\n   - \\(13\\): Số nguyên tố.\n   - \\(16\\): Không phải số nguyên tố vì chia hết cho \\(2\\), \\(4\\), và \\(8\\).\n   - \\(17\\): Số nguyên tố.\n   - \\(19\\): Số nguyên tố.\n   - Vậy, tập hợp này không chỉ gồm các số nguyên tố vì có số \\(16\\).\n\n4. **Tập hợp D: \\(\\{1 ; 2 ; 3 ; 5\\}\\)**\n   - \\(1\\): Không phải số nguyên tố vì số nguyên tố là số lớn hơn \\(1\\) và chỉ chia hết cho \\(1\\) và chính nó.\n   - \\(2\\): Số nguyên tố.\n   - \\(3\\): Số nguyên tố.\n   - \\(5\\): Số nguyên tố.\n   - Vậy, tập hợp này không chỉ gồm các số nguyên tố vì có số \\(1\\).\n\nKết luận, **tập hợp B: \\(\\{3 ; 5 ; 7 ; 11\\}\\)** là tập hợp chỉ gồm các số nguyên tố.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095731,
+        "question_text": "Bội của 5 là số nào sau đây:\nA. 4\nB. 23\nC. 25\nD. -2",
+        "correct_option": "C",
+        "explanation": "Bội của 5 là các số có tận cùng là 0 hoặc 5",
+        "explanation_by_ai": "Để xác định bội của 5 trong các số đã cho, chúng ta cần tìm số nào chia hết cho 5. Số chia hết cho 5 nếu chữ số cuối cùng của nó là 0 hoặc 5.\n\nA. 4: Số này không chia hết cho 5 vì chữ số cuối cùng không phải là 0 hoặc 5.\n\nB. 23: Số này không chia hết cho 5 vì chữ số cuối cùng không phải là 0 hoặc 5.\n\nC. 25: Số này chia hết cho 5 vì chữ số cuối cùng là 5. Vậy 25 là một bội của 5.\n\nD. -2: Số này không chia hết cho 5 vì chữ số cuối cùng không phải là 0 hoặc 5.\n\nVậy đáp án đúng là C. 25",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000095732,
+        "question_text": "Trong các số: \\(215 ; 1372 ; 409 ; 222\\) số nào chia hết cho 3 ?\nA. 215.\nB. 1372.\nC. 409.\nD. 222.",
+        "correct_option": "D",
+        "explanation": " ",
+        "explanation_by_ai": "Để kiểm tra xem một số có chia hết cho 3 hay không, ta cần tính tổng các chữ số của số đó và kiểm tra xem tổng đó có chia hết cho 3 hay không.\n\n1. **Số 215**:\n   - Tổng các chữ số: \\(2 + 1 + 5 = 8\\).\n   - 8 không chia hết cho 3, nên 215 không chia hết cho 3.\n\n2. **Số 1372**:\n   - Tổng các chữ số: \\(1 + 3 + 7 + 2 = 13\\).\n   - 13 không chia hết cho 3, nên 1372 không chia hết cho 3.\n\n3. **Số 409**:\n   - Tổng các chữ số: \\(4 + 0 + 9 = 13\\).\n   - 13 không chia hết cho 3, nên 409 không chia hết cho 3.\n\n4. **Số 222**:\n   - Tổng các chữ số: \\(2 + 2 + 2 = 6\\).\n   - 6 chia hết cho 3, nên 222 chia hết cho 3.\n\nVậy, trong các số đã cho, **222** là số chia hết cho 3. Đáp án đúng là D. 222.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000095733,
+        "question_text": "Tập hợp các ước nguyên của 6 là:\nA. \\(\\{1 ; 2 ; 3 ; 6\\}\\)\nB. \\(\\{ \\pm 1 ; \\pm 2 ; \\pm 3 ; \\pm 6\\}\\)\nC. \\(\\{0 ; 1 ; 2 ; 3 ; 6\\}\\)\nD. \\(\\{1 ; 2 ; 3 ; 4 ; 5 ; 6\\}\\)",
+        "correct_option": "A",
+        "explanation": "HD: Ước số của một số tự nhiên a là \\(b\\) khi a chia hết cho \\(b ;\\) Ước nguyên của 6 là những số : \\(1,2,3,6\\)",
+        "explanation_by_ai": "Để tìm tập hợp các ước nguyên của 6, ta cần xác định tất cả các số nguyên mà 6 có thể chia hết.\n\nBước 1: Xác định ước số của 6. Ta biết rằng 6 có thể chia hết cho:\n- 1 (vì mọi số đều chia hết cho 1)\n- 2 (vì 6 chia hết cho 2, kết quả là 3)\n- 3 (vì 6 chia hết cho 3, kết quả là 2)\n- 6 (vì mọi số đều chia hết cho chính nó)\n\nBước 2: Loại trừ các lựa chọn không phù hợp.\n- Lựa chọn A: \\(\\{1 ; 2 ; 3 ; 6\\}\\) - Đây là danh sách chính xác các ước số của 6.\n- Lựa chọn B: \\(\\{ \\pm 1 ; \\pm 2 ; \\pm 3 ; \\pm 6\\}\\) - Mặc dù các số này là ước số của 6, nhưng câu hỏi yêu cầu các ước nguyên, không phải ước nguyên âm.\n- Lựa chọn C: \\(\\{0 ; 1 ; 2 ; 3 ; 6\\}\\) - Số 0 không thể là ước số của bất kỳ số nào.\n- Lựa chọn D: \\(\\{1 ; 2 ; 3 ; 4 ; 5 ; 6\\}\\) - Số 4 và 5 không phải là ước số của 6.\n\nDo đó, lựa chọn đúng là A: \\(\\{1 ; 2 ; 3 ; 6\\}\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000095734,
+        "question_text": "Số đối của số -12 là:\nA. 0\nB. 12\nC. -12\nD. 9",
+        "correct_option": "A",
+        "explanation": "Số đối của a là - a. Vậy đối của -12 là \\(-(-12)=12\\)",
+        "explanation_by_ai": "Số đối của một số là số mà khi cộng với số đó thì kết quả bằng 0.\n\nVới số -12, số đối của nó là số mà khi cộng với -12 thì kết quả là 0.\n\nTa có:\n$$-12 + x = 0$$\nGiải phương trình trên, ta được:\n$$x = 12$$\n\nVậy, số đối của số -12 là 12.\n\nĐáp án: B. 12",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095735,
+        "question_text": "Trong các hình sau, hình nào là hình vuông?\nA. Hình 1\nB. Hình 2\nC. Hình 3\nD. Hình 4",
+        "correct_option": "A",
+        "explanation": " ",
+        "explanation_by_ai": "Để xác định hình vuông trong các hình đã cho, chúng ta cần kiểm tra hai tiêu chí sau:\n\n1. Tất cả các cạnh của hình đều có độ dài bằng nhau.\n2. Tất cả các góc của hình đều bằng \\(90^\\circ\\).\n\nTuy nhiên, bạn chưa cung cấp thông tin cụ thể về các hình, như kích thước cạnh hay độ lớn các góc, để tôi có thể kiểm tra và kết luận hình nào là hình vuông. Vì vậy, tôi không thể trực tiếp trả lời câu hỏi của bạn mà không có thông tin đầy đủ hoặc hình ảnh cụ thể của các hình đã cho.\n\nNếu bạn có thể cung cấp thêm thông tin về các hình, như độ dài các cạnh và/hoặc độ lớn của các góc, tôi sẽ rất vui lòng giúp bạn xác định hình vuông.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095737,
+        "question_text": "Yếu tố nào sau đây không phải của hình bình hành?\nA. Hai cặp cạnh đối diện song song\nB. Có hai cặp góc đối bằng nhau.\nC. Hai cặp cạnh đối diện bằng nhau\nD. Hai đường chéo vuông góc với nhau",
+        "correct_option": "D",
+        "explanation": "Hình bình hành có 2 đường chéo cắt nhau tại trung điểm của mỗi đường",
+        "explanation_by_ai": "Để xác định yếu tố nào sau đây không phải của hình bình hành, ta sẽ xem xét từng phương án:\n\nA. **Hai cặp cạnh đối diện song song**: Đây là một đặc điểm cơ bản của hình bình hành. Một hình bình hành được định nghĩa là một tứ giác có hai cặp cạnh đối diện song song. Vậy, phương án A đúng.\n\nB. **Có hai cặp góc đối bằng nhau**: Trong hình bình hành, hai góc đối diện của mỗi cặp góc đều bằng nhau. Điều này là kết quả trực tiếp từ việc hai cặp cạnh đối diện song song. Vậy, phương án B cũng đúng.\n\nC. **Hai cặp cạnh đối diện bằng nhau**: Trong hình bình hành, không chỉ hai cặp cạnh đối diện song song mà chúng còn bằng nhau về độ dài. Điều này đảm bảo rằng hai cạnh đối diện không chỉ chạy song song mà còn cùng chiều dài. Phương án C đúng.\n\nD. **Hai đường chéo vuông góc với nhau**: Đây không phải là một đặc điểm chung của mọi hình bình hành. Đặc điểm này chỉ đúng với một số trường hợp đặc biệt của hình bình hành, chẳng hạn như hình thoi, nơi hai đường chéo không chỉ vuông góc với nhau mà còn chia nhau thành hai phần bằng nhau tại điểm giao nhau. Tuy nhiên, trong một hình bình hành tổng quát, không có quy định nào nói rằng hai đường chéo phải vuông góc với nhau.\n\nKết luận: Phương án **D** là đáp án đúng vì đây không phải là một đặc điểm của hình bình hành.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000095739,
+        "question_text": "Tâm đối xứng của hình tròn là:\nA. Một điểm bất kì nằm trên đường tròn.\nB. Một điểm bất kì nằm bên trong đường tròn.\nC. Tâm của đường tròn.\nD. Một điểm bất kì nằm bên ngoài đường tròn",
+        "correct_option": "C",
+        "explanation": "Tâm đối xứng của đường tròn là tâm của đường tròn.",
+        "explanation_by_ai": "Tâm đối xứng của một hình là điểm mà tại đó, nếu ta lấy bất kỳ điểm nào trên hình và vẽ một đoạn thẳng qua tâm đối xứng này đến điểm đó, đoạn thẳng này sẽ luôn cắt hình tại một điểm khác sao cho khoảng cách từ tâm đối xứng đến hai điểm trên hình là như nhau. Đối với hình tròn, điều này đúng với mọi điểm trên đường tròn đối với một điểm cố định, đó chính là tâm của đường tròn. Điều này có nghĩa là, dù bạn lấy điểm nào trên đường tròn và vẽ một đoạn thẳng qua tâm, thì đoạn thẳng này sẽ luôn chia đôi đường kính và đi qua điểm đối diện trên đường tròn với khoảng cách từ tâm đến hai điểm này là như nhau.\n\nVậy, lựa chọn đúng là:\n\nC. Tâm của đường tròn.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000098918,
+        "question_text": "Tập hợp số nguyên là:\nA. \\(Z=\\{1 ; 2 ; 3 ; \\ldots\\}\\)\nB. \\(Z=\\{\\ldots-3 ;-2 ;-1 ; 0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)\nC. \\(Z = 1 ; 2 ; 3 ; \\dot{s}\\)\nD. \\(\\mathrm{Z}=0 ; 1 ; 2 ; 3 ; \\ldots\\)",
+        "correct_option": "B",
+        "explanation": "Tập hợp các số nguyên là: \\(Z=\\{\\ldots-3 ;-2 ;-1 ; 0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)",
+        "explanation_by_ai": "Để xác định đáp án đúng, ta cần hiểu rõ về tập hợp số nguyên.\n\nTập hợp số nguyên, ký hiệu là \\(Z\\) hoặc \\(\\mathbb{Z}\\), bao gồm cả số nguyên dương, số 0, và số nguyên âm. Do đó, nó bao gồm cả các số dương (\\(1, 2, 3, \\ldots\\)), số 0, và các số âm (\\(-1, -2, -3, \\ldots\\)).\n\nDựa vào định nghĩa này, ta có thể phân tích từng phương án:\n\nA. \\(Z=\\{1 ; 2 ; 3 ; \\ldots\\}\\)\n\n- Phương án này chỉ liệt kê số nguyên dương, không bao gồm số 0 và số nguyên âm.\n\nB. \\(Z=\\{\\ldots-3 ;-2 ;-1 ; 0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)\n\n- Phương án này đúng với định nghĩa của tập hợp số nguyên, vì nó bao gồm cả số nguyên dương, số 0, và số nguyên âm.\n\nC. \\(Z = 1 ; 2 ; 3 ; \\dot{s}\\)\n\n- Phương án này không rõ ràng và có vẻ như thiếu ký hiệu toán học chuẩn.\n\nD. \\(\\mathrm{Z}=0 ; 1 ; 2 ; 3 ; \\ldots\\)\n\n- Phương án này bao gồm số 0 và số nguyên dương, nhưng không bao gồm số nguyên âm.\n\nTừ đó, chúng ta có thể kết luận rằng đáp án đúng là:\n\nB. \\(Z=\\{\\ldots-3 ;-2 ;-1 ; 0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000098919,
+        "question_text": "Thứ tự thực hiên các phép tính đối với các biếu thức có dấu ngoă̆c là\nA. []\\(\\rightarrow \\rightarrow() \\rightarrow \\rightarrow\\{\\}\\)\nB. {}\\(\\rightarrow \\rightarrow \\left [ \\right ] \\rightarrow \\rightarrow \\left ( \\right )\\)\nC. []\\(\\rightarrow \\rightarrow() \\rightarrow \\rightarrow\\{\\}\\)\nD. ()\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow\\{\\}\\)",
+        "correct_option": "D",
+        "explanation": "Thứ tự thực hiên các phép tính đối với các biểu thức có dấu ngoặc là: ()\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow\\{\\}\\)",
+        "explanation_by_ai": "Trong toán học, thứ tự thực hiện các phép tính trong biểu thức có chứa dấu ngoặc là rất quan trọng. Thứ tự này giúp xác định phép tính nào được thực hiện trước và phép tính nào thực hiện sau. Cụ thể, thứ tự từ trong ra ngoài và từ trái qua phải như sau:\n\n1. **Dấu ngoặc đơn ()**: Đây là dấu ngoặc được ưu tiên thực hiện trước tiên.\n2. **Dấu ngoặc vuông []**: Sau khi thực hiện xong các phép tính trong dấu ngoặc đơn, tiếp tục thực hiện các phép tính trong dấu ngoặc vuông.\n3. **Dấu ngoặc nhọn {}**: Cuối cùng, thực hiện các phép tính trong dấu ngoặc nhọn.\n\nVậy thứ tự thực hiện đúng là:\n- **Dấu ngoặc đơn ()**\n- **Dấu ngoặc vuông []**\n- **Dấu ngoặc nhọn {}**\n\nDựa vào thông tin này, ta có thể kết luận rằng đáp án đúng là:\n**D. ()\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow\\{\\}\\)**",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000098920,
+        "question_text": "Số nào sau đây chia hết cho 3 ?\nA. \\(431\\)\nB. \\(245\\)\nC. \\(450\\)\nD. \\(313\\)",
+        "correct_option": "C",
+        "explanation": "Tổng các chứ số của số 450 là: \\(4+5+0=9: 3\\) nên theo dấu hiêu chia hết thì \\(450: 3\\)",
+        "explanation_by_ai": "Để kiểm tra xem một số có chia hết cho 3 hay không, ta cần tính tổng các chữ số của số đó và kiểm tra xem tổng này có chia hết cho 3 hay không.\n\n1. **Số \\(431\\)**:\n   - Tổng các chữ số là: \\(4 + 3 + 1 = 8\\)\n   - \\(8\\) không chia hết cho \\(3\\), vậy \\(431\\) không chia hết cho \\(3\\).\n\n2. **Số \\(245\\)**:\n   - Tổng các chữ số là: \\(2 + 4 + 5 = 11\\)\n   - \\(11\\) không chia hết cho \\(3\\), vậy \\(245\\) không chia hết cho \\(3\\).\n\n3. **Số \\(450\\)**:\n   - Tổng các chữ số là: \\(4 + 5 + 0 = 9\\)\n   - \\(9\\) chia hết cho \\(3\\), vậy \\(450\\) chia hết cho \\(3\\).\n\n4. **Số \\(313\\)**:\n   - Tổng các chữ số là: \\(3 + 1 + 3 = 7\\)\n   - \\(7\\) không chia hết cho \\(3\\), vậy \\(313\\) không chia hết cho \\(3\\).\n\nVậy, số chia hết cho \\(3\\) trong các lựa chọn là **C. \\(450\\)**.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000098921,
+        "question_text": "Số nào sau đây là số nguyên tố?\nA. \\(367\\)\nB. \\(376\\)\nC. \\(140\\)\nD. \\(455\\)",
+        "correct_option": "A",
+        "explanation": "367 là số nguyên tố vì 113 chỉ có ước là 1 và chính nó.",
+        "explanation_by_ai": "Để xác định một số là số nguyên tố, ta cần kiểm tra xem nó có chia hết cho bất kỳ số nào khác không, ngoại trừ 1 và chính nó. Ta sẽ kiểm tra từng lựa chọn một.\n\n1. **Kiểm tra số \\(367\\):**\n   - Ta chỉ cần kiểm tra các ước số có thể từ \\(2\\) đến \\(\\sqrt{367}\\), vì nếu một số \\(N\\) không chia hết cho bất kỳ số nào nhỏ hơn hoặc bằng căn bậc hai của nó, thì \\(N\\) là số nguyên tố.\n   - \\(\\sqrt{367} \\approx 19.16\\), vậy ta chỉ cần kiểm tra các số từ \\(2\\) đến \\(19\\).\n   - \\(367\\) không chia hết cho bất kỳ số nào trong khoảng này.\n\n2. **Kiểm tra số \\(376\\):**\n   - Ta nhận thấy ngay \\(376\\) chia hết cho \\(2\\) (vì là số chẵn), nên không phải số nguyên tố.\n\n3. **Kiểm tra số \\(140\\):**\n   - Số này cũng là số chẵn, nên chia hết cho \\(2\\), không phải số nguyên tố.\n\n4. **Kiểm tra số \\(455\\):**\n   - \\(455\\) chia hết cho \\(5\\) (vì tận cùng là \\(5\\)), nên không phải số nguyên tố.\n\nVậy, **A. \\(367\\)** là số nguyên tố.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000098922,
+        "question_text": "Số liền sau của số -19 là\nA. -20\nB. 20\nC. -18\nD. 18",
+        "correct_option": "C",
+        "explanation": "Số liền sau của số -19 là: - 18",
+        "explanation_by_ai": "Số liền sau của một số là số đó cộng thêm 1. \n\nVậy, số liền sau của số -19 là: \\(-19 + 1 = -18\\).\n\nVì vậy, đáp án đúng là C. -18.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000098923,
+        "question_text": "Số đối của 28 là\nA. \\(0\\)\nB. \\(-28\\)\nC. \\(28\\)\nD. \\(\\frac{-1}{28}\\)",
+        "correct_option": "B",
+        "explanation": "Số đối của 28 là: - 28",
+        "explanation_by_ai": "Số đối của một số là số khi cộng với số đó kết quả bằng 0. Vậy, số đối của \\(28\\) là số mà khi cộng với \\(28\\) ta được kết quả là \\(0\\).\n\nTa có phương trình:\n\\[x + 28 = 0\\]\n\nGiải phương trình trên, ta được:\n\\[x = -28\\]\n\nVậy, số đối của \\(28\\) là \\(-28\\).\n\nĐáp án đúng là B. \\(-28\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000098924,
+        "question_text": "Tam giác có độ dài các góc đều bằng \\(60^{\\circ}\\) là:\nA. tam giác vuông cân\nB. tam giác vuông\nC. tam giác đều\nD. tam giác cân",
+        "correct_option": "C",
+        "explanation": "Tam giác có độ dài các cạnh đều bằng \\(3 \\mathrm{~cm}\\) là tam giác đều",
+        "explanation_by_ai": "Một tam giác có độ dài các góc đều bằng \\(60^{\\circ}\\) có nghĩa là mỗi góc của tam giác đó đều bằng nhau và tổng số đo ba góc trong một tam giác luôn bằng \\(180^{\\circ}\\).\n\nVì mỗi góc bằng \\(60^{\\circ}\\), và có ba góc, tổng số đo ba góc sẽ là: \\(60^{\\circ} + 60^{\\circ} + 60^{\\circ} = 180^{\\circ}\\), phù hợp với quy tắc tổng số đo ba góc trong tam giác.\n\nDo đó, tam giác này có các góc bằng nhau, điều này đặc trưng cho một tam giác đều, nơi mà không chỉ các góc mà cả ba cạnh đều bằng nhau.\n\nVậy đáp án đúng là: \nC. tam giác đều",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099897,
+        "question_text": "Trong các số sau số nào là số tự nhiên?\nA. \\(\\frac{4}{9}\\)\nB. \\(3 \\frac{1}{4}\\)\nC. \\(2022\\)\nD. 7,8",
+        "correct_option": "C",
+        "explanation": "Số tự nhiên là tập hợp những số lớn hơn hoặc bằng 0 , tập hợp số tự nhiên được ký hiệu là \\(\\mathrm{N}\\).",
+        "explanation_by_ai": "Chúng ta sẽ xem xét từng lựa chọn để xác định số nào là số tự nhiên:\n\nA. \\(\\frac{4}{9}\\) là một phân số, không phải là số tự nhiên vì số tự nhiên là những số không âm mà không có phần thập phân hay phần phân số.\n\nB. \\(3 \\frac{1}{4}\\) là một số hỗn số, có nghĩa là có cả phần nguyên và phần phân số. Điều này không phải là số tự nhiên vì số tự nhiên không bao gồm phần phân số.\n\nC. \\(2022\\) là một số nguyên, không âm và không có phần thập phân hay phần phân số. Đây là một số tự nhiên.\n\nD. \\(7,8\\) là một số có phần thập phân, không phải là số tự nhiên vì số tự nhiên là những số không có phần thập phân.\n\nNhư vậy, lựa chọn C là đáp án: \\(2022\\) là số tự nhiên.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099899,
+        "question_text": "Tính nhanh tổng \\(53+25+47+75\\) bằng\nA. 200\nB. 201\nC. 300\nD. 100",
+        "correct_option": "A",
+        "explanation": "\\(\\begin{array}{l}53+\\mathbf{5 5}+\\mathbf{4 7}+\\mathbf{7 5} \\\\ =(\\mathbf{5 3}+\\mathbf{4 7})+(\\mathbf{2 5}+\\mathbf{7 5}) \\\\ =\\mathbf{1 0 0}+\\mathbf{1 0 0}=\\mathbf{2 0 0}\\end{array}\\)",
+        "explanation_by_ai": "Để tính tổng \\(53 + 25 + 47 + 75\\), ta sẽ cộng từng số lại với nhau:\n\nBước 1: Cộng \\(53 + 25\\)\n\\[ 53 + 25 = 78 \\]\n\nBước 2: Cộng \\(47 + 75\\)\n\\[ 47 + 75 = 122 \\]\n\nBước 3: Cộng kết quả từ Bước 1 và Bước 2\n\\[ 78 + 122 = 200 \\]\n\nVậy tổng \\(53 + 25 + 47 + 75 = 200\\).\n\nĐáp án đúng là: A. 200",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099900,
+        "question_text": "Chọn đáp án đúng.\nA. \\(2^{3}\\lt 2^{7}\\)\nB. \\(2^{3}=2^{7}\\)\nC. \\(2^{3}\\gt 2^{7}\\)\nD. \\(2^{9} \\leq 2^{7}\\)",
+        "correct_option": "A",
+        "explanation": "\\(2^{3}=8 ; 2^{7}=128\\)Vậy: \\(2^{3}\\lt 2^{7}\\)",
+        "explanation_by_ai": "Để giải quyết vấn đề này, ta sẽ xem xét từng phương án một cách chi tiết.\n\nA. \\(2^{3} < 2^{7}\\)\n\n- \\(2^{3} = 8\\)\n- \\(2^{7} = 128\\)\n  \nSo sánh hai giá trị, ta thấy \\(8 < 128\\), nên phương án A đúng.\n\nB. \\(2^{3} = 2^{7}\\)\n\n- Từ cách tính ở trên, ta thấy \\(2^{3} = 8\\) và \\(2^{7} = 128\\), rõ ràng \\(8 \\neq 128\\), nên phương án B sai.\n\nC. \\(2^{3} > 2^{7}\\)\n\n- Kết quả đã tính ở trên cho thấy \\(8 < 128\\), nên phương án C sai.\n\nD. \\(2^{9} \\leq 2^{7}\\)\n\n- \\(2^{9} = 512\\)\n- \\(2^{7} = 128\\)\n  \nSo sánh hai giá trị, ta thấy \\(512 > 128\\), nên \\(2^{9} \\) không nhỏ hơn hoặc bằng \\(2^{7}\\), phương án D sai.\n\nVậy, đáp án đúng là **A. \\(2^{3} < 2^{7}\\)**.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099901,
+        "question_text": "Cho hình bình hành \\(A B C D\\) có \\(A B=2 \\mathrm{~cm}\\) thì\nA. \\(B C=2 \\mathrm{~cm}\\)\nB. \\(A D=2 \\mathrm{~cm}\\)\nC. \\(A C=2 \\mathrm{~cm}\\)\nD. \\(D C=2 \\mathrm{~cm}\\)",
+        "correct_option": "D",
+        "explanation": "Hình bình hành có các cạnh đối bằng nhau",
+        "explanation_by_ai": "Trong một hình bình hành, các cặp cạnh đối diện luôn bằng nhau và song song với nhau. Điều này có nghĩa là nếu \\(AB = 2 \\, \\text{cm}\\), thì cạnh đối diện với \\(AB\\) cũng sẽ có độ dài là \\(2 \\, \\text{cm}\\). \n\n- \\(AB\\) và \\(CD\\) là một cặp cạnh đối diện trong hình bình hành \\(ABCD\\). Do đó, nếu \\(AB = 2 \\, \\text{cm}\\) thì \\(CD = 2 \\, \\text{cm}\\) cũng phải đúng.\n- \\(BC\\) và \\(AD\\) là một cặp cạnh đối diện khác trong hình bình hành \\(ABCD\\). Tuy nhiên, chúng ta không có thông tin về độ dài của chúng từ đề bài.\n- \\(AC\\) là đường chéo của hình bình hành và không phải là cạnh của hình bình hành, do đó độ dài của \\(AC\\) không thể suy ra trực tiếp từ \\(AB\\).\n\nVậy chúng ta có:\n\nA. \\(BC = 2\\, \\text{cm}\\) - không thể kết luận trực tiếp từ thông tin \\(AB = 2\\, \\text{cm}\\).\nB. \\(AD = 2\\, \\text{cm}\\) - không thể kết luận trực tiếp từ thông tin \\(AB = 2\\, \\text{cm}\\).\nC. \\(AC = 2\\, \\text{cm}\\) - không đúng vì \\(AC\\) là đường chéo, không phải cạnh.\nD. \\(DC = 2\\, \\text{cm}\\) - đúng vì \\(DC\\) là cạnh đối diện với \\(AB\\) và trong hình bình hành, cặp cạnh đối diện bằng nhau.\n\nVậy phương án đúng là D. \\(DC = 2 \\, \\text{cm}\\).",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099902,
+        "question_text": "Chữ số điền vào dấu \\({ }^{*}\\) để số \\(37^{*}\\) chia hết cho cả 2 và 5 là\nA. 2\nB. 5\nC. 0 và 5\nD. 0",
+        "correct_option": "D",
+        "explanation": "Vì số có chữ số tận cùng là 0 thì chia hết cho cả 2 và 5 nên chọn đáp án đúng là 0 .",
+        "explanation_by_ai": "Để số \\(37^{*}\\) chia hết cho cả 2 và 5, chúng ta cần xem xét các tiêu chuẩn chia hết cho 2 và 5.\n\n1. **Chia hết cho 2:** Một số chia hết cho 2 nếu chữ số cuối cùng của nó là 0, 2, 4, 6, hoặc 8.\n2. **Chia hết cho 5:** Một số chia hết cho 5 nếu chữ số cuối cùng của nó là 0 hoặc 5.\n\nDo \\(37^{*}\\) cần chia hết cho cả 2 và 5, chúng ta tìm chữ số \\(^{*}\\) sao cho \\(37^{*}\\) thoả mãn cả hai điều kiện trên.\n\nNhưng dựa vào tiêu chuẩn:\n\n- Chỉ có chữ số 0 làm cho số \\(37^{*}\\) chia hết cho 2.\n- Và chữ số 0 hoặc 5 làm cho số \\(37^{*}\\) chia hết cho 5.\n\nDựa vào sự giao thoa của hai điều kiện này, chúng ta thấy rằng chỉ có chữ số 0 khi điền vào \\(^{*}\\) làm cho \\(37^{*}\\) chia hết cho cả 2 và 5.\n\nVậy đáp án đúng là:\n\nD. 0",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099903,
+        "question_text": "Các đường chéo chính của lục giác đều trong hình sau là\nA. \\(D F, F M, M D\\)\nB. \\(E H, H N, N E\\).\nC. \\(D M, E H, D H\\).\nD. \\(D H, E M, N F\\).",
+        "correct_option": "D",
+        "explanation": "Đường chéo chính là đường thẳng nôi 2 đỉnh đối nhau",
+        "explanation_by_ai": "Để xác định các đường chéo chính của một lục giác đều, chúng ta cần nhớ rằng một lục giác đều có các cạnh bằng nhau và các góc bằng nhau. Mỗi đỉnh của lục giác đều kết nối với hai đỉnh khác không kề nó thông qua các đường chéo chính. Vì không có hình vẽ cung cấp, chúng ta sẽ giả sử rằng lục giác đều có các đỉnh được đánh dấu từ A đến F theo chiều kim đồng hồ.\n\nĐầu tiên, xác định các đường chéo chính dựa trên giả định:\n\n1. Đường chéo chính kết nối hai đỉnh đối diện trong lục giác đều. Ví dụ, đối với một lục giác có các đỉnh A, B, C, D, E, F (theo chiều kim đồng hồ), các đường chéo chính sẽ là:\n   - A kết nối với D\n   - B kết nối với E\n   - C kết nối với F\n\nTuy nhiên, dựa trên các lựa chọn được cung cấp, chúng ta cần xác định các đỉnh và đường chéo chính dựa trên các chữ cái được sử dụng.\n\nCác lựa chọn:\n- A. \\(D F, F M, M D\\): Không thể xác định vì không có đỉnh M trong mô tả ban đầu của lục giác đều.\n- B. \\(E H, H N, N E\\): Tương tự như trên, không có đỉnh H và N trong mô tả ban đầu.\n- C. \\(D M, E H, D H\\): Không thể xác định vì không có đỉnh M và H trong mô tả ban đầu.\n- D. \\(D H, E M, N F\\): Không thể xác định vì không có đỉnh H, M, và N.\n\nDựa trên giả định về một lục giác đều có các đỉnh A đến F và không có hình vẽ cung cấp, không thể xác định chính xác các đường chéo chính dựa trên các lựa chọn đã cho. Các lựa chọn không phản ánh một cách chính xác cấu trúc của một lục giác đều với các đỉnh từ A đến F. Điều này có thể do một sự hiểu nhầm hoặc giả định sai về cách đánh dấu các đỉnh của lục giác đều.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099904,
+        "question_text": "Tìm chữ số \\({a}\\) để \\(\\overline{3 a}\\) là số nguyên tố:\nA. 2;4;6;8\nB. 1;2;3;7;9\nC. 0;2;3;4;5;6;8\nD. 1;7",
+        "correct_option": "D",
+        "explanation": "Số nguyên tố là số lớn hơn 1 chỉ có 2 ước là 1 và chính nó",
+        "explanation_by_ai": "Để tìm chữ số \\(a\\) sao cho \\(\\overline{3a}\\) là số nguyên tố, ta sẽ kiểm tra từng giá trị của \\(a\\) trong các phương án đã cho.\n\n1. **A. 2;4;6;8:** \n\n- \\(32\\): Đây không phải là số nguyên tố vì nó chia hết cho \\(2\\).\n- \\(34\\): Đây không phải là số nguyên tố vì nó chia hết cho \\(2\\).\n- \\(36\\): Đây không phải là số nguyên tố vì nó chia hết cho \\(2\\) và \\(3\\).\n- \\(38\\): Đây không phải là số nguyên tố vì nó chia hết cho \\(2\\).\n\nVậy không có giá trị của \\(a\\) trong phương án A làm cho \\(\\overline{3a}\\) là số nguyên tố.\n\n2. **B. 1;2;3;7;9:**\n\n- \\(31\\): Đây là số nguyên tố.\n- \\(32\\): Đã kiểm tra ở trên, không phải là số nguyên tố.\n- \\(33\\): Đây không phải là số nguyên tố vì nó chia hết cho \\(3\\).\n- \\(37\\): Đây là số nguyên tố.\n- \\(39\\): Đây không phải là số nguyên tố vì nó chia hết cho \\(3\\).\n\nVậy giá trị của \\(a\\) trong phương án B làm cho \\(\\overline{3a}\\) là số nguyên tố là \\(1\\) và \\(7\\).\n\n3. **C. 0;2;3;4;5;6;8:**\n\n- \\(30\\), \\(32\\), \\(33\\), \\(34\\), \\(35\\), \\(36\\), \\(38\\): Đã kiểm tra ở trên hoặc có thể dễ dàng thấy không phải là số nguyên tố do chia hết cho \\(2\\), \\(3\\), \\(5\\),...\n\nVậy không có giá trị của \\(a\\) trong phương án C làm cho \\(\\overline{3a}\\) là số nguyên tố.\n\n4. **D. 1;7:** \n\n- \\(31\\), \\(37\\): Đã kiểm tra ở trên, cả hai đều là số nguyên tố.\n\nNhư vậy, phương án đúng là **D. 1;7**.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099905,
+        "question_text": "Biết số bị chia là 128 , thương là 32 số dư bằng 0 , vậy số chia bằng?\nA. 3\nB. 4\nC. 5\nD. 6",
+        "correct_option": "B",
+        "explanation": "\\(128: 32=4\\)",
+        "explanation_by_ai": "Ta có phép chia có số bị chia là 128, thương là 32 và số dư là 0. Để tìm số chia, ta sử dụng công thức của phép chia:\n\n\\[\n\\text{Số bị chia} = (\\text{Thương} \\times \\text{Số chia}) + \\text{Số dư}\n\\]\n\nThay số bị chia là 128, thương là 32 và số dư là 0 vào công thức trên, ta có:\n\n\\[\n128 = (32 \\times \\text{Số chia}) + 0\n\\]\n\n\\[\n128 = 32 \\times \\text{Số chia}\n\\]\n\nĐể tìm số chia, ta chia cả hai vế cho 32:\n\n\\[\n\\text{Số chia} = \\frac{128}{32} = 4\n\\]\n\nVậy, số chia là 4. Đáp án là B. 4.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099906,
+        "question_text": "Khẳng định nào sai trong các khẳng định sau?\nA. Trong hình chữ nhật: Các cạnh đối song song với nhau.\nB. Trong hình thang cân: Các cạnh đối song song với nhau.\nC. Trong hình thoi: Các cạnh đối song song với nhau.\nD. Trong hình bình hành: Các cạnh đối song song với nhau.",
+        "correct_option": "B",
+        "explanation": "Định nghĩa hình thang có 2 cạnh đối song song Hình thang cân là hình thang có:- 2 góc kề 1 đáy bằng nhau- 2 đường chéo bằng nhau",
+        "explanation_by_ai": "Để xác định khẳng định nào sai trong các lựa chọn đã cho, ta sẽ xem xét từng khẳng định một:\n\nA. **Trong hình chữ nhật**: Đúng là các cạnh đối song song với nhau. Hình chữ nhật có hai cặp cạnh đối song song và bằng nhau.\n\nB. **Trong hình thang cân**: Khẳng định này sai. Hình thang cân chỉ có một cặp cạnh đối song song, đó là cạnh đáy. Các cạnh bên của hình thang cân không song song với nhau mà chúng bằng nhau và tạo thành các góc bằng nhau với hai đáy.\n\nC. **Trong hình thoi**: Đúng là các cạnh đối song song với nhau. Hình thoi có hai cặp cạnh đối song song và tất cả các cạnh đều bằng nhau.\n\nD. **Trong hình bình hành**: Đúng là các cạnh đối song song với nhau. Hình bình hành có hai cặp cạnh đối song song và cạnh đối bằng nhau.\n\nVậy, khẳng định sai là **B. Trong hình thang cân: Các cạnh đối song song với nhau.**",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099907,
+        "question_text": "Khẳng định đúng là:\nA. Hình thoi có bốn cạnh bằng nhau\nB. Hình bình hành có các cặp cạnh đối không bằng nhau\nC. Hình chữ nhật có bốn góc bằng nhau, mỗi góc bằng \\(60^{\\circ}\\)\nD. Tam giác đều có ba cạnh không bằng nhau",
+        "correct_option": "A",
+        "explanation": "Định nghĩa hình hoi là tứ giác có 4 cạnh bằng nhau",
+        "explanation_by_ai": "Để xác định khẳng định đúng, chúng ta cần phân tích từng lựa chọn:\n\nA. **Hình thoi có bốn cạnh bằng nhau**: Đây là một khẳng định **đúng**. Hình thoi là một dạng đặc biệt của hình bình hành với bốn cạnh có độ dài bằng nhau.\n\nB. **Hình bình hành có các cặp cạnh đối không bằng nhau**: Đây là một khẳng định **sai**. Hình bình hành là một tứ giác có các cặp cạnh đối song song và bằng nhau, không phải là không bằng nhau.\n\nC. **Hình chữ nhật có bốn góc bằng nhau, mỗi góc bằng \\(60^{\\circ}\\)**: Đây là một khẳng định **sai**. Hình chữ nhật có bốn góc vuông, mỗi góc bằng \\(90^{\\circ}\\), không phải \\(60^{\\circ}\\).\n\nD. **Tam giác đều có ba cạnh không bằng nhau**: Đây là một khẳng định **sai**. Tam giác đều là một dạng đặc biệt của tam giác có ba cạnh bằng nhau và ba góc bằng nhau, mỗi góc bằng \\(60^{\\circ}\\).\n\nVậy, khẳng định đúng là **A. Hình thoi có bốn cạnh bằng nhau**.",
+        "good_explanation": true
+    },
+    {
+        "question_id": 10110000000099908,
+        "question_text": "Kết quả của phép tính \\(212-12.3^{2}\\) là:\nA. 600\nB. 1800\nC. 104\nD. 1200",
+        "correct_option": "C",
+        "explanation": "\\(212-12.3^{2}=212-12.9=212-108=104\\)",
+        "explanation_by_ai": "Để tìm kết quả của phép tính \\(212 - 12.3^{2}\\), ta thực hiện các bước sau:\n\n1. Tính bình phương của 12.3: \\(12.3^{2}\\)\n2. Trừ kết quả tìm được từ 212.\n\nBắt đầu với bước 1:\n\n\\[ 12.3^{2} = 151.29 \\]\n\nTiếp theo, thực hiện bước 2:\n\n\\[ 212 - 151.29 = 60.71 \\]\n\nVì vậy, kết quả của phép tính là 60.71, không khớp với bất kỳ đáp án nào bạn đã cung cấp. Có vẻ như có một sự nhầm lẫn nào đó trong các đáp án được đề xuất.",
+        "good_explanation": false
+    }
+]

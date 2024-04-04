@@ -1,0 +1,555 @@
+[
+    {
+        "question_id": 10110000000072932,
+        "question_text": "Cách viết nào sau đây cho ta một phân số?\nA. \\(\\frac{2,5}{7}\\).\nB. \\(\\frac{8}{0}\\).\nC. \\(\\frac{-2}{11}\\).\nD. \\(\\frac{-3}{3,7}\\).",
+        "correct_option": "C",
+        "explanation": "Tổng quát: Người ta gọi \\(\\frac{a}{b}\\) với \\(a, b \\in Z, a \\neq 0\\) là một phân số, a là tử số, b là mẫu số của phân số. Ta thấy cách viết \\(\\frac{-2}{11}\\) thỏa mãn các điều kiên trên.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000072933,
+        "question_text": "Khi rút gọn phân \\(\\frac{-27}{63}\\) ta được phân số tối giản là số nào sau đây?\nA. \\(\\frac{9}{21}\\)\nB. \\(\\frac{-3}{7}\\)\nC. \\(\\frac{3}{7}\\)\nD. \\(\\frac{-9}{21}\\)",
+        "correct_option": "B",
+        "explanation": "\\(\\frac{-27}{63}=\\frac{-3.9}{7.9}=\\frac{-3}{7}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000072934,
+        "question_text": "Phép so sánh nào sau đây là đúng?\nA. \\(\\frac{5}{7}\\gt \\frac{-5}{7}\\)\nB. \\(\\frac{-5}{7}\\gt \\frac{5}{7}\\)\nC. \\(\\frac{5}{-7}\\lt \\frac{-5}{7}\\)\nD. \\(\\frac{5}{7}\\gt \\frac{-5}{-7}\\)",
+        "correct_option": "A",
+        "explanation": "Để so sánh hai phân số có cùng mẫu ta so sánh tử số, phân số nào có tử số lớn hơn thì phân số đó lớn hơn.\\(\\frac{5}{7}\\gt \\frac{-5}{7}(\\text { vì } 5>-5)\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000072935,
+        "question_text": "Khi đổi hỗn số \\(5 \\frac{1}{2}\\) thành phân số, ta được phân số nào sau đây là đúng?\nA. \\(\\frac{8}{2}\\).\nB. \\(\\frac{7}{2}\\).\nC. \\(\\frac{5}{2}\\).\nD. \\(\\frac{11}{2}\\).",
+        "correct_option": "D",
+        "explanation": "\\(5 \\frac{1}{2}=\\frac{5.2+1}{2}=\\frac{11}{2}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000072937,
+        "question_text": "Điểm A không thuộc đường thẳng d được kí hiệu ?\nA. \\(\\mathrm{d} \\in \\mathrm{A}\\).\nB. \\(\\mathrm{A} \\in \\mathrm{d}\\)\nC. \\(\\mathrm{A} \\notin \\mathrm{d}\\)\nD. \\(\\mathrm{A} \\subset \\mathrm{d}\\)",
+        "correct_option": "C",
+        "explanation": "Điểm A không thuộc đường thẳng \\(\\mathrm{d}\\) được kí hiệu \\(A \\in d\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000072938,
+        "question_text": "Dựa vào hình vẽ, hãy chọn khẳng định đúng trong các khẳng định sau?\nA. Hai đường thẳng AB và AC song song với nhau.\nB. Hai đường thẳng AB và AC cắt nhau.\nC. Hai đường thẳng AB và AC trùng nhau.\nD. Hai đường thẳng AB và AC có hai điểm chung.",
+        "correct_option": "B",
+        "explanation": "Hai đường thẳng \\(\\mathrm{AB}\\) và \\(\\mathrm{AC}\\) cắt nhau.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000072939,
+        "question_text": "Trong các phát biểu sau, phát biểu nào là \\(\\underline{s a i}\\) ?\nA. Chữ H là hình vừa có tâm đối xứng,vừa có trục đối xứng.\nB. Chữ A là hình có trục đối xứng và không có tâm đối xứng.\nC. Chữ O là hình vừa có trục đối xứng vừa có tâm đối xứng.\nD. Chữ N là hình vừa có trục đối xứng và có tâm đối xứng.",
+        "correct_option": "D",
+        "explanation": "Chữ N là hình vừa có trục đối xứng và có tâm đối xứng là sai chữ không có trục đồi xứng , tâm đối xứng.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089145,
+        "question_text": "Cho tập hợp \\(A=\\{0 ; 2 ; 4 ; 6 ; 8\\}\\). Số phần tử của tập hợp \\(\\mathrm{A}\\) là ?\nA. 3\nB. 4\nC. 5\nD. 6",
+        "correct_option": "C",
+        "explanation": "Tập hợp \\(A=\\{0 ; 2 ; 4 ; 6 ; 8\\}\\). có 4 phần tử là: \\(0 ; 2 ; 4 ; 6 ; 8\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089146,
+        "question_text": "Cho tập hợp \\(B=\\{1 ; 2 ; 3 ; 4 ; 5\\}\\). Phần tử nào sau đây không thuộc tập hợp \\(B\\) ?\nA. 2\nB. 4\nC. 1\nD. 0",
+        "correct_option": "D",
+        "explanation": "Phần tử 0 không nằm trong tập hợp \\(B=\\{1 ; 2 ; 3 ; 4 ; 5\\}\\).",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089147,
+        "question_text": "Thứ tự thực hiện phép tính trong ngoặc theo thứ tự nào?\nA. \\(\\{\\}\\rightarrow[] \\rightarrow()\\)\nB. \\(\\{\\}\\rightarrow[] \\rightarrow()\\)\nC. \\(() \\rightarrow[] \\rightarrow\\{\\}\\)\nD. \\([]\\rightarrow() \\rightarrow\\{\\}\\)",
+        "correct_option": "B",
+        "explanation": "Thứ tự thực hiện phép tính trong ngoặc: \\(()\\rightarrow[] \\rightarrow\\{\\}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089148,
+        "question_text": "Cho phép nhân: 25. 5. 4. 27. 2 = ? Cách làm nào là hợp lý nhất?\nA. \\((25.4) \\cdot(5.2) .27\\)\nB. \\((25.5 .4 .27) .2\\)\nC. \\((25.5 .4) .27 .2\\)\nD. \\((25.4 .2) \\cdot 27.5\\)",
+        "correct_option": "A",
+        "explanation": "Cách làm hợp lý nhất là:\\((25 \\cdot 4) \\cdot(5 \\cdot 2) \\cdot 27=100 \\cdot 10 \\cdot 27=27000\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089149,
+        "question_text": "Phép tính \\(5^{7}: 5^{3}\\) là:\nA. Nhân 2 số tự nhiên\nB. Chia 2 số tự nhiên\nC. Chia 2 luỹ thừa cùng cơ số\nD. Nhân 2 luỹ thừa cùng cơ số",
+        "correct_option": "C",
+        "explanation": "Phép tính \\(5^{7}: 5^{3}\\) là phép chia hai lũy thừa cùng cơ số 5",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089150,
+        "question_text": "\\(6^{7} .6^{5}\\) là phép toán\nA. Nhân 2 số tự nhiên\nB. Chia 2 số tự nhiên\nC. Chia 2 luỹ thừa cùng cơ số\nD. Chia 2 luỹ thừa cùng cơ số",
+        "correct_option": "C",
+        "explanation": "\\(6^{7} \\cdot 6^{5}\\) là phép toán phép nhân hai lũy thừa cùng cơ số 6",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089151,
+        "question_text": "Kết quả phép tính \\(\\frac{3^{2} \\cdot 3^{3}}{3^{5}}\\) bằng\nA. 3\nB. 9\nC. 0\nD. 1",
+        "correct_option": "D",
+        "explanation": "Kết quả phép tính: \\(\\frac{3^{2} \\cdot 3^{3}}{3^{5}}=\\frac{3^{5}}{3^{5}}=1\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089152,
+        "question_text": "Có bao nhiêu số nguyên tố nhỏ hơn 10 ?\nA. 2\nB. 3\nC. 4\nD. 5",
+        "correct_option": "C",
+        "explanation": "Có 4 số nguyên tố nhỏ hơn 10 là: 2;3;5;7.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089153,
+        "question_text": "Hình tam giác đều là hình:\nA. Có 3 cạnh và 3 góc bằng 60 độ bằng nhau\nB. Có 2 góc bằng nhau\nC. Có 2 cạnh bằng nhau\nD. Có 3 góc bằng 90 độ",
+        "correct_option": "A",
+        "explanation": "Tam giác đều là tam giác có 3 cạnh bằng nhau, 3 góc bằng nhau và bằng \\(60^{\\circ}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089154,
+        "question_text": "Khẳng định nào sau đây sai?\nA. Trong hình thoi, các góc đối không bằng nhau.\nB. Hai góc kề một đáy của hình thang cân bằng nhau.\nC. Hai đường chéo của hình vuông bằng nhau.\nD. Trong hình chữ nhật, hai dường chéo cắt nhau tại trung điểm mỗi đường.",
+        "correct_option": "A",
+        "explanation": "Hình thoi có các góc đối bằng nhau.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089155,
+        "question_text": "Công thức tính chu vi của hình chữ nhật có độ dài 2 cạnh \\(a ; b\\) là\nA. \\(C=a\\)\nB. \\(C=a+b\\).\nC. \\(C=a b\\).\nD. \\(C=2(a+b)\\).",
+        "correct_option": "D",
+        "explanation": "Tính chu vi hình chữ nhật có độ dài 2 cạnh là a,b:Ta có: \\(C=a+b+a+b=2 a+2 b=2(a+b)\\).",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089156,
+        "question_text": "Công thức tính diện tích hình thang là:\nA. \\(S=(a+b) h\\)\nB. \\(S=(a+b) h\\)\nC. \\(S=a+b h\\)\nD. \\(S=\\frac{1}{2} a+b h\\)",
+        "correct_option": "B",
+        "explanation": "Công thức tính diện tích hình thang là: \\(S=\\frac{1}{2}(a+b) h\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089524,
+        "question_text": "Tập hợp số tự nhiên là\nA. \\(\\mathrm{N}=\\{1 ; 2 ; 3 ; \\ldots\\}\\)\nB. \\(\\mathrm{N}=\\{0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)\nC. \\(\\mathrm{N}=1 ; 2 ; 3 ; \\ldots\\)\nD. \\(\\mathrm{N}=0 ; 1 ; 2 ; 3 ; \\ldots\\)",
+        "correct_option": "B",
+        "explanation": "Tập hợp số tự nhiên là: \\(\\mathrm{N}=\\{0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089525,
+        "question_text": "Thứ tự thực hiện các phép tính đối với các biểu thức có dấu ngoặc là:\nA. [ ]\\(\\rightarrow \\rightarrow() \\rightarrow \\rightarrow\\{\\}\\)\nB. { }\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow()\\)\nC. [ ]\\(\\rightarrow \\rightarrow() \\rightarrow \\rightarrow\\{\\}\\)\nD. ( )\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow\\{\\}\\)",
+        "correct_option": "D",
+        "explanation": "Thứ tự thực hiên các phép tính đối với các biểu thức có dấu ngoặc là: ( )\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow\\{\\}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089526,
+        "question_text": "Số nào sau đây chia hết cho 3?\nA. 351\nB. 491\nC. 601\nD. 872",
+        "correct_option": "A",
+        "explanation": "Tổng các chứ số của số 351 là: \\(3+5+1=9: 3\\) nên theo dấu hiêu chia hết thì \\(351: 3\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089527,
+        "question_text": "Số nào sau đây là số nguyên tố?\nA. 111\nB. 113\nC. 115\nD. 117",
+        "correct_option": "B",
+        "explanation": "Số 113 là số nguyên tố vì 113 chỉ có ước là 1 và chính nó.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089528,
+        "question_text": "Số liền trước số -19 là\nA. -20\nB. 20\nC. 18\nD. -18",
+        "correct_option": "A",
+        "explanation": "Số liền trước của số -19 là số -20",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089529,
+        "question_text": "Số đối của -28 là\nA. \\(0\\)\nB. \\(-28\\)\nC. \\(28\\)\nD. \\(\\frac{-1}{28}\\)",
+        "correct_option": "C",
+        "explanation": "Số đối của -28 là số 28",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000089530,
+        "question_text": "Tam giác có độ dài các cạnh đều bằng 3cm là\nA. tam giác vuông cân\nB. tam giác vuông\nC. tam giác đều \nD. tam giác cân",
+        "correct_option": "C",
+        "explanation": "Tam giác có độ dài các cạnh đều bằng 3cm là tam giác đều",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090632,
+        "question_text": "Trong các số sau số nào là số tự nhiên?\nA. \\(\\frac{4}{9}\\)\nB. \\(3 \\frac{1}{4}\\)\nC. \\(2022\\)\nD. 7,8",
+        "correct_option": "C",
+        "explanation": "",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090634,
+        "question_text": "Tính nhanh tổng \\(53+25+47+75\\) bằng\nA. 200\nB. 201\nC. 300\nD. 100",
+        "correct_option": "A",
+        "explanation": "\\(\\begin{array}{l}\\mathbf{5 3}+\\mathbf{2 5}+\\mathbf{4 7}+\\mathbf{7 5} \\\\ =(\\mathbf{5 3}+\\mathbf{4 7})+(\\mathbf{2 5}+\\mathbf{7 5}) \\\\ =\\mathbf{1 0 0}+\\mathbf{1 0 0}=\\mathbf{2 0 0}\\end{array}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090635,
+        "question_text": "Chọn đáp án đúng.\nA. \\(2^{3}\\lt 2^{7}\\)\nB. \\(2^{3}=2^{7}\\)\nC. \\(2^{3}\\gt 2^{7}\\)\nD. \\(2^{9} \\leq 2^{7}\\)",
+        "correct_option": "A",
+        "explanation": "\\(\\begin{array}{l}2^{3}=8 ; 2^{7}=128 \\\\ \\text { Vậy: } 2^{3}\\lt 2^{7}\\end{array}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090636,
+        "question_text": "Cho hình bình hành \\(A B C D\\) có \\(A B=2 \\mathrm{~cm}\\) thì\nA. \\(B C=2 \\mathrm{~cm}\\)\nB. \\(A D=2 \\mathrm{~cm}\\)\nC. \\(A C=2 \\mathrm{~cm}\\)\nD. \\(D C=2 \\mathrm{~cm}\\)",
+        "correct_option": "D",
+        "explanation": "Hình bình hành có các cạnh đối bằng nhau",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090637,
+        "question_text": "Chữ số điền vào dấu * để số \\(\\overline{37 *}\\) chia hết cho cả 2 và 5 là\nA. 2\nB. 5\nC. 0 và 5\nD. 0",
+        "correct_option": "D",
+        "explanation": "Vì số có chữ số tận cùng là 0 thì chia hết cho cả 2 và 5 nên chon đáp án đúng là 0 .",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090639,
+        "question_text": "Tìm chữ số \\({ }^{a}\\) để \\(\\overline{3 a}\\) là số nguyên tố:\nA. \\(2 ; 4 ; 6 ; 8\\)\nB. \\(1 ; 2 ; 3 ; 7 ; 9\\)\nC. \\(0 ; 2 ; 3 ; 4 ; 5 ; 6 ; 8\\)\nD. \\(1 ; 7\\)",
+        "correct_option": "D",
+        "explanation": "Số nguyên tố là số lớn hơn 1 chỉ có 2 ước là 1 và chính nó",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090640,
+        "question_text": "Biết số bị chia là 128 , thương là 32 số dư bằng 0 , vậy số chia bằng?\nA. 3\nB. 4\nC. 5\nD. 6",
+        "correct_option": "B",
+        "explanation": "\\(128: 32=4\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090641,
+        "question_text": "Khắng định nào \\(\\underline{s a i}\\) trong các khẳng định sau?\nA. Trong hình chữ nhật: Các cạnh đôi song song với nhau.\nB. Trong hình thang cân: Các cạnh đối song song với nhau.\nC. Trong hình thoi: Các cạnh đối song song với nhau.\nD. Trong hình bình hành: Các cạnh đối song song với nhau.",
+        "correct_option": "B",
+        "explanation": "Định nghĩa hình thang có 2 cạnh đối song songHình thang cân là hình thang có:- 2 góc kề 1 đáy bằng nhau- 2 đường chéo bằng nhau",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090642,
+        "question_text": "Khẳng định đúng là:\nA. Hình thoi có bốn canh bằng nhau\nB. Hình bình hành có các cặp cạnh đối không bằng nhau\nC. Hình chữ nhật có bốn góc bằng nhau, mỗi góc bằng \\(60^{\\circ}\\)\nD. Tam giác đều có ba cạnh không bằng nhau",
+        "correct_option": "A",
+        "explanation": "Định nghĩa hình hoi là tứ giác có 4 cạnh bằng nhau",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000090643,
+        "question_text": "Kết quả của phép tính \\(212-12.3^{2}\\) là:\nA. 600\nB. 1800\nC. 104\nD. 1200",
+        "correct_option": "C",
+        "explanation": "\\(212-12.3^{2}=212-12.9=212-108=104\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092101,
+        "question_text": "Khoa học tự nhiên nghiên cứu về lĩnh vực nào dưới đây?\nA. Các sự vật, hiện tượng tự nhiên.\nB. Các quy luật tự nhiên.\nC. Những ành hưởng của tự nhiên đến con người và môi trường sống.\nD. Tất cả các ý trên.",
+        "correct_option": "D",
+        "explanation": "Khoa học tự nhiên (KHTN) là một nhánh khoa học, nghiên cứu các hiện tượng tự nhiên, tìm ra các tính chát, các quy luật của chúng. Các thành tựu KHTN được áp dụng vào công nghệ có gây ảnh hưởng tới môi trường tự nhiên và con người.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092102,
+        "question_text": "Để đåm båo an toàn trong phòng thực hành cần thực hiện nguyên tắc nào dưới đây?\nA. Đọc kĩ nội quy và thực hiện theo nội quy phòng thực hành.\nB. Chỉ làm thí nghiệm, thực hành khi có sự hướng dẫn và giám sát của giáo viên.\nC. Thực hiện đúng nguyên tắc khi sử dụng hóa chất, dụng cụ, thiết bị trong phòng thực hành.\nD. Tất cả các ý trên.",
+        "correct_option": "D",
+        "explanation": "Để đảm bảo an toàn trong phòng thực hành cần thực hiện nguyên tắc sau đây:- Đọc kĩ nội quy và thực hiện theo nội quy phòng thực hành.- Chỉ làm thí nghiệm, thực hành khi có sự hướng dẫn và giám sát của giáo viên.- Thực hiện đúng nguyên tắc khi sử dụng hóa chất, dụng cụ, thiết bị trong phòng thực hành.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092103,
+        "question_text": "Cho các bước đo chiều dài sau:(1) Đặt thước dọc theo chiều dài cần đo, vạch số 0 của thước ngang với một đầu của vật.(2) Ước lượng chiều dài cần đo để chọn thước đo thích hợp.(3) Mắt nhìn theo hướng vuông góc với cạnh thước ở đầu kia của vật.(4) Đọc kết quà đo theo vạch chia gần nhất với đầu kia của vật.(5) Ghi kết quå đo theo ĐCNN của thước.Hãy chọn cách sắp xếp đúng?\nA. \\(1-2-3-4-5\\).\nB. \\(1-2-3-5-4\\)\nC. \\(2 - 1 - 3 - 4 - 5\\).\nD. \\(5-4-3-2-1\\)",
+        "correct_option": "C",
+        "explanation": "Cách sắp xếp các bước đo độ dài theo thứ tự đúng là:(2) Ước lượng chiều dài cần đo để chọn thước đo thích hợp.(1) Đặt thước dọc theo chiều dài cẩn đo, vạch số 0 của thước ngang với một dầu của vật.(3) Mắt nhìn theo hướng vuông góc với cạnh thước ở đầu kia của vật.(4) Đọc kết quả đo theo vạch chia gần nhất với đầu kia của vật.(5) Ghi kết quả đo theo ĐCNN của thước.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092104,
+        "question_text": "Điều nào sau đây là đúng trong việc thực hiện các bước đo thời gian của một hoạt động?\nA. Hiệu chỉnh đồng hồ ở vạch số 1 trước khi đo\nB. Hiệu chỉnh đồng hồ về vạch số 0 trước khi đo\nC. Không cần hiệu chỉnh trước khi đo\nD. Hiệu chỉnh đồng hồ ở vạch số 2 trước khi đo",
+        "correct_option": "B",
+        "explanation": "",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092105,
+        "question_text": "Đơn vị đo khối lượng hợp pháp ờ nước ta là\nA. kg\nB. g\nC. tạ\nD. tấn",
+        "correct_option": "A",
+        "explanation": "Đơn vị đo khối lượng hợp pháp ở nước ta là kg.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092106,
+        "question_text": "Đơn vị nào sau đây là đơn vị đo thời gian?\nA. Giây\nB. milimét\nC. miligam\nD. kilôgam",
+        "correct_option": "A",
+        "explanation": "- Đơn vị đo thời gian là giây- Đơn vị đo độ dài: milimét- Đơn vị đo khối lượng: miligam, kilôgam",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092107,
+        "question_text": "Để đo thời gian người ta dùng:\nA. Thước\nB. Đồng hồ\nC. Cân\nD. Tivi",
+        "correct_option": "B",
+        "explanation": "- Để đo thời gian người ta dùng đồng hồ.- Để đo độ dài dùng thước, đo khối lượng dùng cân.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092108,
+        "question_text": "Đâu không phải là dụng cụ đo chiều dài?\nA. Thước kẻ bảng\nB. Thước dây\nC. Thước cuộn\nD. Cân đồng hồ",
+        "correct_option": "D",
+        "explanation": "- Dụng cụ đo chiều dài là thước kẻ bảng, thước dây, thước cuộn.- Dụng cụ đo khối lượng là cân đồng hồ.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092109,
+        "question_text": "Điền vào chỗ trống “...\" trong câu sau:Để xác định mức độ nóng, lạnh của vật, người ta dùng khái niệm (1)...: Vật càng nóng thì nhiệt độ của vật càng (2)... .\nA. (1) nóng - lạnh; (2) cao.\nB. (1) nóng - lạnh; (2) thấp.\nC. (1) nhiệt độ; (2) cao.\nD. (1) nhiệt độ; (2) thấp.",
+        "correct_option": "A",
+        "explanation": "Để xác định mức độ nóng, lạnh của vật, người ta dùng khái niệm (1) nhiệt độ: Vật càng nóng thì nhiệt độ của vật càng (2) cao.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092110,
+        "question_text": "Nhiệt độ là :\nA. Là số đo độ nóng cuả một vật\nB. Là số đo độ lạnh cuả một vật\nC. Là số đo độ nóng, lạnh của nhiệt kế\nD. Cả A và B",
+        "correct_option": "D",
+        "explanation": "Nhiệt độ là số đo nóng, lạnh của một vật.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092111,
+        "question_text": "Tính chất nào sau đây là tính chất hóa học của chất?\nA. Tính tan.\nB. Tính dẻo.\nC. Tính dẫn nhiệt.\nD. Từ chất này biến đổi thành chất khác",
+        "correct_option": "D",
+        "explanation": "- Tính chất hóa học: từ chất này biến đổi thành chất khác.- Tính chất vật lí: tính tan, tính dẻo, tính dẫn nhiệt.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092112,
+        "question_text": "Vật thể tự nhiên là?\nA. Giếng.\nB. Bể bơi.\nC. Biển.\nD. Nước giải khát.",
+        "correct_option": "C",
+        "explanation": "- Vật thể tự nhiên (có sẵn trong tự nhiên): biển.- Vật thể nhân tạo (do con người tạo ra): giếng, bể bơi, nước giải khát.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092113,
+        "question_text": "Vật thể nhân tạo là\nA. Cây lúa.\nB. Cây cầu.\nC. Mặt trời.\nD. Con sóc.",
+        "correct_option": "B",
+        "explanation": "- Vật thể tự nhiên (có sẵn trong tự nhiên): cây lúa, mặt trời, con sóc.- Vật thể nhân tạo (do con người tạo ra): cây cầu.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092114,
+        "question_text": "Sự nóng chảy là sự chuyển thể từ\nA. thể rắn sang thể lỏng của chất.\nB. thể lỏng sang thể rắn của chất.\nC. từ thể lỏng sang thể khí của chất.\nD. từ thể khí sang thể lỏng của chất.",
+        "correct_option": "A",
+        "explanation": "Sự nóng chåy là sự chuyền thể từ thể rắn sang thể lỏng của chất.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092115,
+        "question_text": "Mặt trời mọc lên, dưới ánh nắng mặt trời làm cho các hạt surơng tan dần. Hiện tượng này thể hiện quá trình chuyển thể nào?\nA. Từ rắn sang lỏng\nB. Từ lỏng sang hơi\nC. Từ hơi sang lỏng\nD. Từ lỏng sang rắn",
+        "correct_option": "B",
+        "explanation": "Mặt trời mọc lên, dưới ánh nắng mặt trời làm cho các hạt suơng tan dần. Hiện tượng này thể hiện quá trình chuyển từ lỏng sang hơi. Hạt sương đang là thể lỏng, dưới ánh sáng mặt trời tan ra và bay hoi.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000092116,
+        "question_text": "Hiện tượng tự nhiên nào sau đây là do hơi nước ngưng tụ?\nA. Tạo thành mây\nB. Gió thổi\nC. Mưa rơi\nD. Lốc xoáy",
+        "correct_option": "A",
+        "explanation": "Hiện tượng tạo thành mây là do hơi nước ngưng tụ.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095729,
+        "question_text": "Cho tập hợp \\(A=\\{1 ; 3 ; 6 ; 7 ; 10 ; 12\\}\\). Trong các khẳng định sau khẳng định nào đúng?\nA. \\(1 \\notin A\\)\nB. \\(5 \\in A\\)\nC. \\(7 \\in A\\).\nD. \\(10 \\notin A\\)",
+        "correct_option": "C",
+        "explanation": "\\(A=\\{1 ; 3 ; 6 ; 7 ; 10 ; 12\\}\\) các số \\(1,3,6,7,10,12\\) thuốc tập con của \\(\\mathrm{A}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095730,
+        "question_text": "Tập hợp nào dưới đây chỉ gồm các số nguyên tố?\nA. \\(A=\\{3 ; 7 ; 10 ; 13\\}\\)\nB. \\(A=\\{3 ; 5 ; 7 ; 11\\}\\)\nC. \\(A=\\{13 ; 16 ; 17 ; 19\\}\\)\nD. \\(A=\\{1 ; 2 ; 3 ; 5\\}\\)",
+        "correct_option": "D",
+        "explanation": "HD: Số nguyên tố hay còn gọi là hợp số, đây là tập hợp số tự nhiên chỉ chia hết cho 1 và chính nó nê ta có \\(A=\\{1 ; 2 ; 3 ; 5\\}\\) là tập các số nguyên tố",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095731,
+        "question_text": "Bội của 5 là số nào sau đây:\nA. 4\nB. 23\nC. 25\nD. -2",
+        "correct_option": "C",
+        "explanation": "Bội của 5 là các số có tận cùng là 0 hoặc 5",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095732,
+        "question_text": "Trong các số: \\(215 ; 1372 ; 409 ; 222\\) số nào chia hết cho 3 ?\nA. 215.\nB. 1372.\nC. 409.\nD. 222.",
+        "correct_option": "D",
+        "explanation": " ",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095733,
+        "question_text": "Tập hợp các ước nguyên của 6 là:\nA. \\(\\{1 ; 2 ; 3 ; 6\\}\\)\nB. \\(\\{ \\pm 1 ; \\pm 2 ; \\pm 3 ; \\pm 6\\}\\)\nC. \\(\\{0 ; 1 ; 2 ; 3 ; 6\\}\\)\nD. \\(\\{1 ; 2 ; 3 ; 4 ; 5 ; 6\\}\\)",
+        "correct_option": "A",
+        "explanation": "HD: Ước số của một số tự nhiên a là \\(b\\) khi a chia hết cho \\(b ;\\) Ước nguyên của 6 là những số : \\(1,2,3,6\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095734,
+        "question_text": "Số đối của số -12 là:\nA. 0\nB. 12\nC. -12\nD. 9",
+        "correct_option": "A",
+        "explanation": "Số đối của a là - a. Vậy đối của -12 là \\(-(-12)=12\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095735,
+        "question_text": "Trong các hình sau, hình nào là hình vuông?\nA. Hình 1\nB. Hình 2\nC. Hình 3\nD. Hình 4",
+        "correct_option": "A",
+        "explanation": " ",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095737,
+        "question_text": "Yếu tố nào sau đây không phải của hình bình hành?\nA. Hai cặp cạnh đối diện song song\nB. Có hai cặp góc đối bằng nhau.\nC. Hai cặp cạnh đối diện bằng nhau\nD. Hai đường chéo vuông góc với nhau",
+        "correct_option": "D",
+        "explanation": "Hình bình hành có 2 đường chéo cắt nhau tại trung điểm của mỗi đường",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000095739,
+        "question_text": "Tâm đối xứng của hình tròn là:\nA. Một điểm bất kì nằm trên đường tròn.\nB. Một điểm bất kì nằm bên trong đường tròn.\nC. Tâm của đường tròn.\nD. Một điểm bất kì nằm bên ngoài đường tròn",
+        "correct_option": "C",
+        "explanation": "Tâm đối xứng của đường tròn là tâm của đường tròn.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000098918,
+        "question_text": "Tập hợp số nguyên là:\nA. \\(Z=\\{1 ; 2 ; 3 ; \\ldots\\}\\)\nB. \\(Z=\\{\\ldots-3 ;-2 ;-1 ; 0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)\nC. \\(Z = 1 ; 2 ; 3 ; \\dot{s}\\)\nD. \\(\\mathrm{Z}=0 ; 1 ; 2 ; 3 ; \\ldots\\)",
+        "correct_option": "B",
+        "explanation": "Tập hợp các số nguyên là: \\(Z=\\{\\ldots-3 ;-2 ;-1 ; 0 ; 1 ; 2 ; 3 ; \\ldots\\}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000098919,
+        "question_text": "Thứ tự thực hiên các phép tính đối với các biếu thức có dấu ngoă̆c là\nA. []\\(\\rightarrow \\rightarrow() \\rightarrow \\rightarrow\\{\\}\\)\nB. {}\\(\\rightarrow \\rightarrow \\left [ \\right ] \\rightarrow \\rightarrow \\left ( \\right )\\)\nC. []\\(\\rightarrow \\rightarrow() \\rightarrow \\rightarrow\\{\\}\\)\nD. ()\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow\\{\\}\\)",
+        "correct_option": "D",
+        "explanation": "Thứ tự thực hiên các phép tính đối với các biểu thức có dấu ngoặc là: ()\\(\\rightarrow \\rightarrow[] \\rightarrow \\rightarrow\\{\\}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000098920,
+        "question_text": "Số nào sau đây chia hết cho 3 ?\nA. \\(431\\)\nB. \\(245\\)\nC. \\(450\\)\nD. \\(313\\)",
+        "correct_option": "C",
+        "explanation": "Tổng các chứ số của số 450 là: \\(4+5+0=9: 3\\) nên theo dấu hiêu chia hết thì \\(450: 3\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000098921,
+        "question_text": "Số nào sau đây là số nguyên tố?\nA. \\(367\\)\nB. \\(376\\)\nC. \\(140\\)\nD. \\(455\\)",
+        "correct_option": "A",
+        "explanation": "367 là số nguyên tố vì 113 chỉ có ước là 1 và chính nó.",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000098922,
+        "question_text": "Số liền sau của số -19 là\nA. -20\nB. 20\nC. -18\nD. 18",
+        "correct_option": "C",
+        "explanation": "Số liền sau của số -19 là: - 18",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000098923,
+        "question_text": "Số đối của 28 là\nA. \\(0\\)\nB. \\(-28\\)\nC. \\(28\\)\nD. \\(\\frac{-1}{28}\\)",
+        "correct_option": "B",
+        "explanation": "Số đối của 28 là: - 28",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000098924,
+        "question_text": "Tam giác có độ dài các góc đều bằng \\(60^{\\circ}\\) là:\nA. tam giác vuông cân\nB. tam giác vuông\nC. tam giác đều\nD. tam giác cân",
+        "correct_option": "C",
+        "explanation": "Tam giác có độ dài các cạnh đều bằng \\(3 \\mathrm{~cm}\\) là tam giác đều",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099897,
+        "question_text": "Trong các số sau số nào là số tự nhiên?\nA. \\(\\frac{4}{9}\\)\nB. \\(3 \\frac{1}{4}\\)\nC. \\(2022\\)\nD. 7,8",
+        "correct_option": "C",
+        "explanation": "Số tự nhiên là tập hợp những số lớn hơn hoặc bằng 0 , tập hợp số tự nhiên được ký hiệu là \\(\\mathrm{N}\\).",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099899,
+        "question_text": "Tính nhanh tổng \\(53+25+47+75\\) bằng\nA. 200\nB. 201\nC. 300\nD. 100",
+        "correct_option": "A",
+        "explanation": "\\(\\begin{array}{l}53+\\mathbf{5 5}+\\mathbf{4 7}+\\mathbf{7 5} \\\\ =(\\mathbf{5 3}+\\mathbf{4 7})+(\\mathbf{2 5}+\\mathbf{7 5}) \\\\ =\\mathbf{1 0 0}+\\mathbf{1 0 0}=\\mathbf{2 0 0}\\end{array}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099900,
+        "question_text": "Chọn đáp án đúng.\nA. \\(2^{3}\\lt 2^{7}\\)\nB. \\(2^{3}=2^{7}\\)\nC. \\(2^{3}\\gt 2^{7}\\)\nD. \\(2^{9} \\leq 2^{7}\\)",
+        "correct_option": "A",
+        "explanation": "\\(2^{3}=8 ; 2^{7}=128\\)Vậy: \\(2^{3}\\lt 2^{7}\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099901,
+        "question_text": "Cho hình bình hành \\(A B C D\\) có \\(A B=2 \\mathrm{~cm}\\) thì\nA. \\(B C=2 \\mathrm{~cm}\\)\nB. \\(A D=2 \\mathrm{~cm}\\)\nC. \\(A C=2 \\mathrm{~cm}\\)\nD. \\(D C=2 \\mathrm{~cm}\\)",
+        "correct_option": "D",
+        "explanation": "Hình bình hành có các cạnh đối bằng nhau",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099902,
+        "question_text": "Chữ số điền vào dấu \\({ }^{*}\\) để số \\(37^{*}\\) chia hết cho cả 2 và 5 là\nA. 2\nB. 5\nC. 0 và 5\nD. 0",
+        "correct_option": "D",
+        "explanation": "Vì số có chữ số tận cùng là 0 thì chia hết cho cả 2 và 5 nên chọn đáp án đúng là 0 .",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099903,
+        "question_text": "Các đường chéo chính của lục giác đều trong hình sau là\nA. \\(D F, F M, M D\\)\nB. \\(E H, H N, N E\\).\nC. \\(D M, E H, D H\\).\nD. \\(D H, E M, N F\\).",
+        "correct_option": "D",
+        "explanation": "Đường chéo chính là đường thẳng nôi 2 đỉnh đối nhau",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099904,
+        "question_text": "Tìm chữ số \\({a}\\) để \\(\\overline{3 a}\\) là số nguyên tố:\nA. 2;4;6;8\nB. 1;2;3;7;9\nC. 0;2;3;4;5;6;8\nD. 1;7",
+        "correct_option": "D",
+        "explanation": "Số nguyên tố là số lớn hơn 1 chỉ có 2 ước là 1 và chính nó",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099905,
+        "question_text": "Biết số bị chia là 128 , thương là 32 số dư bằng 0 , vậy số chia bằng?\nA. 3\nB. 4\nC. 5\nD. 6",
+        "correct_option": "B",
+        "explanation": "\\(128: 32=4\\)",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099906,
+        "question_text": "Khẳng định nào sai trong các khẳng định sau?\nA. Trong hình chữ nhật: Các cạnh đối song song với nhau.\nB. Trong hình thang cân: Các cạnh đối song song với nhau.\nC. Trong hình thoi: Các cạnh đối song song với nhau.\nD. Trong hình bình hành: Các cạnh đối song song với nhau.",
+        "correct_option": "B",
+        "explanation": "Định nghĩa hình thang có 2 cạnh đối song song Hình thang cân là hình thang có:- 2 góc kề 1 đáy bằng nhau- 2 đường chéo bằng nhau",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099907,
+        "question_text": "Khẳng định đúng là:\nA. Hình thoi có bốn cạnh bằng nhau\nB. Hình bình hành có các cặp cạnh đối không bằng nhau\nC. Hình chữ nhật có bốn góc bằng nhau, mỗi góc bằng \\(60^{\\circ}\\)\nD. Tam giác đều có ba cạnh không bằng nhau",
+        "correct_option": "A",
+        "explanation": "Định nghĩa hình hoi là tứ giác có 4 cạnh bằng nhau",
+        "good_explanation": false
+    },
+    {
+        "question_id": 10110000000099908,
+        "question_text": "Kết quả của phép tính \\(212-12.3^{2}\\) là:\nA. 600\nB. 1800\nC. 104\nD. 1200",
+        "correct_option": "C",
+        "explanation": "\\(212-12.3^{2}=212-12.9=212-108=104\\)",
+        "good_explanation": false
+    }
+]

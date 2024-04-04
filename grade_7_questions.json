@@ -1,0 +1,122 @@
+[
+    {
+        "question_id": 10110000000099870,
+        "question_text": "Sắp xếp các số \\(1,\\left(31\\right)\\); \\(\\frac{4}{3}\\); \\(-1,7\\); \\(-\\sqrt{3}\\) theo thứ tự tăng dần được kết quả là  \nA. \\(-\\sqrt{3} ;-1,7 ; \\frac{4}{3} ; 1,(31)\\)\nB. \\(-\\sqrt{3} ;-1,7 ; 1,(31) ; \\frac{4}{3}\\)\nC. \\(-1,7 ;-\\sqrt{3} ; \\frac{4}{3} ; 1,(31)\\)\nD. \\(-1,7 ;-\\sqrt{3} ; 1,(31) ; \\frac{4}{3}\\).",
+        "correct_option": "B",
+        "explanation": "Sắp sếp theo thứ tự tăng dần như sau \\(-\\sqrt{3} ;-1,7 ; 1,(31) ; \\frac{4}{3}\\)"
+    },
+    {
+        "question_id": 10110000000099871,
+        "question_text": "Tỉ số \\(\\frac{-3}{1,2}\\) và tỉ số nào sau đây lập được tỉ lệ thức? \nA. \\(-\\frac{3}{4}:\\frac{1}{2}\\)\nB. \\(\\left(-2,4\\right):\\frac{2}{3}\\)\nC. \\(\\frac{1,5}{-6}\\)\nD. \\(\\frac{15}{2}:\\left(-3\\right)\\)",
+        "correct_option": "D",
+        "explanation": "Tỉ số \\(\\frac{-3}{1,2}\\) và \\(\\frac{15}{2}:\\left(-3\\right)\\) được tỉ lệ thức "
+    },
+    {
+        "question_id": 10110000000099872,
+        "question_text": "Tập hợp Q các số hữu tỉ là tập hợp gồm các số \nA. viết được dưới dạng phân số \\(\\frac{a}{b}\\) với \\(a,b\\in Z\\); \\(b\\ne0\\)\nB. viết được dưới dạng \\(\\frac{a}{b}\\) với \\(a,b\\in Z\\); b=0.\nC. viết được dưới dạng \\(\\frac{a}{b}\\) với \\(a,b\\in Z\\)\nD. viết được dưới dạng \\(\\frac{a}{b}\\) với \\(b\\ne0\\)",
+        "correct_option": "A",
+        "explanation": "Tập hợp Q các số hữu tỉ là tập hợp gồm các số viết được dưới dạng phân số \\(\\frac{a}{b}\\) với \\(a,b\\in Z\\); \\(b\\ne0\\)"
+    },
+    {
+        "question_id": 10110000000099873,
+        "question_text": "Có bao nhiêu số vô tỉ trong các số thực sau: \\(-\\frac{2}{5};\\sqrt{9};0;\\sqrt{3};2,\\left(15\\right);-3,8\\)\nA. 0\nB. 1\nC. 3\nD. 2",
+        "correct_option": "B",
+        "explanation": "\\(\\sqrt{3}\\) là số vô tỉ"
+    },
+    {
+        "question_id": 10110000000099874,
+        "question_text": "Kết quả của phép tính \\(\\sqrt{4}+\\sqrt{6}\\) sau khi được làm tròn đến chữ số thập phân thứ hai là \nA. 4,45. \nB. 4,5. \nC. 4,44. \nD. 4,4. ",
+        "correct_option": "A",
+        "explanation": "\\(\\sqrt{4}+\\sqrt{6}=4,45\\)."
+    },
+    {
+        "question_id": 10110000000099875,
+        "question_text": "Để xúc cát lên các xe tải, người ta dùng một máy xúc với gàu xúc (Hình 1) có dạng gần như một lăng trụ đứng tam giác kích thước như Hình 2. Nếu coi dung tích của gầu xúc đúng bằng thể tích của hình lăng trụ đứng tam giác thì muốn xúc \\(60m^3\\) cát xe phải múc ít nhất bao nhiêu gàu? \nA. 62\nB. 63\nC. 64\nD. 60",
+        "correct_option": "B",
+        "explanation": "Thể tích của gầu máy xúc là: \\(\\mathrm{V}=\\frac{1}{2} \\cdot 1 \\cdot 1,2 \\cdot 1,6=0,96 \\mathrm{~m}^{3}\\) Vậy muốn xúc hết \\(60 \\mathrm{~m}^{3}\\) cát cần múc với số lần là: \\(60: 0,96=62,5\\) gầu. Vậy máy cần múc ít nhất là \\(63\\) lần."
+    },
+    {
+        "question_id": 10110000000099876,
+        "question_text": "Trong hình vẽ, các điểm A,B,C theo thứ tự biểu diễn các số hữu tỉ nào? \nA. 2;5;-4.\nB. \\(\\frac{4}{3};\\frac{2}{3};2.\\)\nC. \\(\\frac{2}{3};-\\frac{4}{3};\\frac{5}{3}.\\)\nD. \\(\\frac{2}{3};-\\frac{4}{3};2.\\)",
+        "correct_option": "D",
+        "explanation": "Điểm A biểu diễn số \\(\\frac{2}{3}\\), điểm B biểu diễn số \\(-\\frac{4}{3}\\), điểm C biểu diễn số 2."
+    },
+    {
+        "question_id": 10110000000099877,
+        "question_text": "Cho dãy tỉ số bằng nhau \\(\\frac{x}{3}=\\frac{y}{5}=\\frac{z}{2}\\). Trong các khẳng định sau khẳng định nào đúng?\nA. \\(\\frac{x}{3}=\\frac{y}{5}=\\frac{z}{2}=\\frac{x+y+z}{3-5+2}\\).\nB. \\(\\frac{x}{3}=\\frac{y}{5}=\\frac{z}{2}=\\frac{x \\cdot y \\cdot z}{3 \\cdot 5 \\cdot 2}\\).\nC. \\(\\frac{x}{3}=\\frac{y}{5}=\\frac{z}{2}=\\frac{x+y+z}{3+5+2}\\).\nD. \\(\\frac{x}{3}=\\frac{y}{5}=\\frac{z}{2}=\\frac{x-y-z}{3-5+2}\\)",
+        "correct_option": "C",
+        "explanation": "Theo đại lượng tỉ lệ thuận ta có: \\(\\frac{x}{3}=\\frac{y}{5}=\\frac{z}{2}=\\frac{x+y+z}{3+5+2}\\)"
+    },
+    {
+        "question_id": 10110000000099878,
+        "question_text": " Qua một điểm ở ngoài một đường thẳng \nA. chỉ có một đường thẳng song song với đường thẳng đó.\nB. có ít nhất một đường thẳng song song với đường thẳng đó.\nC. có nhiều hơn một đường thẳng song song với đường thẳng đó.\nD. chỉ có hai đường thẳng song song với đường thẳng đó. ",
+        "correct_option": "A",
+        "explanation": "Qua một điểm ở ngoài một đường thẳng chỉ có một đường thẳng song song với đường thẳng đó. "
+    },
+    {
+        "question_id": 10110000000099879,
+        "question_text": "Căn bậc hai số học của 64 là \nA. 332\nB. -8\nC. 8 và -8\nD. 8",
+        "correct_option": "D",
+        "explanation": "\\(\\sqrt{64}=8\\)"
+    },
+    {
+        "question_id": 10110000000099880,
+        "question_text": "Cho tỉ lệ thức \\(\\frac{x}{-8}=\\frac{-0.6}{1.2}\\). Giá trị của x bằng \nA. -4\nB. 40\nC. 4\nD. 0,4 ",
+        "correct_option": "C",
+        "explanation": "\\(\\frac{x}{-8}=\\frac{-0,6}{1,2} \\Rightarrow x=\\frac{-8 \\cdot-0,6}{1,2}=4\\)"
+    },
+    {
+        "question_id": 10110000000099881,
+        "question_text": "Trong các khẳng định sau, khẳng định nào đúng? \nA. \\(-\\sqrt{5} \\in \\mathbb{R}\\)\nB. \\(\\sqrt{10} \\in \\mathbb{Q}\\)\nC. \\(-2,(34) \\notin \\mathbb{R}\\)\nD. \\(\\sqrt{9} \\notin \\mathbb{Q}\\).",
+        "correct_option": "A",
+        "explanation": "Khẳng định đúng là: \\(-\\sqrt{5} \\in \\mathbb{R}\\)"
+    },
+    {
+        "question_id": 10110000000099882,
+        "question_text": "Số đối của số \\(-\\frac{4}{5}\\) là: \nA. \\(\\frac{4}{-5}\\)\nB. \\(\\frac{5}{4}\\)\nC. \\(\\frac{-5}{4}\\)\nD. \\(\\frac{4}{5}\\)",
+        "correct_option": "D",
+        "explanation": "Số đối của số \\(-\\frac{4}{5}\\) là \\(\\frac{4}{5}\\)"
+    },
+    {
+        "question_id": 10110000000099883,
+        "question_text": "Tính \\(\\left|-1,5-2\\right|\\) ta được kết quả là \nA. -0,5\nB. 0,5\nC. -3,5\nD. 3,5",
+        "correct_option": "D",
+        "explanation": "\\(\\left|-1,5-2\\right|=\\left|-3,5\\right|=3,5\\)"
+    },
+    {
+        "question_id": 10110000000099884,
+        "question_text": "Trong các số sau, số nào không là số hữu tỉ? \nA. 2,5\nB. 0\nC. \\(\\sqrt{2}\\)\nD. \\(-\\frac{1}{2}\\)",
+        "correct_option": "C",
+        "explanation": "\\(\\sqrt{2}\\) không phải là số hữu tỉ "
+    },
+    {
+        "question_id": 10110000000099885,
+        "question_text": "Nhà Mai có một bể cá bằng kính hình hộp chữ nhật có kích thước như hình vẽ. Để nuôi cá nhà Mai đã đổ nước cách miệng bể 20 cm. Tính số lít nước nhà Mai đã đổ vào bể. (Coi độ dày kính không đáng kể) \nA. 640l\nB. 64l\nC. 128l\nD. 1280l",
+        "correct_option": "C",
+        "explanation": "Ta có thể tích nước Mai đổ vào để nuôi cá là:\\(V=80.40 .40=128000 \\mathrm{~cm}^{3}=128 \\mathrm{~m}^{3}=128 l\\)"
+    },
+    {
+        "question_id": 10110000000099886,
+        "question_text": "Trong các số hữu tỉ sau, số nào viết được dưới dạng số thập phân hữu hạn? \nA. \\(\\frac{5}{6}\\)\nB. \\(\\frac{15}{12}\\)\nC. \\(\\frac{1}{3}\\)\nD. \\(\\frac{21}{18}\\)",
+        "correct_option": "B",
+        "explanation": "\\(\\frac{15}{12}=1,25\\) là số thập phân hữu hạn "
+    },
+    {
+        "question_id": 10110000000099887,
+        "question_text": "Các mặt bên của hình lăng trụ đứng tứ giác là những \nA. hình vuông. \nB. hình chữ nhật.\nC. hình thoi. \nD. hình tứ giác. ",
+        "correct_option": "B",
+        "explanation": "Các mặt bên của hình lăng trụ đứng tứ giác là những hình chữ nhật. "
+    },
+    {
+        "question_id": 10110000000099888,
+        "question_text": "Hình lập phương có bao nhiêu đường chéo?  \nA. 2\nB. 4\nC. 8\nD. 12",
+        "correct_option": "B",
+        "explanation": "Hình lập phương có 4 đường chéo "
+    },
+    {
+        "question_id": 10110000000099889,
+        "question_text": "Cho hình vẽ. Trong các khẳng định sau, khẳng định nào sai? \nA. \\(\\widehat{x O a}\\) kề bù với \\(\\widehat{y O b}\\)\nB. \\(\\widehat{x O a}=60^{\\circ}\\)\nC. \\(\\widehat{x O b}\\) đối đỉnh với \\(\\widehat{a O y}\\)\nD. \\(\\widehat{x O b}=120^{\\circ}\\)",
+        "correct_option": "A",
+        "explanation": "\\(\\widehat{x O a}\\) đối đỉnh với \\(\\widehat{y O b}\\)"
+    }
+]
