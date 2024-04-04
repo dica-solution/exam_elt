@@ -112,7 +112,8 @@ class ExamUpdater(ExamParser):
         exam_data_update = self.parse_as_dict_collections(src_exam_id)
         if exam_data_update:
             # Check if the exam has been updated
-            if self.check_changes(lastest_runtime, exam_data_update.exam.updated_at):
+            if 1:
+            # if self.check_changes(lastest_runtime, exam_data_update.exam.updated_at):
                 # Update exam
                 record_exam = self.session_import.query(Exam).filter(Exam.id == des_exam_id).first()
                 record_exam.updated_at = exam_data_update.exam.updated_at
@@ -138,7 +139,7 @@ class ExamUpdater(ExamParser):
                         idx, quiz_info_dict = self.get_index_by_value(exam_data_update.quiz_info_list, src_info_dict)
                         update_item = exam_data_update.quiz_question_list[idx]
                         record_quiz_question = self.session_import.query(QuizQuestion).filter(QuizQuestion.id == des_question_id).first()
-                        record_quiz_question.quiz_question_group_id = update_item.quiz_question_group_id
+                        record_quiz_question.quiz_question_group_id = 0 if update_item.quiz_question_group_id==0 else quiz_question_group_id_mapping[update_item.quiz_question_group_id]
                         record_quiz_question.original_text = update_item.original_text
                         record_quiz_question.parsed_text = update_item.parsed_text
                         record_quiz_question.quiz_type = update_item.quiz_type
@@ -154,7 +155,7 @@ class ExamUpdater(ExamParser):
                             src_quiz_question_group_id = quiz_info_dict.get('src_quiz_question_group_id'),
                             des_exam_id = des_exam_id,
                             des_quiz_question_id = des_question_id,
-                            des_quiz_question_group_id = update_item.quiz_question_group_id,
+                            des_quiz_question_group_id = 0 if update_item.quiz_question_group_id==0 else quiz_question_group_id_mapping[update_item.quiz_question_group_id],
                             task_name = 'update', # "insert", "update" or "delete"
                             order = order,
                         )

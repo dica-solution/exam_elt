@@ -67,7 +67,8 @@ def import_exam_by_list(session_import, session_log, lst_id_to_import):
 def sync_exams(session_import, session_log, lst_id_to_sync, latest_runtime):
     start_time = time.time()
     sync_count = 0
-    for exam_id in tqdm(lst_id_to_sync):
+    # for exam_id in tqdm(lst_id_to_sync):
+    for exam_id in lst_id_to_sync:
         try:
             synced_exam_id = sync_exam_bank(session_import, session_log, exam_id, latest_runtime)
             if synced_exam_id != 0:
@@ -123,7 +124,7 @@ def main():
 
 
         if args.sync:
-            # idx = lst_imported_ids.index(2155)
+            # idx = lst_imported_ids.index(1268)
             # lst_id_to_sync = lst_imported_ids[idx: idx+1]
             lst_id_to_sync = lst_imported_ids
             latest_runtime = get_latest_runtime('logs/sync_log')
