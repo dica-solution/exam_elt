@@ -11,23 +11,17 @@ async def extract_data(session, url, headers):
     return dict()
 async def check_structured(exam_id, data):
     related_items = data.get('data').get('relatedItems')
-    if len(related_items) != 7:
+    if len(related_items) != 5:
         return exam_id, False
 
-    if related_items[0].get('__component') != 'exam.grouped-essay' or len(related_items[0].get('relatedEssays')) != 3:
+    if any(item.get('__component') != 'exam.single-essay' for item in related_items[0:3]):
+        return exam_id, False
+    if related_items[3].get('__component') != 'exam.grouped-essay' or len(related_items[3].get('relatedEssays')) != 3:
         return exam_id, False
 
-    if any(item.get('__component') != 'exam.single-essay' for item in related_items[1:4]):
+    if related_items[4].get('__component') != 'exam.single-essay':
         return exam_id, False
 
-    if related_items[4].get('__component') != 'exam.grouped-essay' or len(related_items[4].get('relatedEssays')) != 2:
-        return exam_id, False
-
-    if related_items[5].get('__component') != 'exam.grouped-essay' or len(related_items[5].get('relatedEssays')) != 3:
-        return exam_id, False
-
-    if related_items[6].get('__component') != 'exam.single-essay':
-        return exam_id, False
 
     return exam_id, True
 
