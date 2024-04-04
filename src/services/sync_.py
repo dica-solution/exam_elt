@@ -112,8 +112,8 @@ class ExamUpdater(ExamParser):
         exam_data_update = self.parse_as_dict_collections(src_exam_id)
         if exam_data_update:
             # Check if the exam has been updated
-            if 1:
-            # if self.check_changes(lastest_runtime, exam_data_update.exam.updated_at):
+            # if 1:
+            if self.check_changes(lastest_runtime, exam_data_update.exam.updated_at):
                 # Update exam
                 record_exam = self.session_import.query(Exam).filter(Exam.id == des_exam_id).first()
                 record_exam.updated_at = exam_data_update.exam.updated_at
