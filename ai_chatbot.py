@@ -47,14 +47,16 @@ with col1:
 
 
     for message in st.session_state.messages:
-        # if message.get"role"] == "user":
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+        # if message.get["role"] == "user":
+            with st.chat_message(message["role"]):
+                st.markdown(message["content"])
 
-    st.session_state.messages.append({"role": "system",
-                                    "content": "Giải chi tiết và dễ hiểu hoàn toàn bằng tiếng Việt. Chú ý quy đồng mẫu số. Tiếp tục cho tới khi nào tìm ra được đáp án. Không được hỏi lại bất kỳ câu nào."})
+    if not st.session_state.messages:
+        st.session_state.messages.append({"role": "system",
+                                    # "content": "Giải chi tiết và dễ hiểu hoàn toàn bằng tiếng Việt. Chú ý quy đồng mẫu số. Tiếp tục cho tới khi nào tìm ra được đáp án. Không được hỏi lại bất kỳ câu nào."
+                                    "content": open("src/prompts/thetawise_prompt.txt", "r").read()})
     # Accept user input
-    if prompt := st.chat_input("what is your company?"):
+    if prompt := st.chat_input("what is your math question?"):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
@@ -67,4 +69,4 @@ with col1:
         st.session_state.messages = st.session_state.messages[0]
 
 with col2:
-    st.json(st.session_state, expanded=True)
+    st.json(st.session_state, expanded=True) 
