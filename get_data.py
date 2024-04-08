@@ -50,42 +50,40 @@ def combine_with_question(question, options):
         question += value_opt
     return question, correct_option
 
+def get_correct_option(options):
+    opt = ""
+    correct_opt = ""
+    for option in options:
+        opt += option.get('label') + '. ' + remove_html_with_beautifulsoup(option.get('content')) + '\n'
+        if option.get('is_correct'):
+            correct_opt= option.get('label')
+    return opt, correct_opt
+
 
 with get_sessions_from_engines(engine_import, engine_log) as (session_import, session_log):
-    # questions = session_import.query(QuizQuestion.id, QuizQuestion.original_text, QuizQuestion.quiz_options, QuizQuestion.explanation
-    #                                  ).join(ExamQuestion, ExamQuestion.quiz_question_id==QuizQuestion.id
-    #                                  ).join(Exam, Exam.id==ExamQuestion.exam_id
-    #                                  ).filter(
-    #                                      and_(
-    #                                          Exam.grade_id==7,
-    #                                          Exam.subject_id==14,
-    #                                          QuizQuestion.quiz_options!='',
-    #                                          QuizQuestion.explanation!='',
-    #                                          QuizQuestion.original_text.not_like('%%src%%'),
-    #                                          QuizQuestion.quiz_options.not_like('%%src%%'),
-    #                                      )
-    #                                  ).order_by(QuizQuestion.id).all()
-    questions = session_import.query(QuizQuestion.id, QuizQuestion.quiz_type, QuizQuestion.original_text, QuizQuestion.explanation
+    questions = session_import.query(QuizQuestion.id, QuizQuestion.quiz_type, QuizQuestion.original_text, QuizQuestion.quiz_options, QuizQuestion.explanation
                                      ).join(ExamQuestion, ExamQuestion.quiz_question_id==QuizQuestion.id
                                      ).join(Exam, Exam.id==ExamQuestion.exam_id
                                      ).filter(
                                          and_(
                                              Exam.grade_id==9,
                                              Exam.subject_id==14,
-                                             QuizQuestion.quiz_type == 3,
+                                             QuizQuestion.quiz_type == 1,
                                              QuizQuestion.explanation!='',
                                              QuizQuestion.original_text.not_like('%%src%%'),
+                                             QuizQuestion.explanation.not_like('%%src%%'),
                                          )
                                      ).order_by(QuizQuestion.id).all()
     result = []
     for question in questions:
-        # question_text, correct_option = combine_with_question(question.original_text, convert_options(question.quiz_options))
+        options, correct_option = get_correct_option(convert_options(question.quiz_options))
         result.append({
             'question_id': question.id,
             'question_type': question.quiz_type,
             'question_text': remove_html_with_beautifulsoup(question.original_text),
             # 'question_text': question_text,
-            # 'correct_option': correct_option,
+            'options': options,
+            'correct_option': correct_option,
             'explanation': remove_html_with_beautifulsoup(question.explanation),
             'good_explanation': False
         })
@@ -95,6 +93,6 @@ with get_sessions_from_engines(engine_import, engine_log) as (session_import, se
     #         f.write(json.dumps(res, ensure_ascii=False))
     #         f.write('\n')
     print(f'Number of questions: {len(result)}')
-    with open('grade_9_questions.json', 'w') as f:
+    with open('grade_9_multi_choice_questions.json', 'w') as f:
         json.dump(result, f, ensure_ascii=False, indent=4)
     print('Debugging...')
