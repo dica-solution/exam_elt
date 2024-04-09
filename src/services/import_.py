@@ -474,71 +474,75 @@ class ExamParser:
     def import_exam(self, exam_id: int) -> int:
         exam_data = self.parse_as_dict_collections(exam_id)
         if exam_data:
-            quiz_info_list = exam_data.quiz_info_list
-            quiz_info_idx = 0
-            logs_list = []
-            uniqid_idx = 0
+            try:
+                quiz_info_list = exam_data.quiz_info_list
+                quiz_info_idx = 0
+                logs_list = []
+                uniqid_idx = 0
 
-            # Register all related ids for the current exam
-            uniqid_list = exam_data.uniqid_list
-            self.session_import.add_all(uniqid_list)
-            self.session_import.commit()
-
-            # Specify exam id and store it
-            exam = exam_data.exam
-            exam.id = uniqid_list[uniqid_idx].to_uniqid_number()
-            exam.num_quizzes = len(exam_data.quiz_question_list)
-            uniqid_idx += 1
-            self.session_import.add(exam)
-            self.session_import.commit()
-
-            # Store all quiz_question_group_list
-            ref_quiz_groups = dict()
-            quiz_question_group_list = exam_data.quiz_question_group_list
-            for group in quiz_question_group_list:
-                group_id = group.id
-                group.id = None
-                self.session_import.add(group)
+                # Register all related ids for the current exam
+                uniqid_list = exam_data.uniqid_list
+                self.session_import.add_all(uniqid_list)
                 self.session_import.commit()
-                ref_quiz_groups[group_id] = group.id
-            
 
-            # Specify related quizzes and store them
-            quiz_question_list = exam_data.quiz_question_list
-            for idx, quiz in enumerate(quiz_question_list):
-                quiz.id = uniqid_list[uniqid_idx].to_uniqid_number()
-                # print(quiz.id)
+                # Specify exam id and store it
+                exam = exam_data.exam
+                exam.id = uniqid_list[uniqid_idx].to_uniqid_number()
+                exam.num_quizzes = len(exam_data.quiz_question_list)
                 uniqid_idx += 1
-                ref_group_id = quiz.quiz_question_group_id
-                if ref_group_id:
-                    quiz.quiz_question_group_id = ref_quiz_groups[ref_group_id]
-                quiz_info_dict = quiz_info_list[quiz_info_idx]
-                quiz_info_idx += 1
-                logs_list.append(TrackingLogs(    
-                    src_exam_id = quiz_info_dict.get('src_exam_id'),
-                    src_quiz_object_type = quiz_info_dict.get('src_quiz_object_type'),
-                    src_quiz_question_id = quiz_info_dict.get('src_quiz_question_id'),
-                    src_quiz_question_group_id = quiz_info_dict.get('src_quiz_question_group_id'),
-                    des_exam_id = exam.id,
-                    des_quiz_question_id = quiz.id,
-                    des_quiz_question_group_id = quiz.quiz_question_group_id,
-                    task_name = 'insert', # "insert", "update" or "delete"
-                    order = idx,
-                ))
-            self.session_import.add_all(quiz_question_list)
-            self.session_import.commit()
-            self.session_log.add_all(logs_list)
-            self.session_log.commit()
+                self.session_import.add(exam)
+                self.session_import.commit()
 
-            exam_question_list = []
-            for idx, question in enumerate(quiz_question_list):
-                exam_question = ExamQuestion(exam_id=exam.id, quiz_question_id=question.id, order=idx, is_checkpoint=False)
-                exam_question_list.append(exam_question)
+                # Store all quiz_question_group_list
+                ref_quiz_groups = dict()
+                quiz_question_group_list = exam_data.quiz_question_group_list
+                for group in quiz_question_group_list:
+                    group_id = group.id
+                    group.id = None
+                    self.session_import.add(group)
+                    self.session_import.commit()
+                    ref_quiz_groups[group_id] = group.id
+                
 
-            self.session_import.add_all(exam_question_list)
-            self.session_import.commit()
-            return exam.id
-        return 0
+                # Specify related quizzes and store them
+                quiz_question_list = exam_data.quiz_question_list
+                for idx, quiz in enumerate(quiz_question_list):
+                    quiz.id = uniqid_list[uniqid_idx].to_uniqid_number()
+                    # print(quiz.id)
+                    uniqid_idx += 1
+                    ref_group_id = quiz.quiz_question_group_id
+                    if ref_group_id:
+                        quiz.quiz_question_group_id = ref_quiz_groups[ref_group_id]
+                    quiz_info_dict = quiz_info_list[quiz_info_idx]
+                    quiz_info_idx += 1
+                    logs_list.append(TrackingLogs(    
+                        src_exam_id = quiz_info_dict.get('src_exam_id'),
+                        src_quiz_object_type = quiz_info_dict.get('src_quiz_object_type'),
+                        src_quiz_question_id = quiz_info_dict.get('src_quiz_question_id'),
+                        src_quiz_question_group_id = quiz_info_dict.get('src_quiz_question_group_id'),
+                        des_exam_id = exam.id,
+                        des_quiz_question_id = quiz.id,
+                        des_quiz_question_group_id = quiz.quiz_question_group_id,
+                        task_name = 'insert', # "insert", "update" or "delete"
+                        order = idx,
+                    ))
+                self.session_import.add_all(quiz_question_list)
+                self.session_import.commit()
+                self.session_log.add_all(logs_list)
+                self.session_log.commit()
+
+                exam_question_list = []
+                for idx, question in enumerate(quiz_question_list):
+                    exam_question = ExamQuestion(exam_id=exam.id, quiz_question_id=question.id, order=idx, is_checkpoint=False)
+                    exam_question_list.append(exam_question)
+
+                self.session_import.add_all(exam_question_list)
+                self.session_import.commit()
+                return exam.id, None
+            except Exception as e:
+                self.session_import.rollback()
+                self.session_log.rollback()
+                return 0, e
     
 # @log_runtime    
 def import_exam_bank(session_import: Session, session_log: Session, exam_id: int):

@@ -48,15 +48,15 @@ def get_lst_imported_ids(tbl_tracking_logs, session_log):
                                                 ).filter(tbl_tracking_logs.c.task_name=='insert').distinct().all()]
 
 def import_exam_by_id(session_import, session_log, exam_id):
-    try:
-        impored_exam_id = import_exam_bank(session_import, session_log, exam_id=exam_id)
-        if impored_exam_id != 0:
-            print(f'destination ID: {impored_exam_id:15}, source ID: {exam_id: 10}, task: insert, state: success')
-        else:
-            print(f'destination ID: {impored_exam_id:15}, source ID: {exam_id: 10}, task: insert, state: fail')
-    except Exception as e:
-        # logging.error(f'Error import with exam_id: {exam_id}: {e}')
-        runtime_logger.error(f'Error import with exam_id: {exam_id}: {e}')
+    impored_exam_id, error_info = import_exam_bank(session_import, session_log, exam_id=exam_id)
+    if impored_exam_id != 0:
+        print(f'destination ID: {impored_exam_id:15}, source ID: {exam_id: 10}, task: insert, state: success')
+    else:
+        print(f'destination ID: {impored_exam_id:15}, source ID: {exam_id: 10}, task: insert, state: fail')
+    
+    if error_info is not None:
+        print(f'Error import with exam_id: {exam_id}: {error_info}')
+        runtime_logger.error(f'Error import with exam_id: {exam_id}: {error_info}')
     return None
 
 def import_exam_by_list(session_import, session_log, lst_id_to_import):
