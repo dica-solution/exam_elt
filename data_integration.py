@@ -55,7 +55,6 @@ def import_exam_by_id(session_import, session_log, exam_id):
         print(f'destination ID: {impored_exam_id:15}, source ID: {exam_id: 10}, task: insert, state: fail')
     
     if error_info is not None:
-        print(f'Error import with exam_id: {exam_id}: {error_info}')
         runtime_logger.error(f'Error import with exam_id: {exam_id}: {error_info}')
     return None
 
