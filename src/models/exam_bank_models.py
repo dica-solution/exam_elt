@@ -92,3 +92,9 @@ class TrackingLogs(Base):
     task_name = Column(String(255), nullable=False) # "insert", "update" or "delete"
     # status = Column(String(255))
     order = Column(Integer, nullable=False)
+
+
+class SyncLogs(Base):
+    __tablename__ = 'sync_logs'
+    id = Column(Integer, primary_key=True, nullable=False)
+    runtime = Column(DateTime, default=datetime.now(), server_default=func.now(), nullable=False)

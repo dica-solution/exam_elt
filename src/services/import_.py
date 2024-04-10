@@ -471,7 +471,7 @@ class ExamParser:
         return question_group, quiz_questions, group_quiz_info_list
 
     # @log_runtime
-    def import_exam(self, exam_id: int) -> int:
+    def import_exam(self, exam_id: int):
         exam_data = self.parse_as_dict_collections(exam_id)
         if exam_data:
             try:
@@ -547,5 +547,5 @@ class ExamParser:
 # @log_runtime    
 def import_exam_bank(session_import: Session, session_log: Session, exam_id: int):
     exam_parser = ExamParser(session_import, session_log)
-    exam_id = exam_parser.import_exam(exam_id)
-    return exam_id
+    exam_id, error = exam_parser.import_exam(exam_id)
+    return exam_id, error

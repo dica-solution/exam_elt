@@ -3,7 +3,8 @@ from sqlalchemy import create_engine, Table, MetaData
 from src.services.import_ import import_exam_bank
 from src.services.sync_ import sync_exam_bank
 from src.config.config import settings
-from datetime import datetime, timezone
+from src.models.exam_bank_models import SyncLogs
+from datetime import datetime, timezone, timedelta
 import argparse
 import os
 import glob
@@ -20,11 +21,17 @@ runtime_logger.setLevel(logging.ERROR)
 runtime_handler = logging.FileHandler(f'logs/runtime_log/{now_str}.log')
 runtime_logger.addHandler(runtime_handler)
 
+from sqlalchemy import inspect
 
-def get_latest_runtime(logs_folder_path):
-    latest_runtime = max(glob.glob(os.path.join(logs_folder_path, '*.log')), key=os.path.getctime)
-    latest_runtime = os.path.basename(latest_runtime).replace('.log', '')
-    return latest_runtime
+def check_synclogs(engine, session):
+    inspector = inspect(engine)
+    if 'sync_logs' not in inspector.get_table_names():
+        return None
+    else:
+        print(f"Table {SyncLogs.__tablename__} already exists!")
+        last_runtime = session.query(SyncLogs.runtime).order_by(SyncLogs.id.desc()).first()
+        return last_runtime.runtime
+
 
 def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow=0):
     try:
@@ -66,23 +73,24 @@ def import_exam_by_list(session_import, session_log, lst_id_to_import):
 def sync_exams(session_import, session_log, lst_id_to_sync, latest_runtime):
     start_time = time.time()
     sync_count = 0
-    # for exam_id in tqdm(lst_id_to_sync):
-    for exam_id in lst_id_to_sync:
-        try:
-            synced_exam_id = sync_exam_bank(session_import, session_log, exam_id, latest_runtime)
-            if synced_exam_id != 0:
-                sync_count += 1
-                print(f'destination ID: {synced_exam_id:15}, source ID: {exam_id: 10}, task: sync, state: success')
-        except Exception as e:
-            runtime_logger.error(f'Error sync with exam_id: {exam_id}: {e}')
+    for exam_id in lst_id_to_sync:        
+        synced_exam_id, error_info = sync_exam_bank(session_import, session_log, exam_id, latest_runtime)
+        if synced_exam_id == -1:
+            pass
+        elif synced_exam_id == 0:
+            print(f'destination ID: {synced_exam_id:15}, source ID: {exam_id: 10}, task: sync, state: fail')
+        else:
+            sync_count += 1
+            print(f'destination ID: {synced_exam_id:15}, source ID: {exam_id: 10}, task: sync, state: success')
+
+        if error_info is not None:
+            runtime_logger.error(f'Error sync with exam_id: {exam_id}: {error_info}')
     if sync_count != 0:
         run_time = time.time() - start_time
-        sync_logger = logging.getLogger('sync_logger')
-        sync_logger.setLevel(logging.INFO)
-        sync_handler = logging.FileHandler(f'logs/sync_log/{now_str}.log')
-        sync_logger.addHandler(sync_handler)
         print(f'Time to sync {sync_count} IDs: {run_time}')
-        sync_logger.info(f'Synced {sync_count} IDs in {run_time} seconds')
+        new_sync_log = SyncLogs(runtime=datetime.now(timezone.utc))
+        session_log.add(new_sync_log)
+        session_log.commit()
     else:
         print('No exam to sync!')
     return None
@@ -125,10 +133,15 @@ def main():
         if args.sync:
             # idx = lst_imported_ids.index(1268)
             # lst_id_to_sync = lst_imported_ids[idx: idx+1]
+            
             lst_id_to_sync = lst_imported_ids
-            latest_runtime = get_latest_runtime('logs/sync_log')
-            print('Syncing exams...')
-            sync_exams(session_import, session_log, lst_id_to_sync, latest_runtime)
+            latest_runtime = check_synclogs(engine_log, session_log)
+            if latest_runtime:
+                print(f"Latest sync runtime: {latest_runtime}")
+                print('Syncing exams...')
+                sync_exams(session_import, session_log, lst_id_to_sync, latest_runtime)
+            else:
+                print('Create `sync_logs` table first!')
         else:
             print('No sync action to perform')
 
