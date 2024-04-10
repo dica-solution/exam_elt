@@ -14,17 +14,17 @@ def send_message(message):
         "model": st.session_state["model"],
         "messages": st.session_state["messages"] + [{"role": "user", "content": message}],
         "temperature": 0.7,
-        "stream": False
+        "stream": True
     }
     response = requests.post('https://internal-luminous.giainhanh.vn/api/v1/chat/completions', headers=headers, data=json.dumps(data), stream=True)
     if response.status_code == 200:
-        # for line in response.iter_lines():
-        #     if line:
-        #         try:
-        #             yield json.loads(line.decode().replace('data: ', ''))['choices'][0]['delta'].get('content', '')
-        #         except:
-        #             pass
-        return json.loads(response.content)['choices'][0]['message'].get('content', '')
+        for line in response.iter_lines():
+            if line:
+                try:
+                    yield json.loads(line.decode().replace('data: ', ''))['choices'][0]['delta'].get('content', '')
+                except:
+                    pass
+        # return json.loads(response.content)['choices'][0]['message'].get('content', '')
 
 with col1:
     model_name = st.selectbox(
@@ -63,8 +63,8 @@ with col1:
 
         with st.chat_message("assistant"):
                 stream = send_message(prompt)
-                # response = st.write_stream(stream)
-                response = st.write(stream)
+                response = st.write_stream(stream)
+                # response = st.write(stream)
         st.session_state.messages.append({"role": "assistant", "content": response})
     if st.button('Clear Conversation'):
         st.session_state.messages = st.session_state.messages[0]
