@@ -23,6 +23,12 @@ DATABASE_URL
 ```bash
 python create_id_mapping_table.py
 ```
+
+- Create the `sync_logs` table if not existed, the lastest runtime is set to 7 days ago (can choose how many days ago by set the `d`, for example `--d 3`)
+```bash
+python create_sync_logs_table.py -d 7
+```
+
 - Depending on specific requirements, you will choose one from the following commands:
 ```bash
 # Import by list of IDs or just one ID
@@ -34,13 +40,9 @@ python data_integration.py --sync
 ```
 ### Notes:  
 - Runtime logs in `logs/runtime_log`  
-- Sync logs in `logs/sync_log`
-
 
 ## Examples
 ```bash
 python data_integration.py --file example_ids.txt # import with list of IDs
 python data_integration.py --id 99 # import with a single ID
-python data_integration.py --file example_ids.txt --sync
-python data_integration.py --id 99 --sync
 ```
