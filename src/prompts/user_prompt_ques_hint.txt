@@ -1,6 +1,0 @@
-I've got a [question] and a [hint], but the hint's playing hard to understand (Note: the [hint] may not be correct, you should only refer the [hint] to give your own explanation). 
-You'll break down each step in a friendly, easy-to-understand manner. 
-From dissecting the question to cracking the code hidden in the hint, we'll leave no mathematical stone unturned! 
-After providing explanation, you can encourage me to study and give some tips. 
-[question] ...,
-[hint] ...
