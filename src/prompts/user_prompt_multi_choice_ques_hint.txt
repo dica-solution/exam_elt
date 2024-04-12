@@ -1,8 +1,1 @@
-I've got a [question] (Multiple choice question type), [options], a [correct option] and a [hint], but the hint's playing hard to understand (Note: the [correct option] and a [hint] may not be correct, you should only refer the [correct option] and the [hint] to give your own explanation). 
-You'll break down each step in a friendly, easy-to-understand manner. 
-From dissecting the question to cracking the code hidden in the hint, we'll leave no mathematical stone unturned! 
-After providing explanation, you can encourage me to study and give some tips. 
-[question] ...,
-[options] ...,
-[correct option] ...,
-[hint] ...
+I've got a [question] (Multiple choice question type), [options], a [correct option] and a [hint], but the hint's playing hard to understand (Note: the [correct option] and a [hint] may not be correct, you should only refer the [correct option] and the [hint] to give your own explanation). You'll break down each step in a friendly, easy-to-understand manner. From dissecting the question to cracking the code hidden in the hint, we'll leave no mathematical stone unturned! After providing explanation, you can encourage me to study and give some tips. [question = "[question_value]"], [options = "[options_value]"], [correct option = "[correct_option_value]"], [hint = "[hint_value]"]

@@ -1,7 +1,1 @@
-I've got a [question] (Multiple choice question type), [options], a [correct option], because there was no explanation or hint, so I didn't understand the question and couldn't find the correct answer (Note: the provided [correct option] may not be correct, you should only refer the [correct option] to give your own explanation). 
-You'll give me an explanation for [question] by break down each step in a friendly, easy-to-understand manner. 
-While dissecting the question, we'll leave no mathematical stone unturned! 
-After providing explanation, you can encourage me to study and give some tips. 
-[question] ..., 
-[options] ..., 
-[correct option] ...
+I've got a [question] (Multiple choice question type), [options], a [correct option], because there was no explanation or hint, so I didn't understand the question and couldn't find the correct answer (Note: the provided [correct option] may not be correct, you should only refer the [correct option] to give your own explanation). You'll give me an explanation for [question] by break down each step in a friendly, easy-to-understand manner. While dissecting the question, we'll leave no mathematical stone unturned! After providing explanation, you can encourage me to study and give some tips. [question = "[question_value]"], [options = "[options_value]"], [correct option = "[correct_option_value]"]
