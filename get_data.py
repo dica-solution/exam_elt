@@ -1,9 +1,10 @@
-from sqlalchemy import create_engine, and_
+from sqlalchemy import create_engine, and_, desc
 from src.database import get_sessions_from_engines
-from src.models.exam_bank_models import Exam, ExamQuestion, QuizQuestion
+from src.models.exam_bank_models import Exam, ExamQuestion, QuizQuestion, TrackingLogs
 from src.config.config import settings
 from bs4 import BeautifulSoup
 import json
+import argparse
 
 def create_and_check_engine(database_url, echo=False, pool_size=50, max_overflow=0):
     try:
@@ -59,40 +60,47 @@ def get_correct_option(options):
             correct_opt= option.get('label')
     return opt, correct_opt
 
+def main():
+    parser = argparse.ArgumentParser(description="Get data with CLI")
+    parser.add_argument('--c', type=int, help='Grade id')
+    parser.add_argument('--file', type=str, help='Path save file')
+    args = parser.parse_args()
 
-with get_sessions_from_engines(engine_import, engine_log) as (session_import, session_log):
-    questions = session_import.query(QuizQuestion.id, QuizQuestion.quiz_type, QuizQuestion.original_text, QuizQuestion.quiz_options, QuizQuestion.explanation
-                                     ).join(ExamQuestion, ExamQuestion.quiz_question_id==QuizQuestion.id
-                                     ).join(Exam, Exam.id==ExamQuestion.exam_id
-                                     ).filter(
-                                         and_(
-                                             Exam.grade_id==9,
-                                             Exam.subject_id==14,
-                                             QuizQuestion.quiz_type == 1,
-                                             QuizQuestion.explanation!='',
-                                             QuizQuestion.original_text.not_like('%%src%%'),
-                                             QuizQuestion.explanation.not_like('%%src%%'),
-                                         )
-                                     ).order_by(QuizQuestion.id).all()
-    result = []
-    for question in questions:
-        options, correct_option = get_correct_option(convert_options(question.quiz_options))
-        result.append({
-            'question_id': question.id,
-            'question_type': question.quiz_type,
-            'question_text': remove_html_with_beautifulsoup(question.original_text),
-            # 'question_text': question_text,
-            'options': options,
-            'correct_option': correct_option,
-            'explanation': remove_html_with_beautifulsoup(question.explanation),
-            'good_explanation': False
-        })
+    with get_sessions_from_engines(engine_import, engine_log) as (session_import, session_log):
+        questions = session_import.query(QuizQuestion.id, QuizQuestion.quiz_type, QuizQuestion.original_text, QuizQuestion.quiz_options, QuizQuestion.explanation
+                                        ).join(ExamQuestion, ExamQuestion.quiz_question_id==QuizQuestion.id
+                                        ).join(Exam, Exam.id==ExamQuestion.exam_id
+                                        ).filter(
+                                            and_(
+                                                Exam.grade_id==args.c,
+                                                Exam.subject_id==14,
+                                                QuizQuestion.quiz_type == 1,
+                                                #  QuizQuestion.explanation!='',
+                                                QuizQuestion.original_text.not_like('%%src%%'),
+                                                QuizQuestion.explanation.not_like('%%src%%'),
+                                            )
+                                        ).order_by(QuizQuestion.id).all()
+        
 
-    # with open('grad_7_questions.json', 'w') as f:
-    #     for res in result:
-    #         f.write(json.dumps(res, ensure_ascii=False))
-    #         f.write('\n')
-    print(f'Number of questions: {len(result)}')
-    with open('grade_9_multi_choice_questions.json', 'w') as f:
-        json.dump(result, f, ensure_ascii=False, indent=4)
-    print('Debugging...')
+
+        result = []
+        for question in questions:
+            try:
+                options, correct_option = get_correct_option(convert_options(question.quiz_options))
+                result.append({
+                    'question_id': question.id,
+                    'original_text': remove_html_with_beautifulsoup(question.original_text),
+                    'quiz_options': options,
+                    'correct_option': correct_option,
+                    'original_explanation': remove_html_with_beautifulsoup(question.explanation) if question.explanation else '',
+
+                })
+            except:
+                print(f'Error: {question.id}')
+
+        print(f'Number of questions: {len(result)}')
+        with open(args.file, 'w') as f:
+            json.dump(result, f, ensure_ascii=False, indent=4)
+
+if __name__ == '__main__':
+    main()
