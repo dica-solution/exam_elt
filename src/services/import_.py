@@ -473,7 +473,7 @@ class ExamParser:
     # @log_runtime
     def import_exam(self, exam_id: int):
         exam_data = self.parse_as_dict_collections(exam_id)
-        if bool(exam_data.quiz_question_list):
+        if exam_data and bool(exam_data.quiz_question_list):
         # if exam_data:
             try:
                 quiz_info_list = exam_data.quiz_info_list
