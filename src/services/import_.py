@@ -473,7 +473,8 @@ class ExamParser:
     # @log_runtime
     def import_exam(self, exam_id: int):
         exam_data = self.parse_as_dict_collections(exam_id)
-        if exam_data:
+        if bool(exam_data.quiz_question_list):
+        # if exam_data:
             try:
                 quiz_info_list = exam_data.quiz_info_list
                 quiz_info_idx = 0
@@ -543,6 +544,8 @@ class ExamParser:
                 self.session_import.rollback()
                 self.session_log.rollback()
                 return 0, e
+        else:
+            return 0, f"No data found for the exam_id {exam_id}"
     
 # @log_runtime    
 def import_exam_bank(session_import: Session, session_log: Session, exam_id: int):
