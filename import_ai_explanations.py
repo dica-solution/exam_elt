@@ -6,7 +6,7 @@ from sqlalchemy import create_engine, Table, MetaData, select
 from sqlalchemy.sql import select, update
 import argparse
 
-parenet_path = "/home/dica/Projects/syvan_projects/test_exam_etl/exam_elt/math_questions_prod/"
+parent_path = "/home/dica/Projects/syvan_projects/test_exam_etl/exam_elt/math_questions_prod/"
 
 list_of_filename = [
     "bio_10_single_quiz.json",
@@ -43,7 +43,7 @@ def main():
 
     with get_session_from_engine(engine) as session:
         for filename in list_of_filename:
-            with open(parenet_path + filename) as f:
+            with open(parent_path + filename) as f:
                 data = json.load(f)
                 for item in data:
                     question_id = item['question_id']
