@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     api_course_detail: Optional[str]
     api_lecture_detail: Optional[str]
     api_type_of_maths_detail: Optional[str]
+    import_course_log_dir: Optional[str]
 
     # model_config = SettingsConfigDict(env_file=".env.dev", env_file_encoding='utf=8', extra='ignore')
     class Config:
@@ -21,8 +22,5 @@ class Settings(BaseSettings):
         extra = 'ignore'
 
 
-def get_settings(env_file: str) -> Settings:
+def get_settings(env_file: str='./.env.dev') -> Settings:
     return Settings(_env_file=env_file)
-
-
-# settings = get_settings()
