@@ -15,7 +15,7 @@ class Course(Base):
     id = Column(BigInteger, primary_key=True, nullable=False)
     created_at = Column(DateTime, default=datetime.now(), server_default=func.now())
     updated_at = Column(DateTime, default=datetime.now(), onupdate=func.now(), server_default=func.now())
-    published_at = Column(DateTime, default=datetime.now(), server_default=func.now())
+    published_at = Column(DateTime, nullable=True)
     title = Column(String(150), nullable=False, default='')
     banner_url = Column(String(255), nullable=False, default='')
     description = Column(Text, nullable=False, default='')
