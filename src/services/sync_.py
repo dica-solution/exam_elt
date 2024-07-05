@@ -24,9 +24,10 @@ from sqlalchemy import and_, asc
 from sqlalchemy.orm import Session
 import requests
 from src.services.import_ import ExamParser
-from src.config.config import settings
+from src.config.config import get_settings
 from datetime import datetime
 
+settings = get_settings()
 
 class ExamUpdater(ExamParser):
     def __init__(self, session_import: Session, session_log: Session,):
