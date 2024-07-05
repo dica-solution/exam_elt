@@ -11,12 +11,11 @@ logger = setup_logger()
 
 
 class QuestionProcessor:
-    def __init__(self, session: Session, theory_example: bool, theory_id: int, current_position: int,question_list: List[Dict[str, Any]], question_type: str, quiz_collection_name: str,
+    def __init__(self, session: Session, theory_example: bool, theory_id: int, question_list: List[Dict[str, Any]], question_type: str, quiz_collection_name: str,
                  user_id: int, grade_id: int, subject_id: int,):
         self.session = session
         self.theory_example = theory_example
         self.theory_id = theory_id
-        self.current_position = current_position
         self.question_list = question_list
         self.question_type = question_type.lower()
         self.quiz_collection_name = quiz_collection_name
@@ -81,7 +80,7 @@ class QuestionProcessor:
                 quiz_type = QuizTypeSingleChoice
             if self.question_type == 'essay':
                 quiz_type = QuizTypeSingleEssay
-            for question_idx, question_dict in enumerate(self.question_list[:3]):
+            for question_idx, question_dict in enumerate(self.question_list):
 
                 quiz_options = []
                 for label_key in ['a', 'b', 'c', 'd']:
@@ -90,15 +89,22 @@ class QuestionProcessor:
                         quiz_options.append(dict(label=label_key, content=option_content, is_correct=True))
                     else:
                         quiz_options.append(dict(label=label_key, content=option_content, is_correct=False))
+
+                quiz_answer = self.transform_data(question_dict.get('answer', None))
+                if quiz_answer:
+                    quiz_options = ''
+                else:
+                    quiz_options = json.dumps(quiz_options)
+                    quiz_answer = ''
                 
                 links = {"audio_links": [], "video_links": [], "image_links": []}
                 question_audio = question_dict.get('question_audio', None)
                 if question_audio:
-                    question_audio = question_audio.get('url', '')
+                    # question_audio = question_audio.get('url', '')
                     links["audio_links"].append(question_audio)
                 question_images = question_dict.get('question_images', None)
                 if question_images:
-                    question_images = question_images.get('url', '')
+                    question_images = question_images[0].get('url', '')
                     links["image_links"].append(question_images)
 
                 question = QuizQuestion(
@@ -106,10 +112,10 @@ class QuestionProcessor:
                     original_text=self.transform_data(question_dict.get('question_content', '')),
                     parsed_text=self.transform_data(question_dict.get('question_content', '')),
                     quiz_type=quiz_type,
-                    quiz_options=json.dumps(quiz_options) if quiz_options else '',
+                    quiz_options=quiz_options,
                     explanation=self.transform_data(question_dict.get('explanation', '')),
                     links=json.dumps(links),
-                    quiz_answer=question_dict.get('answer', ''),
+                    quiz_answer=quiz_answer,
                     level=self.process_level(question_dict.get('level', [])),
                 )
 
@@ -149,26 +155,27 @@ class QuestionProcessor:
                 self.session.add_all(quiz_collection_list)
                 self.session.commit()
                 logger.info(f"Processed {len(processed_question_list)} questions for quiz_collection_group_id: {quiz_collection_group.id}")
-                return quiz_collection_group.id, self.current_position
+                return quiz_collection_group.id
             else:
                 theory_example_list = []
-
+                current_position = 0
                 for question_idx, question in enumerate(processed_question_list):
                     question.id = question_uniqid_list[question_idx].to_uniqid_number()
                     theory_example_list.append(TheoryExample(
                         # id=question.id,
                         theory_id=self.theory_id,
                         question_id=question.id,
-                        position=self.current_position,
+                        position=current_position,
                     ))
-                    self.current_position += 1
+                    current_position += 1
                 self.session.add_all(processed_question_list)
                 self.session.add_all(theory_example_list)
                 self.session.commit()
                 logger.info(f"Processed {len(processed_question_list)} questions for theory_id: {self.theory_id}")
-                return self.theory_id, self.current_position
+                return True
         except Exception as e:
             logger.error(f"Error: {e}")
-            return None, 0
+            print(f"Error: {e}")
+            return False
         
 

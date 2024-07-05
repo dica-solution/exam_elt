@@ -154,7 +154,7 @@ class CourseParser:
         # course_id_list = self.extract_id_list('course', 0, settings)
         course_id_list = [3] # For test import course `Toán 12`
         if course_id_list:
-            for course_idx, course_id in enumerate(course_id_list):
+            for course_idx, course_id in enumerate(course_id_list[0:1]):
                 # Import course
                 course_data_dict = self.extract_data_dict(course_id, 'course', settings).get('data')
                 course = self.process_course(course_data_dict)
@@ -162,24 +162,24 @@ class CourseParser:
 
                 course_lecture_position = 0
                 
-                for chapter_idx, chapter_dict in enumerate(course_data_dict.get('table_of_contents', [])[0:1]):
+                for chapter_idx, chapter_dict in enumerate(course_data_dict.get('table_of_contents', [])):
                     # Import chapter
                     chapter = self.process_lecture(chapter_dict, 0, '')
                     self.session.add(chapter)
 
-                    course_lecture_course_chapter = self.process_course_lecture(course.id, chapter.id, 0, 1, False, 1, course_lecture_position)
+                    course_lecture_course_chapter = self.process_course_lecture(course.id, chapter.id, 0, 1, True, 1, course_lecture_position)
                     course_lecture_position += 1
                     self.session.add(course_lecture_course_chapter)
 
 
-                    for lecture_idx, lecture_dict in enumerate(chapter_dict.get('course_lessons', [])[0:1]):
+                    for lecture_idx, lecture_dict in enumerate(chapter_dict.get('course_lessons', [])):
                         # Import lecture
                         lecture_data_dict = self.extract_data_dict(lecture_dict.get('id'), 'lecture', settings).get('data')
                         lecture = self.process_lecture(lecture_data_dict, 0, '')
                         self.session.add(lecture)
 
                         # Import course_lecture
-                        course_lecture_chapter_lecture = self.process_course_lecture(course.id, lecture.id, course_lecture_course_chapter.id, 2, False, 1, course_lecture_position)
+                        course_lecture_chapter_lecture = self.process_course_lecture(course.id, lecture.id, course_lecture_course_chapter.id, 2, True, 1, course_lecture_position)
                         course_lecture_position += 1
                         self.session.add(course_lecture_chapter_lecture)
 
@@ -197,7 +197,7 @@ class CourseParser:
                                 lecture_lecture_theory = self.process_lecture(content_dict, theory.id, 'theory')
                                 self.session.add(lecture_lecture_theory)
 
-                                course_lecture_lecture_theory = self.process_course_lecture(course.id, lecture_lecture_theory.id, course_lecture_chapter_lecture.id, 3, False, 2, course_lecture_position)
+                                course_lecture_lecture_theory = self.process_course_lecture(course.id, lecture_lecture_theory.id, course_lecture_chapter_lecture.id, 3, True, 2, course_lecture_position)
                                 course_lecture_position += 1
                                 self.session.add(course_lecture_lecture_theory)
                             
@@ -213,88 +213,102 @@ class CourseParser:
                                         lecture_math_type = self.process_lecture(math_type_data_dict, 0, '')
                                         self.session.add(lecture_math_type)
 
-                                        course_lecture_lecture_math_type = self.process_course_lecture(course.id, lecture_math_type.id, course_lecture_chapter_lecture.id, 3, False, 1, course_lecture_position)
+                                        course_lecture_lecture_math_type = self.process_course_lecture(course.id, lecture_math_type.id, course_lecture_chapter_lecture.id, 3, True, 1, course_lecture_position)
                                         course_lecture_position += 1
                                         self.session.add(course_lecture_lecture_math_type)
 
                                         # Import Guide
                                         guide = Theory(
                                             id = self.get_uniqid(ObjectTypeStrMapping[TheoryType]),
-                                            title='',
+                                            title='Phương pháp giải',
                                             original_text=self.transform_data(math_type_data_dict.get('guide', '')),
                                             parsed_text=self.transform_data(math_type_data_dict.get('guide', ''))
                                         )
                                         self.session.add(guide)
 
                                         lecture_math_type_theory = self.process_lecture(math_type_data_dict, guide.id, 'theory')
-                                        lecture_math_type_theory.title = 'Phương pháp giải'
+                                        lecture_math_type_theory.title = guide.title
                                         self.session.add(lecture_math_type_theory)
 
-                                        course_lecture_math_type_theory = self.process_course_lecture(course.id, lecture_math_type_theory.id, course_lecture_lecture_math_type.id, 4, False, 2, course_lecture_position)
+                                        course_lecture_math_type_theory = self.process_course_lecture(course.id, lecture_math_type_theory.id, course_lecture_lecture_math_type.id, 4, True, 2, course_lecture_position)
                                         course_lecture_position += 1
                                         self.session.add(course_lecture_math_type_theory)
 
                                         # Import questions
                                         for question_idx, question_dict in enumerate(math_type_data_dict.get('questions', [])):
+                                            practice_question_list = []
+                                            question_list = []
                                             if question_dict.get('__component') == 'course.group-quiz':
-                                                question_list = question_dict.get('related_quizzes', [])
+                                                practice_question_list = question_dict.get('related_quizzes', [])
                                                 quiz_type = 'quiz'
                                             
-                                            if question_dict.get('__component') == 'course.group-essay':
+                                            elif question_dict.get('__component') == 'course.group-essay':
+                                                practice_question_list = question_dict.get('related_essays', [])
+                                                quiz_type = 'essay'
+                                            
+                                            elif question_dict.get('__component') == 'course.quiz':
+                                                practice_question_list = [question_dict]
+                                                quiz_type = 'quiz'
+                                                
+                                            elif question_dict.get('__component') == 'course.essay':
+                                                practice_question_list = [question_dict]
+                                                quiz_type = 'essay'
+                                            
+                                            elif question_dict.get('__component') == 'course.group-practice-quiz':
+                                                practice_question_list = question_dict.get('related_quizzes', [])
+                                                quiz_type = 'quiz'
+                                                
+                                            elif question_dict.get('__component') == 'course.group-practice-essay':
+                                                practice_question_list = question_dict.get('related_essays', [])
+                                                quiz_type = 'essay'
+                                            
+                                            elif question_dict.get('__component') == 'course.practice-quiz':
+                                                practice_question_list = [question_dict]
+                                                quiz_type = 'quiz'
+                                                
+                                            elif question_dict.get('__component') == 'course.practice-essay':
+                                                practice_question_list = [question_dict]
+                                                quiz_type = 'essay'
+                                        
+                                            elif question_dict.get('__component') == 'course.group-example-quiz':
+                                                question_list = question_dict.get('related_quizzes', [])
+                                                quiz_type = 'quiz'
+                                                
+                                            elif question_dict.get('__component') == 'course.group-example-essay':
                                                 question_list = question_dict.get('related_essays', [])
                                                 quiz_type = 'essay'
                                             
-                                            if question_dict.get('__component') == 'course.quiz':
+                                            elif question_dict.get('__component') == 'course.example-quiz':
                                                 question_list = [question_dict]
                                                 quiz_type = 'quiz'
                                                 
-                                            if question_dict.get('__component') == 'course.essay':
+                                            else: 
+                                                # question_dict.get('__component') == 'course.example-essay':
                                                 question_list = [question_dict]
                                                 quiz_type = 'essay'
 
-                                            if question_dict.get('__component') == 'course.group-example-quiz':
-                                                question_list = question_dict.get('related_quizzes', [])
-                                                quiz_type = 'quiz'
+                                            if practice_question_list:
                                                 
-                                            if question_dict.get('__component') == 'course.group-example-essay':
-                                                question_list = question_dict.get('related_essays', [])
-                                                quiz_type = 'essay'
-                                            
-                                            if question_dict.get('__component') == 'course.example-quiz':
-                                                question_list = [question_dict]
-                                                quiz_type = 'quiz'
-                                                
-                                            if question_dict.get('__component') == 'course.example-essay':
-                                                question_list = [question_dict]
-                                                quiz_type = 'essay'
-                                            
-                                            if question_dict.get('__component') == 'course.group-practice-quiz':
-                                                question_list = question_dict.get('related_quizzes', [])
-                                                quiz_type = 'quiz'
-                                                
-                                            if question_dict.get('__component') == 'course.group-practice-essay':
-                                                question_list = question_dict.get('related_essays', [])
-                                                quiz_type = 'essay'
-                                            
-                                            if question_dict.get('__component') == 'course.practice-quiz':
-                                                question_list = [question_dict]
-                                                quiz_type = 'quiz'
-                                                
-                                            if question_dict.get('__component') == 'course.practice-essay':
-                                                question_list = [question_dict]
-                                                quiz_type = 'essay'
-                                            
-                                            if question_list:
-                                                question_processor = QuestionProcessor(self.session, False, 0, 0, question_list, quiz_type, 
+                                                question_processor = QuestionProcessor(self.session, False, 0, practice_question_list, quiz_type, 
                                                                                         question_dict.get('title', ''), 1, course.grade_id, course.subject_id)
-                                                quiz_collection_group_id, _ = question_processor.process_questions_old_version()
+                                                quiz_collection_group_id = question_processor.process_questions_old_version()
                                                 if quiz_collection_group_id:
-                                                    lecture_math_type_quiz_collection_group = self.process_lecture(question_dict, quiz_collection_group_id, 'collection')
+                                                    lecture_math_type_quiz_collection_group = self.process_lecture(question_dict, quiz_collection_group_id, 'quizzes')
                                                     self.session.add(lecture_math_type_quiz_collection_group)
 
-                                                    course_lecture_math_type_quiz_collection_group = self.process_course_lecture(course.id, lecture_math_type_quiz_collection_group.id, course_lecture_lecture_math_type.id, 4, False, 2, course_lecture_position)
+                                                    course_lecture_math_type_quiz_collection_group = self.process_course_lecture(course.id, lecture_math_type_quiz_collection_group.id, course_lecture_lecture_math_type.id, 4, True, 2, course_lecture_position)
                                                     course_lecture_position += 1
                                                     self.session.add(course_lecture_math_type_quiz_collection_group)
+
+                                            if question_list:
+                                                question_processor = QuestionProcessor(self.session, True, guide.id, question_list, quiz_type, 
+                                                                        content_dict.get('title', ''), 1, course.grade_id, course.subject_id)
+                                
+                                                _ = question_processor.process_questions_old_version()
+                                                # course_lecture_position += _
+                                                # if quiz_collection_group_id:
+                                                #     lecture_lecture_quiz_collection_group = self.process_lecture(content_dict, quiz_collection_group_id, 'collection')
+                                                #     self.session.add(lecture_lecture_quiz_collection_group)
 
 
                             # Import Practice
@@ -316,18 +330,18 @@ class CourseParser:
                                 quiz_type = 'essay'
 
                             if question_list:
-                                question_processor = QuestionProcessor(self.session, True, theory.id, course_lecture_position, question_list, quiz_type, 
+                                question_processor = QuestionProcessor(self.session, False, theory.id, question_list, quiz_type, 
                                                                         content_dict.get('title', ''), 1, course.grade_id, course.subject_id)
                                 
-                                quiz_collection_group_id, _ = question_processor.process_questions_old_version()
-                                course_lecture_position += _
-                                # if quiz_collection_group_id:
-                                #     lecture_lecture_quiz_collection_group = self.process_lecture(content_dict, quiz_collection_group_id, 'collection')
-                                #     self.session.add(lecture_lecture_quiz_collection_group)
+                                quiz_collection_group_id = question_processor.process_questions_old_version()
 
-                                #     course_lecture_lecture_quiz_collection_group = self.process_course_lecture(course.id, lecture_lecture_quiz_collection_group.id, course_lecture_chapter_lecture.id, 3, False, 2, course_lecture_position)
-                                #     course_lecture_position += 1
-                                #     self.session.add(course_lecture_lecture_quiz_collection_group)
+                                if quiz_collection_group_id:
+                                    lecture_lecture_quiz_collection_group = self.process_lecture(content_dict, quiz_collection_group_id, 'quizzes')
+                                    self.session.add(lecture_lecture_quiz_collection_group)
+
+                                    course_lecture_lecture_quiz_collection_group = self.process_course_lecture(course.id, lecture_lecture_quiz_collection_group.id, course_lecture_chapter_lecture.id, 3, True, 2, course_lecture_position)
+                                    course_lecture_position += 1
+                                    self.session.add(course_lecture_lecture_quiz_collection_group)
                             
                         self.session.commit()
 
