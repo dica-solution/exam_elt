@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     api_course_detail: Optional[str]
     api_lecture_detail: Optional[str]
     api_type_of_maths_detail: Optional[str]
+    api_question_collection_detail: Optional[str]
     import_course_log_dir: Optional[str]
 
     # model_config = SettingsConfigDict(env_file=".env.dev", env_file_encoding='utf=8', extra='ignore')
