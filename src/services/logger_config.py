@@ -12,9 +12,9 @@ def setup_logger():
         os.makedirs(log_path)
     log_file = os.path.join(log_path, f"{now}.log")
     logging.basicConfig(
-        filemode=log_file,
+        filename=log_file,
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(message)s",
     )
-
+    
     return logging.getLogger(__name__)
