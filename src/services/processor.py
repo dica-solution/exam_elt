@@ -5,7 +5,7 @@ import requests
 from typing import Any, Dict, List, Tuple, Optional
 from sqlalchemy.orm import Session
 from src.models.exam_bank_models import Uniqid, QuizCollectionGroup, QuizCollection, TheoryExample, QuizQuestion, QuizQuestionGroup, Course, Lecture, \
-    Theory, CourseLecture, Media
+    Theory, CourseLecture, Media, CourseIDMapping
 from src.commons import *
 from src.config.config import Settings
 from src.services.logger_config import setup_logger
@@ -60,7 +60,7 @@ class Processor:
             id = uniqid,
             created_at = course_data.get('createdAt'),
             updated_at = course_data.get('updatedAt'),
-            # published_at = course_data.get('publishedAt'), # unpublish course
+            published_at = course_data.get('publishedAt'), # unpublish course
             title = course_data.get('title', ''),
             description = course_data.get('description', ''),
             grade_id = self._get_mapped_id(course_data.get('grade').get('id'), GradeIDMapping),
@@ -167,6 +167,7 @@ class Processor:
         return theory
 
     def _process_quiz(self, question_dict: Dict[str, Any], question_group_id: int):
+        original_question_id = question_dict.get('id')
         original_text = self.transform_text(question_dict.get('question_content', ''))
         parsed_text = original_text
         quiz_type = QuizTypeSingleChoice if question_group_id == 0 else QuizTypeMultipleChoice
@@ -192,9 +193,10 @@ class Processor:
             quiz_answer = quiz_answer,
             level = self._process_level(question_dict.get('question_levels', [])),
         )
-        return question
+        return question, original_question_id
     
     def _process_essay(self, question_dict: Dict[str, Any], question_group_id: int):
+        original_question_id = question_dict.get('id')
         original_text = self.transform_text(question_dict.get('question_content', ''))
         parsed_text = original_text
         quiz_type = QuizTypeSingleEssay
@@ -214,10 +216,11 @@ class Processor:
             quiz_answer = quiz_answer,
             level = self._process_level(question_dict.get('question_levels', [])),
         )
-        return question
+        return question, original_question_id
     
     def _process_group_quiz(self, group_question_dict):
         question_list = []
+        original_question_ids = []
         question_group_id = group_question_dict.get('id')
         original_text = self.transform_text(group_question_dict.get('group_content', ''))
         parsed_text = original_text
@@ -230,13 +233,15 @@ class Processor:
             # level = self._process_level(group_question_dict.get('level', [])),
         )
         for question_dict in group_question_dict.get('related_quizzes', []):
-            question = self._process_quiz(question_dict, question_group_id)
+            question, original_question_id = self._process_quiz(question_dict, question_group_id)
             question_list.append(question)
+            original_question_ids.append(original_question_id)
         
-        return question_group, question_list
+        return question_group, question_list, original_question_ids
     
     def _process_group_essay(self, group_question_dict):
         question_list = []
+        original_question_ids = []
         question_group_id = group_question_dict.get('id')
         original_text = self.transform_text(group_question_dict.get('group_content', ''))
         parsed_text = original_text
@@ -248,12 +253,14 @@ class Processor:
             links = json.dumps(links),
         )
         for question_dict in group_question_dict.get('related_essays', []):
-            question= self._process_essay(question_dict, question_group_id)
+            question, original_question_id = self._process_essay(question_dict, question_group_id)
             question_list.append(question)
+            original_question_ids.append(original_question_id)
         
-        return question_group, question_list
+        return question_group, question_list, original_question_ids
     
     def _process_single_text_entry(self, question_dict, question_group_id: int):
+        original_question_id = question_dict.get('id')
         original_text = self.transform_text(question_dict.get('question_content', ''))
         parsed_text = original_text
         quiz_type = QuizTypeBlankFilling
@@ -273,10 +280,11 @@ class Processor:
             quiz_answer = quiz_answer,
             level = self._process_level(question_dict.get('question_levels', [])),
         )
-        return question
+        return question, original_question_id
     
     def _process_group_text_entry(self, group_question_dict):
         question_list = []
+        original_question_ids = []
         question_group_id = group_question_dict.get('id')
         original_text = self.transform_text(group_question_dict.get('group_content', ''))
         parsed_text = original_text
@@ -288,12 +296,14 @@ class Processor:
             links = json.dumps(links),
         )
         for question_dict in group_question_dict.get('related_questions', []):
-            question = self._process_single_text_entry(question_dict, question_group_id)
+            question, original_question_id = self._process_single_text_entry(question_dict, question_group_id)
             question_list.append(question)
+            original_question_ids.append(original_question_id)
         
-        return question_group, question_list
+        return question_group, question_list, original_question_ids
     
     def _process_single_quiz_true_false(self, question_dict, question_group_id: int):
+        original_question_id = question_dict.get('id')
         original_text = self.transform_text(question_dict.get('question_content', ''))
         parsed_text = original_text
         quiz_type = QuizTypeSingleChoice if question_group_id == 0 else QuizTypeMultipleChoice
@@ -319,10 +329,11 @@ class Processor:
             quiz_answer = quiz_answer,
             level = self._process_level(question_dict.get('question_levels', [])),
         )
-        return question
+        return question, original_question_id
     
     def _process_group_quiz_true_false(self, group_question_dict):
         question_list = []
+        original_question_ids = []
         question_group_id = group_question_dict.get('id')
         original_text = self.transform_text(group_question_dict.get('group_content', ''))
         parsed_text = original_text
@@ -334,112 +345,114 @@ class Processor:
             links = json.dumps(links),
         )
         for question_dict in group_question_dict.get('related_questions', []):
-            question = self._process_single_quiz_true_false(question_dict, question_group_id)
+            question, original_question_id = self._process_single_quiz_true_false(question_dict, question_group_id)
             question_list.append(question)
+            original_question_ids.append(original_question_id)
         
-        return question_group, question_list
+        return question_group, question_list, original_question_ids
     
-    def _process_question(self, question_item_list):
+    def _process_questions(self, question_item_list):
         group_question_list = []
         processed_question_list = []
         uniqid_list = []
+        original_question_id_list = []
+
         for question_dict in question_item_list:
             question_type = question_dict.get('__component')
 
             if question_type == 'course.quiz':
-                question = self._process_quiz(question_dict, 0)
+                question, original_question_id = self._process_quiz(question_dict, 0)
                 processed_question_list.append(question)
                 uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+                original_question_id_list.append(original_question_id)
 
             if question_type == 'course.essay':
-                question = self._process_essay(question_dict, 0)
+                question, original_question_id = self._process_essay(question_dict, 0)
                 processed_question_list.append(question)
                 uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+                original_question_id_list.append(original_question_id)
 
             if question_type == 'course.group-quiz':
-                question_group, question_list = self._process_group_quiz(question_dict)
+                question_group, question_list, original_question_ids = self._process_group_quiz(question_dict)
                 group_question_list.append(question_group)
                 processed_question_list.extend(question_list)
                 for _ in question_list:
                     uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+                original_question_id_list.extend(original_question_ids)
 
             if question_type == 'course.group-essay':
-                question_group, question_list = self._process_group_essay(question_dict)
+                question_group, question_list, original_question_ids = self._process_group_essay(question_dict)
                 group_question_list.append(question_group)
                 processed_question_list.extend(question_list)
                 for _ in question_list:
                     uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+                original_question_id_list.extend(original_question_ids)
 
             if question_type == 'course.single-text-entry':
-                question = self._process_single_text_entry(question_dict, 0)
+                question, original_question_id = self._process_single_text_entry(question_dict, 0)
                 processed_question_list.append(question)
                 uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+                original_question_id_list.append(original_question_id)
 
             if question_type == 'course.group-text-entry':
-                question_group, question_list = self._process_group_text_entry(question_dict)
+                question_group, question_list, original_question_ids = self._process_group_text_entry(question_dict)
                 group_question_list.append(question_group)
                 processed_question_list.extend(question_list)
                 for _ in question_list:
                     uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+                original_question_id_list.extend(original_question_ids)
 
             if question_type == 'course.single-quiz-true-false':
-                question = self._process_single_quiz_true_false(question_dict, 0)
+                question, original_question_id = self._process_single_quiz_true_false(question_dict, 0)
                 processed_question_list.append(question)
                 uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+                original_question_id_list.append(original_question_id)
 
             if question_type == 'course.group-quiz-true-false':
-                question_group, question_list = self._process_group_quiz_true_false(question_dict)
+                question_group, question_list, original_question_ids = self._process_group_quiz_true_false(question_dict)
                 group_question_list.append(question_group)
                 processed_question_list.extend(question_list)
                 for _ in question_list:
                     uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+                original_question_id_list.extend(original_question_ids)
 
-        return group_question_list, processed_question_list, uniqid_list
+        return group_question_list, processed_question_list, uniqid_list, original_question_id_list
 
 
 
-    def _process_collection(self, question_item_list):
+    def _process_collection(self, question_item_list): # TODO: return original_question_id_list, processed_question_list
         try:
             logger.info(f"Start importing {len(question_item_list)} questions") 
-            group_question_list, processed_question_list, uniqid_list = self._process_question(question_item_list)
+            group_question_list, processed_question_list, uniqid_list, original_question_id_list = self._process_questions(question_item_list)
 
             self.session.add_all(uniqid_list)
             self.session.commit()
 
-            # self.session.add_all(group_question_list)
-            # self.session.commit()
-
             ref_group = dict()
-            group_position = 0
             for group in group_question_list:
                 group_id = group.id
                 group.id = None
                 self.session.add(group)
                 self.session.commit()
                 ref_group[group_id] = group.id
-                # ref_group[group_position] = [group.id, group_id]
-                # group_position += 1
 
-            group_position = 0
             for question_idx, question in enumerate(processed_question_list):
                 question.id = uniqid_list[question_idx].to_uniqid_number()
                 ref_group_id = question.quiz_question_group_id
                 if ref_group_id in ref_group:
                     question.quiz_question_group_id = ref_group[ref_group_id]
-                # if ref_group_id and ref_group_id != 0:
-                #     question.quiz_question_group_id = ref_group[group_position][0]
-                #     group_position += 1
+                
 
             self.session.add_all(processed_question_list)
             self.session.commit()
 
             logger.info(f"Imported {len(processed_question_list)} questions")
 
-            return processed_question_list
+            return original_question_id_list, processed_question_list
         
         except Exception as e:
             logger.error(f"Error processing questions: {e}")
-            return []
+            return [], []
         
     def _create_collection(self, question_list, level, grade_id, subject_id):
         collection_name = {0: 'Bài tập ngẫu nhiên', 1: 'Nhận biết', 2: 'Thông hiểu', 3: 'Vận dụng', 4: 'Vận dụng cao'}.get(level)
@@ -456,7 +469,12 @@ class Processor:
                 self.session.flush()
 
                 quiz_collection_list = []
-                for question in question_list:
+                question_id_list = []
+
+                for _question in question_list:
+                    question = _question[0]
+                    original_question_id = _question[1]
+                    question_id_list.append([original_question_id, question.id])
                     quiz_collection_list.append(QuizCollection(
                         id = self._get_uniqid(ObjectTypeStrMapping[QuizCollectionType]),
                         quiz_id = question.id,
@@ -466,10 +484,11 @@ class Processor:
                 self.session.commit()
 
                 logger.info(f"Created `{collection_name}` collection for {len(question_list)} questions")
-                return collection
+                collection_item = [collection, question_id_list]
+                return collection_item
         except Exception as e:
             logger.error(f"Error creating `{collection_name}` collection: {e}")
-            return None
+            return []
 
         
     def process_practices(self, question_item_list, grade_id, subject_id):
@@ -480,21 +499,23 @@ class Processor:
             vd_level_question_list = []
             vdc_level_question_list = []
 
+
             logger.info(f"Start processing collections for {len(question_item_list)} questions")
 
-            processed_question_list = self._process_collection(question_item_list)
-            for question in processed_question_list:
+            original_question_id_list, processed_question_list = self._process_collection(question_item_list)
+            for current_position, question in enumerate(processed_question_list):
                 level = question.level
                 if level == 0:
-                    nonlevel_question_list.append(question)
+                    nonlevel_question_list.append([question, original_question_id_list[current_position]])
                 elif level == 1:
-                    nb_level_question_list.append(question)
+                    nb_level_question_list.append([question, original_question_id_list[current_position]])
                 elif level == 2:
-                    th_level_question_list.append(question)
+                    th_level_question_list.append([question, original_question_id_list[current_position]])
                 elif level == 3:
-                    vd_level_question_list.append(question)
+                    vd_level_question_list.append([question, original_question_id_list[current_position]])
                 elif level == 4:
-                    vdc_level_question_list.append(question)
+                    vdc_level_question_list.append([question, original_question_id_list[current_position]])
+
             collection_list = []
             collection_list.append(self._create_collection(nonlevel_question_list, 0, grade_id, subject_id))
             collection_list.append(self._create_collection(nb_level_question_list, 1, grade_id, subject_id))
@@ -512,26 +533,27 @@ class Processor:
             logger.error(f"Error processing collections: {e}")
             return []
 
-    def process_theory_examples(self, theory_id: int, question_item_list):
+    def process_theory_examples(self, theory_id: int, course_lecture_id: int, question_item_list):
         try:
             logger.info(f"Start processing theory examples for theory {theory_id}: {len(question_item_list)} questions")
-            processed_question_list = self._process_collection(question_item_list)
+            original_question_id_list, processed_question_list = self._process_collection(question_item_list)
             theory_example_list = []
-            current_position = 0
-            for question in processed_question_list:
+            question_id_mapping_list = []
+            for current_position, question in enumerate(processed_question_list):
                 theory_example_list.append(TheoryExample(
                     theory_id = theory_id,
                     question_id = question.id,
                     position = current_position
                 ))
-                current_position += 1
+                question_id_mapping_list.append(self.create_course_id_mapping(original_question_id_list[current_position], question.id, 'question', course_lecture_id, 'insert'))
+
             self.session.add_all(theory_example_list)
             self.session.commit()
             logger.info(f"Processed {len(question_item_list)} theory examples for theory {theory_id}")
-            return 
+            return question_id_mapping_list
         except Exception as e:
             logger.error(f"Error processing theory examples: {e}")
-            return 
+            return []
 
     def process_media(self, media_data: Dict[str, Any]):
         try:
@@ -550,3 +572,16 @@ class Processor:
         except Exception as e:
             logger.error(f"Error processing media: {e}")
             return None
+
+    def create_course_id_mapping(self, original_id: int, new_id: int, entity_type: str, parent_new_id: int, task_name: str) -> CourseIDMapping:
+        course_id_mapping = CourseIDMapping(
+            original_id = original_id,
+            new_id = new_id,
+            entity_type = entity_type,
+            parent_new_id = parent_new_id,
+            task_name = task_name
+        )
+        logger.info(f"ID mapping for {task_name}: {parent_new_id} {entity_type}: {original_id} -> {new_id}")
+
+        return course_id_mapping
+    
