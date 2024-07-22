@@ -147,8 +147,7 @@ class ImportCourse:
                                                                                            question_item_list=example_data_dict.get('questions', []))
                                                     course_id_mapping_list.extend(question_id_mapping_list)
 
-                                                question_collection_data_list = []
-
+                                            question_collection_data_list = []
                                             practices = math_type_data_dict.get('practices', [])
                                             if practices:
                                                 for practice in math_type_data_dict.get('practices', []):
@@ -202,27 +201,35 @@ class ImportCourse:
                                                                                                                               entity_type='media', parent_new_id=course_lecture_lecture_math_type.id, task_name='insert'))
 
 
-                        # question_collection_data_list = []
-                        # practices = lecture_data_dict.get('practices', [])
-                        # if practices:
-                        #     for question_collection in practices:
-                        #         question_collection_id = question_collection.get('id')
-                        #         question_collection_data_dict = self.processor.get_data_dict(id=question_collection_id, type='quiz_collection')
-                        #         questions = question_collection_data_dict.get('questions')
-                        #         if questions:
-                        #             question_collection_data_list.extend(questions)
-                        #     if question_collection_data_list:
-                        #         collection_list =self.processor.process_practices(question_item_list=question_collection_data_list, grade_id=course.grade_id, subject_id=course.subject_id)
-                        #         for collection in collection_list:
-                        #             collection_data_dict = question_collection_data_dict.copy()
-                        #             collection_data_dict['title'] = collection.name
-                        #             lecture_practice_collection = self.processor.process_lecture(lecture_data=collection_data_dict, content_id=collection.id, content_type='quizzes')
-                        #             self.session_import.add(lecture_practice_collection)
+                        question_collection_data_list = []
+                        practices = lecture_data_dict.get('practices', [])
+                        if practices:
+                            for question_collection in practices:
+                                question_collection_id = question_collection.get('id')
+                                question_collection_data_dict = self.processor.get_data_dict(id=question_collection_id, type='quiz_collection')
+                                question_collection_data_list.extend(question_collection_data_dict.get('questions', []))
+                            if question_collection_data_list:
+                                collection_list = self.processor.process_practices(question_item_list=question_collection_data_list, grade_id=course.grade_id, subject_id=course.subject_id)
+                                for item in collection_list:
+                                    collection = item[0]
+                                    question_ids_list = item[1]
+                                    collection_data_dict = question_collection_data_dict.copy()
+                                    collection_data_dict['title'] = collection.name
+                                    lecture_practice_collection = self.processor.process_lecture(lecture_data=collection_data_dict, content_id=collection.id, content_type='quizzes')
+                                    self.session_import.add(lecture_practice_collection)
 
-                        #             course_lecture_lecture_practice_collection, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=lecture_practice_collection.id, 
-                        #                                                                                                         parent_id=course_lecture_chapter_lecture.id, level=3, is_free=is_free, node_type=2, position=current_position)
-                        #             self.session_import.add(course_lecture_lecture_practice_collection)
-                        #             lecture_count += 1
+                                    course_lecture_lecture_practice_collection, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=lecture_practice_collection.id, 
+                                                                                                                                parent_id=course_lecture_chapter_lecture.id, level=3, is_free=is_free, node_type=2, position=current_position)
+                                    self.session_import.add(course_lecture_lecture_practice_collection)
+                                    self.session_import.flush()
+                                    lecture_count += 1
+
+                                    course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=0, new_id=course_lecture_lecture_practice_collection.id,
+                                                                                                          entity_type='collection', parent_new_id=course_lecture_chapter_lecture.id, task_name='insert'))
+
+                                    for question_ids in question_ids_list:
+                                        course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=question_ids[0], new_id=question_ids[1], entity_type='question',
+                                                                                                              parent_new_id=course_lecture_lecture_practice_collection.id, task_name='insert'))
 
                         
                         exam_list = lecture_data_dict.get('paper_exams', [])
