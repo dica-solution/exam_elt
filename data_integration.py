@@ -2,7 +2,7 @@ from src.database import get_sessions_from_engines
 from sqlalchemy import create_engine, Table, MetaData
 from src.services.import_ import import_exam_bank
 from src.services.sync_ import sync_exam_bank
-from src.config.config import settings
+from src.config.config import get_settings
 from src.models.exam_bank_models import SyncLogs
 from datetime import datetime, timezone, timedelta
 import argparse
@@ -12,6 +12,7 @@ import logging
 import time
 from tqdm import tqdm
 
+settings = get_settings()
 
 now = datetime.now(timezone.utc)
 now_str = now.strftime("%Y-%m-%d %H:%M:%S")

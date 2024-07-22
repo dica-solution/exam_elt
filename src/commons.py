@@ -24,19 +24,33 @@ ExamAttemptType = "exam_attempt"
 ExamType = "exam"
 QuizQuestionType = "quiz_question"
 ExamAttemptAnswerType = "exam_attempt_answer"
+ItemType = "item"
+QuizCollectionType = "quiz_collection"
+CourseType = "course",
+LectureType = "lecture",
+MediaType = "media",
+TheoryType = "theory",
+QuizCollectionGroupType = "quiz_collection_group"
 
 ObjectTypeStrMapping = {
-    QuestionObjectType: 1,
-    AnswerObjectType: 2,
-    TagObjectType: 3,
-    UserObjectType: 4,
-    CollectionObjectType: 6,
-    CommentObjectType: 7,
-    ReportObjectType: 8,
-    ExamAttemptType: 9,
-    ExamType: 10,
-    QuizQuestionType: 11,
+    QuestionObjectType:    1,
+    AnswerObjectType:      2,
+    TagObjectType:         3,
+    UserObjectType:        4,
+    CollectionObjectType:  6,
+    CommentObjectType:     7,
+    ReportObjectType:      8,
+    ExamAttemptType:       9,
+    ExamType:              10,
+    QuizQuestionType:      11,
     ExamAttemptAnswerType: 12,
+    ItemType:              13,
+    QuizCollectionType:        14,
+    CourseType:                15,
+    LectureType:               16,
+    MediaType:                 17,
+    TheoryType:                18,
+    QuizCollectionGroupType:   19,
 }
 
 ObjectTypeNumberMapping = {
@@ -51,6 +65,13 @@ ObjectTypeNumberMapping = {
     10: ExamType,
     11: QuizQuestionType,
     12: ExamAttemptAnswerType,
+    13: ItemType,
+    14: QuizCollectionType,
+    15: CourseType,
+    16: LectureType,
+    17: MediaType,
+    18: TheoryType,
+    19: QuizCollectionGroupType,
 }
 
 def get_unique_id(store, key):

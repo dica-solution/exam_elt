@@ -3,13 +3,15 @@ from typing import Any, Dict, List, Optional, Tuple
 from src.commons import ObjectTypeStrMapping, ExamType, QuizTypeSingleChoice, QuizTypeSingleEssay, QuizTypeSingleChoiceFromQuiz,\
     QuizTypeMultipleChoice, QuizTypeBlankFilling, QuizQuestionType, GradeIDMapping, SubjectIDMapping
 from src.models.exam_bank_models import Exam, Uniqid, QuizQuestion, QuizQuestionGroup, ExamQuestion, TrackingLogs, Base
-from src.config.config import settings
+# from src.config.config import settings
+from src.config.config import get_settings
 from sqlalchemy.orm import Session
 import requests
 import asyncio
 import re
 from src.services.logger import log_runtime
 
+settings = get_settings()
 
 class PrepExamData:
     def __init__(self,

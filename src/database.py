@@ -8,11 +8,14 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 from sqlalchemy.orm import Session, scoped_session, sessionmaker
 
-from src.services.logger import log_runtime, start_info, end_info
+from src.services.logger_config import setup_logger
+
+logger = setup_logger()
 
 
 @contextmanager
 def get_session_from_engine(from_engine):
+    logger.info("Start session")
     session = scoped_session(sessionmaker(bind=from_engine,))
     try:
         yield session()
@@ -20,6 +23,7 @@ def get_session_from_engine(from_engine):
         raise e from None
     finally:
         session.close()
+        logger.info("End session")
         
 # @log_runtime
 @contextmanager
