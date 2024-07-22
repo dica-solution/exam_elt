@@ -44,9 +44,9 @@ class QuizQuestionGroup(Base):
     id = Column(BigInteger, primary_key=True, nullable=False)
     created_at = Column(DateTime, default=datetime.now(), server_default=func.now())
     updated_at = Column(DateTime, default=datetime.now(), onupdate=func.now(), server_default=func.now())
-    original_text = Column(Text, nullable=False)
-    parsed_text = Column(Text, nullable=False)
-    links = Column(Text, nullable=False)
+    original_text = Column(Text, nullable=False, default='')
+    parsed_text = Column(Text, nullable=False, default='')
+    links = Column(Text, nullable=False, default='')
 
 class QuizQuestion(Base):
     __tablename__ = 'quiz_question'
@@ -55,12 +55,12 @@ class QuizQuestion(Base):
     updated_at = Column(DateTime, default=datetime.now(), onupdate=func.now(), server_default=func.now())
     user_id = Column(BigInteger, nullable=False, default=0)
     quiz_question_group_id = Column(Integer, nullable=False, default=0)
-    original_text = Column(Text, nullable=False)
-    parsed_text = Column(Text, nullable=False)
-    quiz_type = Column(Integer, nullable=False)
+    original_text = Column(Text, nullable=False, default='')
+    parsed_text = Column(Text, nullable=False, default='')
+    quiz_type = Column(Integer, nullable=False, default=1)
     quiz_options = Column(Text, nullable=True)
     explanation = Column(Text, nullable=True, default='')
-    links = Column(Text, nullable=False)
+    links = Column(Text, nullable=False, default='')
     quiz_answer = Column(Text, nullable=False)
     level = Column(Integer, nullable=False, default=0)
 
@@ -199,8 +199,9 @@ class Media(Base):
 class CourseIDMapping(Base):
     __tablename__ = 'course_id_mapping'
     id = Column(Integer, primary_key=True, nullable=False)
-    original_id = Column(Integer, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    original_id = Column(Integer, nullable=False, default=0)
     new_id = Column(BigInteger, nullable=False)
     entity_type = Column(String(150), nullable=False)
     parent_new_id = Column(BigInteger, nullable=False, default=0)
-    position = Column(Integer, nullable=False, default=0)
+    task_name = Column(String(50), nullable=False)
