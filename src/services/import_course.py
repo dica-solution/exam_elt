@@ -22,6 +22,8 @@ class ImportCourse:
     
     def import_course(self, course_id: int, is_free: bool=False):
 
+        print(f"Start import course {course_id} ...")
+
         course_id_mapping_list = []
         current_position = 0
         lecture_count = 0
@@ -114,38 +116,42 @@ class ImportCourse:
                                             course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=math_type_data_dict.get('id'), new_id=course_lecture_lecture_math_type.id,
                                                                                                                   entity_type='math_type', parent_new_id=course_lecture_chapter_lecture.id, task_name='insert'))
 
-                                            guide_dict = {
-                                                'title': 'Phương pháp giải',
-                                                'content': math_type_data_dict.get('guide', '')
-                                            }
-                                            guide = self.processor.process_theory(theory_data=guide_dict)
-                                            self.session_import.add(guide)
+                                            guide_content = math_type_data_dict.get('guide')
+                                            examples = math_type_data_dict.get('examples')
+                                            if not guide_content and not examples:
+                                                logger.info("Empty guide and examples")
+                                            else:
+                                                guide_dict = {
+                                                    'title': 'Phương pháp giải',
+                                                    'content': guide_content
+                                                }
+                                                guide = self.processor.process_theory(theory_data=guide_dict)
+                                                self.session_import.add(guide)
 
-                                            guide_data_dict = math_type_data_dict.copy()
-                                            guide_data_dict['title'] = guide_dict.get('title')
-                                            
-                                            lecture_math_type_guide = self.processor.process_lecture(lecture_data=guide_data_dict, content_id=guide.id, content_type='theory')
-                                            self.session_import.add(lecture_math_type_guide)
-                                            
-                                            new_lecture_math_type_guide_id = lecture_math_type_guide.id
+                                                guide_data_dict = math_type_data_dict.copy()
+                                                guide_data_dict['title'] = guide_dict.get('title')
+                                                
+                                                lecture_math_type_guide = self.processor.process_lecture(lecture_data=guide_data_dict, content_id=guide.id, content_type='theory')
+                                                self.session_import.add(lecture_math_type_guide)
+                                                
+                                                new_lecture_math_type_guide_id = lecture_math_type_guide.id
 
-                                            course_lecture_math_type_guide, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=new_lecture_math_type_guide_id,
-                                                                                                                                    parent_id=course_lecture_lecture_math_type.id, level=4, is_free=is_free, node_type=2, position=current_position)
-                                            self.session_import.add(course_lecture_math_type_guide)
-                                            self.session_import.flush()
-                                            lecture_count += 1
+                                                course_lecture_math_type_guide, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=new_lecture_math_type_guide_id,
+                                                                                                                                        parent_id=course_lecture_lecture_math_type.id, level=4, is_free=is_free, node_type=2, position=current_position)
+                                                self.session_import.add(course_lecture_math_type_guide)
+                                                self.session_import.flush()
+                                                lecture_count += 1
 
-                                            course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=0, new_id=course_lecture_math_type_guide.id,
-                                                                                                                  entity_type='guide', parent_new_id=course_lecture_lecture_math_type.id, task_name='insert'))
+                                                course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=0, new_id=course_lecture_math_type_guide.id,
+                                                                                                                    entity_type='guide', parent_new_id=course_lecture_lecture_math_type.id, task_name='insert'))
 
-                                            examples = math_type_data_dict.get('examples', [])
-                                            if examples:
-                                                for example in examples:
-                                                    example_id = example.get('id')
-                                                    example_data_dict = self.processor.get_data_dict(id=example_id, type='quiz_collection')
-                                                    question_id_mapping_list = self.processor.process_theory_examples(theory_id=guide.id, course_lecture_id=course_lecture_math_type_guide.id, 
-                                                                                           question_item_list=example_data_dict.get('questions', []))
-                                                    course_id_mapping_list.extend(question_id_mapping_list)
+                                                if examples:
+                                                    for example in examples:
+                                                        example_id = example.get('id')
+                                                        example_data_dict = self.processor.get_data_dict(id=example_id, type='quiz_collection')
+                                                        question_id_mapping_list = self.processor.process_theory_examples(theory_id=guide.id, course_lecture_id=course_lecture_math_type_guide.id, 
+                                                                                            question_item_list=example_data_dict.get('questions', []))
+                                                        course_id_mapping_list.extend(question_id_mapping_list)
 
                                             question_collection_data_list = []
                                             practices = math_type_data_dict.get('practices', [])
