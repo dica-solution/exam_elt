@@ -116,6 +116,29 @@ class ImportCourse:
                                             course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=math_type_data_dict.get('id'), new_id=course_lecture_lecture_math_type.id,
                                                                                                                   entity_type='math_type', parent_new_id=course_lecture_chapter_lecture.id, task_name='insert'))
 
+                                            guide_video_links = math_type_data_dict.get('guide_videos', [])
+                                            if guide_video_links:
+                                                for guide_video_link in guide_video_links:
+                                                    media = self.processor.process_media(media_data=guide_video_link)
+                                                    if media:
+                                                        self.session_import.add(media)
+                                                        guide_video_data_dict = math_type_data_dict.copy()
+                                                        guide_video_data_dict['title'] = 'Video'
+
+                                                        lecture_math_type_media = self.processor.process_lecture(lecture_data=guide_video_data_dict, content_id=media.id, content_type='video')
+                                                        self.session_import.add(lecture_math_type_media)
+
+                                                        new_lecture_math_type_media_id = lecture_math_type_media.id
+
+                                                        course_lecture_math_type_media, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=new_lecture_math_type_media_id, 
+                                                                                                                                        parent_id=course_lecture_lecture_math_type.id, level=4, is_free=is_free, node_type=2, position=current_position)
+                                                        self.session_import.add(course_lecture_math_type_media)
+                                                        self.session_import.flush()
+                                                        lecture_count += 1
+
+                                                        course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=guide_video_link.get('id'), new_id=course_lecture_math_type_media.id,
+                                                                                                                              entity_type='media', parent_new_id=course_lecture_lecture_math_type.id, task_name='insert'))
+
                                             guide_content = math_type_data_dict.get('guide')
                                             examples = math_type_data_dict.get('examples')
                                             if not guide_content and not examples:
@@ -183,29 +206,7 @@ class ImportCourse:
                                                             course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=question_ids[0], new_id=question_ids[1], entity_type='question',
                                                                                                                               parent_new_id=course_lecture_math_type_practice_collection.id, task_name='insert'))
 
-                                            guide_video_links = math_type_data_dict.get('guide_videos', [])
-                                            if guide_video_links:
-                                                for guide_video_link in guide_video_links:
-                                                    media = self.processor.process_media(media_data=guide_video_link)
-                                                    if media:
-                                                        self.session_import.add(media)
-                                                        guide_video_data_dict = math_type_data_dict.copy()
-                                                        guide_video_data_dict['title'] = 'Video'
-
-                                                        lecture_math_type_media = self.processor.process_lecture(lecture_data=guide_video_data_dict, content_id=media.id, content_type='video')
-                                                        self.session_import.add(lecture_math_type_media)
-
-                                                        new_lecture_math_type_media_id = lecture_math_type_media.id
-
-                                                        course_lecture_math_type_media, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=new_lecture_math_type_media_id, 
-                                                                                                                                        parent_id=course_lecture_lecture_math_type.id, level=4, is_free=is_free, node_type=2, position=current_position)
-                                                        self.session_import.add(course_lecture_math_type_media)
-                                                        self.session_import.flush()
-                                                        lecture_count += 1
-
-                                                        course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=guide_video_link.get('id'), new_id=course_lecture_math_type_media.id,
-                                                                                                                              entity_type='media', parent_new_id=course_lecture_lecture_math_type.id, task_name='insert'))
-
+                                            
 
                         question_collection_data_list = []
                         practices = lecture_data_dict.get('practices', [])
