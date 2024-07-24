@@ -60,7 +60,7 @@ class Processor:
             id = uniqid,
             created_at = course_data.get('createdAt'),
             updated_at = course_data.get('updatedAt'),
-            published_at = course_data.get('publishedAt'), # unpublish course
+            # published_at = course_data.get('publishedAt'), # unpublish course
             title = course_data.get('title', ''),
             description = course_data.get('description', ''),
             grade_id = self._get_mapped_id(course_data.get('grade').get('id'), GradeIDMapping),
