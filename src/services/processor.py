@@ -455,7 +455,7 @@ class Processor:
             return [], []
         
     def _create_collection(self, question_list, level, grade_id, subject_id):
-        collection_name = {0: 'Bài tập ngẫu nhiên', 1: 'Nhận biết', 2: 'Thông hiểu', 3: 'Vận dụng', 4: 'Vận dụng cao'}.get(level)
+        collection_name = {0: 'Cấp độ ngẫu nhiên', 1: 'Cấp độ nhận biết', 2: ' Cấp độ thông hiểu', 3: 'Cấp độ vận dụng', 4: 'Cấp độ vận dụng cao'}.get(level)
         try:   
             if question_list:
                 collection = QuizCollectionGroup(
