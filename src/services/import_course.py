@@ -59,8 +59,8 @@ class ImportCourse:
                 if lessons:
                     for lecture_idx, lecture_dict in enumerate(lessons):
                         lecture_data_dict = self.processor.get_data_dict(id=lecture_dict.get('id'), type='lecture')
-                        is_published = lecture_data_dict.get('publishedAt')
-                        if is_published:
+                        published_flag = lecture_data_dict.get('publishedAt')
+                        if published_flag:
                             lecture_lecture = self.processor.process_lecture(lecture_data=lecture_data_dict, content_id=0, content_type='')
                             self.session_import.add(lecture_lecture)
 
