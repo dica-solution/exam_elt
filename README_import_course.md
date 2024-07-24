@@ -43,3 +43,31 @@ python import_course_by_id.py --course_id=10
 ## Output
 
 Check the newly created log file in the logs folder.
+
+## Query course with CTE  
+```sql
+-- CTE
+with recursive course_hierachy as (
+	select cim.id, cim.created_at, cim.original_id, cim.new_id, cim.parent_new_id, cim.entity_type, cim.task_name
+	from public.course_id_mapping cim 
+	where cim.entity_type like 'course'
+	and cim.original_id = 16
+	and cim.task_name like 'insert'
+	
+	union all
+	
+	select cim.id, cim.created_at, cim.original_id , cim.new_id, cim.parent_new_id, cim.entity_type, cim.task_name
+	from public.course_id_mapping cim 
+	join course_hierachy ch on cim.parent_new_id = ch.new_id
+	
+)
+-- View course
+--select * 
+--from course_hierachy
+--order by id;
+
+-- Delete course
+delete
+from public.course_id_mapping cim
+where cim.id in (select id from course_hierachy);
+```
