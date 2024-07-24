@@ -145,7 +145,7 @@ class ImportCourse:
                                                 logger.info("Empty guide and examples")
                                             else:
                                                 guide_dict = {
-                                                    'title': 'Phương pháp giải',
+                                                    'title': 'Lý thuyết kèm ví dụ mẫu',
                                                     'content': guide_content
                                                 }
                                                 guide = self.processor.process_theory(theory_data=guide_dict)
