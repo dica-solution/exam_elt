@@ -16,3 +16,5 @@ test.json
 .vscode/launch.json
 ids/exam_ids_imported.txt
 ids/exam_ids_synced.txt
+logs/
+.env.dev
