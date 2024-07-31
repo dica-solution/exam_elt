@@ -36,7 +36,7 @@ class ImportCourse:
         course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=course_id, new_id=new_course_id, 
                                                                               entity_type='course', parent_new_id=0, task_name='insert'))
 
-        chapters = course_data_dict.get('table_of_contents', [])
+        chapters = course_data_dict.get('table_of_contents')
         # print(len(chapters))
         if chapters:
             for chapter_idx, chapter_dict in enumerate(chapters):
@@ -55,7 +55,7 @@ class ImportCourse:
                 course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=chapter_dict.get('id'), new_id=course_lecture_course_chapter.id,
                                                                                       entity_type='chapter', parent_new_id=new_course_id, task_name='insert'))
 
-                lessons = chapter_dict.get('course_lessons', [])
+                lessons = chapter_dict.get('course_lessons')
                 if lessons:
                     for lecture_idx, lecture_dict in enumerate(lessons):
                         lecture_data_dict = self.processor.get_data_dict(id=lecture_dict.get('id'), type='lecture')
@@ -76,7 +76,7 @@ class ImportCourse:
                             course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=lecture_dict.get('id'), new_id=course_lecture_chapter_lecture.id,
                                                                                                 entity_type='lecture', parent_new_id=course_lecture_course_chapter.id, task_name='insert'))
                             
-                            contents = lecture_data_dict.get('content_types', [])
+                            contents = lecture_data_dict.get('content_types')
                             if contents:
                                 for content_idx, content_dict in enumerate(contents):
                                     if content_dict.get('__component') == 'course.overview':
@@ -99,7 +99,7 @@ class ImportCourse:
                                                                                                             entity_type='theory', parent_new_id=course_lecture_chapter_lecture.id, task_name='insert'))
 
                                     if content_dict.get('__component') == 'course.form':
-                                        course_forms = content_dict.get('course_forms', [])
+                                        course_forms = content_dict.get('course_forms')
                                         if course_forms:
                                             for math_type_idx, math_type_dict in enumerate(course_forms):
                                                 math_type_data_dict = self.processor.get_data_dict(id=math_type_dict.get('id'), type='math_type')
@@ -118,7 +118,7 @@ class ImportCourse:
                                                 course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=math_type_data_dict.get('id'), new_id=course_lecture_lecture_math_type.id,
                                                                                                                     entity_type='math_type', parent_new_id=course_lecture_chapter_lecture.id, task_name='insert'))
 
-                                                guide_video_links = math_type_data_dict.get('guide_videos', [])
+                                                guide_video_links = math_type_data_dict.get('guide_videos')
                                                 if guide_video_links:
                                                     for guide_video_link in guide_video_links:
                                                         media = self.processor.process_media(media_data=guide_video_link)
@@ -175,16 +175,16 @@ class ImportCourse:
                                                             example_id = example.get('id')
                                                             example_data_dict = self.processor.get_data_dict(id=example_id, type='quiz_collection')
                                                             question_id_mapping_list = self.processor.process_theory_examples(theory_id=guide.id, course_lecture_id=course_lecture_math_type_guide.id, 
-                                                                                                question_item_list=example_data_dict.get('questions', []))
+                                                                                                question_item_list=example_data_dict.get('questions'))
                                                             course_id_mapping_list.extend(question_id_mapping_list)
 
                                                 question_collection_data_list = []
-                                                practices = math_type_data_dict.get('practices', [])
+                                                practices = math_type_data_dict.get('practices')
                                                 if practices:
-                                                    for practice in math_type_data_dict.get('practices', []):
+                                                    for practice in math_type_data_dict.get('practices'):
                                                         practice_id = practice.get('id')
                                                         practice_data_dict = self.processor.get_data_dict(id=practice_id, type='quiz_collection')
-                                                        question_collection_data_list.extend(practice_data_dict.get('questions', []))
+                                                        question_collection_data_list.extend(practice_data_dict.get('questions'))
                                                     if question_collection_data_list:
                                                         collection_list = self.processor.process_practices(question_item_list=question_collection_data_list, grade_id=course.grade_id, subject_id=course.subject_id)
                                                         for item in collection_list:
@@ -216,7 +216,7 @@ class ImportCourse:
                                 for question_collection in practices:
                                     question_collection_id = question_collection.get('id')
                                     question_collection_data_dict = self.processor.get_data_dict(id=question_collection_id, type='quiz_collection')
-                                    question_collection_data_list.extend(question_collection_data_dict.get('questions', []))
+                                    question_collection_data_list.extend(question_collection_data_dict.get('questions'))
                                 if question_collection_data_list:
                                     collection_list = self.processor.process_practices(question_item_list=question_collection_data_list, grade_id=course.grade_id, subject_id=course.subject_id)
                                     for item in collection_list:
@@ -241,7 +241,7 @@ class ImportCourse:
                                                                                                                 parent_new_id=course_lecture_lecture_practice_collection.id, task_name='insert'))
 
                             
-                            exam_list = lecture_data_dict.get('paper_exams', [])
+                            exam_list = lecture_data_dict.get('paper_exams')
                             if exam_list:
                                 for exam in exam_list:
                                     exam_id = exam.get('id')
