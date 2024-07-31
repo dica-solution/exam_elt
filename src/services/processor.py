@@ -2,13 +2,15 @@ import json
 import re
 import backoff
 import requests
-from typing import Any, Dict, List, Tuple, Optional
+from datetime import datetime
+from typing import Any, Dict, List
 from sqlalchemy.orm import Session
 from src.models.exam_bank_models import Uniqid, QuizCollectionGroup, QuizCollection, TheoryExample, QuizQuestion, QuizQuestionGroup, Course, Lecture, \
     Theory, CourseLecture, Media, CourseIDMapping
 from src.commons import *
 from src.config.config import Settings
 from src.services.logger_config import setup_logger
+
 logger = setup_logger()
 
 def retry(func):
@@ -166,304 +168,388 @@ class Processor:
         )
         return theory
 
+    def _is_question_existed(self, original_question_id: int):
+        flag = self.session.query(CourseIDMapping).filter(CourseIDMapping.original_id == original_question_id,
+                                                           CourseIDMapping.entity_type == 'question').first()
+        if flag is not None:
+            return self.session.query(QuizQuestion).filter(QuizQuestion.id == flag.new_id).first(), True
+        return None, False
+
     def _process_quiz(self, question_dict: Dict[str, Any], question_group_id: int):
         original_question_id = question_dict.get('id')
-        original_text = self.transform_text(question_dict.get('question_content', ''))
-        parsed_text = original_text
-        quiz_type = QuizTypeSingleChoice if question_group_id == 0 else QuizTypeMultipleChoice
-        explanation = self.transform_text(question_dict.get('explanation', ''))
-        links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
-        quiz_options = []
-        for label_key in ['a', 'b', 'c', 'd']:
-            option_content = self.transform_text(question_dict.get(f'label_{label_key}'))
-            if question_dict.get(f'correct_answer') == f'label_{label_key}':
-                quiz_options.append(dict(label=label_key, content=option_content, is_correct=True))
-            else:
-                quiz_options.append(dict(label=label_key, content=option_content, is_correct=False))
-        quiz_answer = ''
-        
-        question = QuizQuestion(
-            quiz_question_group_id = question_group_id,
-            original_text = original_text,
-            parsed_text = parsed_text,
-            quiz_type = quiz_type,
-            quiz_options = json.dumps(quiz_options),
-            explanation = explanation,
-            links = json.dumps(links),
-            quiz_answer = quiz_answer,
-            level = self._process_level(question_dict.get('question_levels', [])),
-        )
-        return question, original_question_id
+        question, is_existed = self._is_question_existed(original_question_id)
+        if is_existed:
+            return question, original_question_id, is_existed
+        else:
+            original_text = self.transform_text(question_dict.get('question_content', ''))
+            parsed_text = original_text
+            quiz_type = QuizTypeSingleChoice if question_group_id == 0 else QuizTypeMultipleChoice
+            explanation = self.transform_text(question_dict.get('explanation', ''))
+            links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
+            quiz_options = []
+            for label_key in ['a', 'b', 'c', 'd']:
+                option_content = self.transform_text(question_dict.get(f'label_{label_key}'))
+                if question_dict.get(f'correct_answer') == f'label_{label_key}':
+                    quiz_options.append(dict(label=label_key, content=option_content, is_correct=True))
+                else:
+                    quiz_options.append(dict(label=label_key, content=option_content, is_correct=False))
+            quiz_answer = ''
+            
+            question = QuizQuestion(
+                quiz_question_group_id = question_group_id,
+                original_text = original_text,
+                parsed_text = parsed_text,
+                quiz_type = quiz_type,
+                quiz_options = json.dumps(quiz_options),
+                explanation = explanation,
+                links = json.dumps(links),
+                quiz_answer = quiz_answer,
+                level = self._process_level(question_dict.get('question_levels', [])),
+            )
+            return question, original_question_id, is_existed
     
     def _process_essay(self, question_dict: Dict[str, Any], question_group_id: int):
         original_question_id = question_dict.get('id')
-        original_text = self.transform_text(question_dict.get('question_content', ''))
-        parsed_text = original_text
-        quiz_type = QuizTypeSingleEssay
-        explanation = self.transform_text(question_dict.get('explanation', ''))
-        links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
-        quiz_options = ''
-        quiz_answer = self.transform_text(question_dict.get('answer', ''))
-        
-        question = QuizQuestion(
-            quiz_question_group_id = question_group_id,
-            original_text = original_text,
-            parsed_text = parsed_text,
-            quiz_type = quiz_type,
-            quiz_options = quiz_options,
-            explanation = explanation,
-            links = json.dumps(links),
-            quiz_answer = quiz_answer,
-            level = self._process_level(question_dict.get('question_levels', [])),
-        )
-        return question, original_question_id
+        question, is_existed = self._is_question_existed(original_question_id)
+        if is_existed:
+            return question, original_question_id, is_existed
+        else:
+            original_text = self.transform_text(question_dict.get('question_content', ''))
+            parsed_text = original_text
+            quiz_type = QuizTypeSingleEssay
+            explanation = self.transform_text(question_dict.get('explanation', ''))
+            links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
+            quiz_options = ''
+            quiz_answer = self.transform_text(question_dict.get('answer', ''))
+            
+            question = QuizQuestion(
+                quiz_question_group_id = question_group_id,
+                original_text = original_text,
+                parsed_text = parsed_text,
+                quiz_type = quiz_type,
+                quiz_options = quiz_options,
+                explanation = explanation,
+                links = json.dumps(links),
+                quiz_answer = quiz_answer,
+                level = self._process_level(question_dict.get('question_levels', [])),
+            )
+            return question, original_question_id, is_existed
     
     def _process_group_quiz(self, group_question_dict):
+        flag = True
         question_list = []
         original_question_ids = []
         question_group_id = group_question_dict.get('id')
-        original_text = self.transform_text(group_question_dict.get('group_content', ''))
-        parsed_text = original_text
-        links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
-        question_group = QuizQuestionGroup(
-            id = question_group_id,
-            original_text = original_text,
-            parsed_text = parsed_text,
-            links = json.dumps(links),
-            # level = self._process_level(group_question_dict.get('level', [])),
-        )
+        
         for question_dict in group_question_dict.get('related_quizzes', []):
-            question, original_question_id = self._process_quiz(question_dict, question_group_id)
+            question, original_question_id, is_existed = self._process_quiz(question_dict, question_group_id)
             question_list.append(question)
             original_question_ids.append(original_question_id)
+            flag = flag and is_existed
+
+        if flag is False:
+            original_text = self.transform_text(group_question_dict.get('group_content', ''))
+            parsed_text = original_text
+            links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
+            question_group = QuizQuestionGroup(
+                id = question_group_id,
+                original_text = original_text,
+                parsed_text = parsed_text,
+                links = json.dumps(links),
+            )
+            return question_group, question_list, original_question_ids, flag
         
-        return question_group, question_list, original_question_ids
+        return None, question_list, original_question_ids, flag
     
     def _process_group_essay(self, group_question_dict):
+        flag = True
         question_list = []
         original_question_ids = []
         question_group_id = group_question_dict.get('id')
-        original_text = self.transform_text(group_question_dict.get('group_content', ''))
-        parsed_text = original_text
-        links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
-        question_group = QuizQuestionGroup(
-            id = question_group_id,
-            original_text = original_text,
-            parsed_text = parsed_text,
-            links = json.dumps(links),
-        )
+        
         for question_dict in group_question_dict.get('related_essays', []):
-            question, original_question_id = self._process_essay(question_dict, question_group_id)
+            question, original_question_id, is_existed = self._process_essay(question_dict, question_group_id)
             question_list.append(question)
             original_question_ids.append(original_question_id)
+            flag = flag and is_existed
         
-        return question_group, question_list, original_question_ids
+        if flag is False:
+            original_text = self.transform_text(group_question_dict.get('group_content', ''))
+            parsed_text = original_text
+            links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
+            question_group = QuizQuestionGroup(
+                id = question_group_id,
+                original_text = original_text,
+                parsed_text = parsed_text,
+                links = json.dumps(links),
+            )
+        
+            return question_group, question_list, original_question_ids, flag
+        
+        return None, question_list, original_question_ids, flag
     
     def _process_single_text_entry(self, question_dict, question_group_id: int):
         original_question_id = question_dict.get('id')
-        original_text = self.transform_text(question_dict.get('question_content', ''))
-        parsed_text = original_text
-        quiz_type = QuizTypeBlankFilling
-        explanation = self.transform_text(question_dict.get('explanation', ''))
-        links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
-        quiz_options = ''
-        quiz_answer = self.transform_text(question_dict.get('answer', ''))
+        question, is_existed = self._is_question_existed(original_question_id)
+        if is_existed:
+            return question, original_question_id, is_existed
+        else:
+            original_text = self.transform_text(question_dict.get('question_content', ''))
+            parsed_text = original_text
+            quiz_type = QuizTypeBlankFilling
+            explanation = self.transform_text(question_dict.get('explanation', ''))
+            links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
+            quiz_options = ''
+            quiz_answer = self.transform_text(question_dict.get('answer', ''))
 
-        question = QuizQuestion(
-            quiz_question_group_id = question_group_id,
-            original_text = original_text,
-            parsed_text = parsed_text,
-            quiz_type = quiz_type,
-            quiz_options = quiz_options,
-            explanation = explanation,
-            links = json.dumps(links),
-            quiz_answer = quiz_answer,
-            level = self._process_level(question_dict.get('question_levels', [])),
-        )
-        return question, original_question_id
+            question = QuizQuestion(
+                quiz_question_group_id = question_group_id,
+                original_text = original_text,
+                parsed_text = parsed_text,
+                quiz_type = quiz_type,
+                quiz_options = quiz_options,
+                explanation = explanation,
+                links = json.dumps(links),
+                quiz_answer = quiz_answer,
+                level = self._process_level(question_dict.get('question_levels', [])),
+            )
+            return question, original_question_id, is_existed
     
     def _process_group_text_entry(self, group_question_dict):
+        flag = True
         question_list = []
         original_question_ids = []
         question_group_id = group_question_dict.get('id')
-        original_text = self.transform_text(group_question_dict.get('group_content', ''))
-        parsed_text = original_text
-        links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
-        question_group = QuizQuestionGroup(
-            id = question_group_id,
-            original_text = original_text,
-            parsed_text = parsed_text,
-            links = json.dumps(links),
-        )
+        
         for question_dict in group_question_dict.get('related_questions', []):
-            question, original_question_id = self._process_single_text_entry(question_dict, question_group_id)
+            question, original_question_id, is_existed = self._process_single_text_entry(question_dict, question_group_id)
             question_list.append(question)
             original_question_ids.append(original_question_id)
+            flag = flag and is_existed
         
-        return question_group, question_list, original_question_ids
+        if flag is False:
+            original_text = self.transform_text(group_question_dict.get('group_content', ''))
+            parsed_text = original_text
+            links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
+            question_group = QuizQuestionGroup(
+                id = question_group_id,
+                original_text = original_text,
+                parsed_text = parsed_text,
+                links = json.dumps(links),
+            )
+            return question_group, question_list, original_question_ids, flag
+        
+        return None, question_list, original_question_ids, flag
     
     def _process_single_quiz_true_false(self, question_dict, question_group_id: int):
         original_question_id = question_dict.get('id')
-        original_text = self.transform_text(question_dict.get('question_content', ''))
-        parsed_text = original_text
-        quiz_type = QuizTypeSingleChoice if question_group_id == 0 else QuizTypeMultipleChoice
-        explanation = self.transform_text(question_dict.get('explanation', ''))
-        links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
-        quiz_answer = question_dict.get('answer', False)
-        quiz_options = []
-        if quiz_answer is True:
-            quiz_options.append(dict(label='a', content='True', is_correct=True))
-            quiz_options.append(dict(label='b', content='False', is_correct=False))
-        if quiz_answer is False:
-            quiz_options.append(dict(label='a', content='True', is_correct=False))
-            quiz_options.append(dict(label='b', content='False', is_correct=True))
-        
-        question = QuizQuestion(
-            quiz_question_group_id = question_group_id,
-            original_text = original_text,
-            parsed_text = parsed_text,
-            quiz_type = quiz_type,
-            quiz_options = json.dumps(quiz_options),
-            explanation = explanation,
-            links = json.dumps(links),
-            quiz_answer = quiz_answer,
-            level = self._process_level(question_dict.get('question_levels', [])),
-        )
-        return question, original_question_id
+        question, is_existed = self._is_question_existed(original_question_id)
+        if is_existed:
+            return question, original_question_id, is_existed
+        else:
+            original_text = self.transform_text(question_dict.get('question_content', ''))
+            parsed_text = original_text
+            quiz_type = QuizTypeSingleChoice if question_group_id == 0 else QuizTypeMultipleChoice
+            explanation = self.transform_text(question_dict.get('explanation', ''))
+            links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
+            quiz_answer = question_dict.get('answer', False)
+            quiz_options = []
+            if quiz_answer is True:
+                quiz_options.append(dict(label='a', content='True', is_correct=True))
+                quiz_options.append(dict(label='b', content='False', is_correct=False))
+            if quiz_answer is False:
+                quiz_options.append(dict(label='a', content='True', is_correct=False))
+                quiz_options.append(dict(label='b', content='False', is_correct=True))
+            
+            question = QuizQuestion(
+                quiz_question_group_id = question_group_id,
+                original_text = original_text,
+                parsed_text = parsed_text,
+                quiz_type = quiz_type,
+                quiz_options = json.dumps(quiz_options),
+                explanation = explanation,
+                links = json.dumps(links),
+                quiz_answer = quiz_answer,
+                level = self._process_level(question_dict.get('question_levels', [])),
+            )
+            return question, original_question_id, is_existed
     
     def _process_group_quiz_true_false(self, group_question_dict):
+        flag = True
         question_list = []
         original_question_ids = []
         question_group_id = group_question_dict.get('id')
-        original_text = self.transform_text(group_question_dict.get('group_content', ''))
-        parsed_text = original_text
-        links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
-        question_group = QuizQuestionGroup(
-            id = question_group_id,
-            original_text = original_text,
-            parsed_text = parsed_text,
-            links = json.dumps(links),
-        )
+        
         for question_dict in group_question_dict.get('related_questions', []):
-            question, original_question_id = self._process_single_quiz_true_false(question_dict, question_group_id)
+            question, original_question_id, is_existed = self._process_single_quiz_true_false(question_dict, question_group_id)
             question_list.append(question)
             original_question_ids.append(original_question_id)
+            flag = flag and is_existed
         
-        return question_group, question_list, original_question_ids
+        if flag is False:
+            original_text = self.transform_text(group_question_dict.get('group_content', ''))
+            parsed_text = original_text
+            links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
+            question_group = QuizQuestionGroup(
+                id = question_group_id,
+                original_text = original_text,
+                parsed_text = parsed_text,
+                links = json.dumps(links),
+            )
+            return question_group, question_list, original_question_ids, flag
+            
+        return None, question_list, original_question_ids, flag
     
-    def _process_questions(self, question_item_list):
+    def _process_question(self, question_dict):
+        
         group_question_list = []
         processed_question_list = []
         uniqid_list = []
         original_question_id_list = []
 
-        for question_dict in question_item_list:
-            question_type = question_dict.get('__component')
+        question_type = question_dict.get('__component')
 
-            if question_type == 'course.quiz':
-                question, original_question_id = self._process_quiz(question_dict, 0)
-                processed_question_list.append(question)
+        if question_type == 'course.quiz':
+            question, original_question_id, is_existed = self._process_quiz(question_dict, 0)
+            processed_question_list.append(question)
+            if not is_existed:
                 uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
-                original_question_id_list.append(original_question_id)
-
-            if question_type == 'course.essay':
-                question, original_question_id = self._process_essay(question_dict, 0)
-                processed_question_list.append(question)
-                uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
-                original_question_id_list.append(original_question_id)
-
-            if question_type == 'course.group-quiz':
-                question_group, question_list, original_question_ids = self._process_group_quiz(question_dict)
+            original_question_id_list.append(original_question_id)
+            
+        if question_type == 'course.group-quiz':
+            question_group, question_list, original_question_ids, is_existed = self._process_group_quiz(question_dict)
+            original_question_id_list.extend(original_question_ids)
+            processed_question_list.extend(question_list)
+            if not is_existed:
                 group_question_list.append(question_group)
-                processed_question_list.extend(question_list)
                 for _ in question_list:
                     uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
-                original_question_id_list.extend(original_question_ids)
 
-            if question_type == 'course.group-essay':
-                question_group, question_list, original_question_ids = self._process_group_essay(question_dict)
-                group_question_list.append(question_group)
-                processed_question_list.extend(question_list)
-                for _ in question_list:
-                    uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
-                original_question_id_list.extend(original_question_ids)
-
-            if question_type == 'course.single-text-entry':
-                question, original_question_id = self._process_single_text_entry(question_dict, 0)
-                processed_question_list.append(question)
+        if question_type == 'course.essay':
+            question, original_question_id, is_existed = self._process_essay(question_dict, 0)
+            processed_question_list.append(question)
+            if not is_existed:
                 uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
-                original_question_id_list.append(original_question_id)
+            else:
+                uniqid_list.append(None)
+            original_question_id_list.append(original_question_id)
 
-            if question_type == 'course.group-text-entry':
-                question_group, question_list, original_question_ids = self._process_group_text_entry(question_dict)
+        if question_type == 'course.group-essay':
+            question_group, question_list, original_question_ids, is_existed = self._process_group_essay(question_dict)
+            original_question_id_list.extend(original_question_ids)
+            processed_question_list.extend(question_list)
+            if question_group:
                 group_question_list.append(question_group)
-                processed_question_list.extend(question_list)
                 for _ in question_list:
                     uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
-                original_question_id_list.extend(original_question_ids)
+            else:
+                for _ in question_list:
+                    uniqid_list.append(None)
 
-            if question_type == 'course.single-quiz-true-false':
-                question, original_question_id = self._process_single_quiz_true_false(question_dict, 0)
-                processed_question_list.append(question)
+        if question_type == 'course.single-text-entry':
+            question, original_question_id, is_existed = self._process_single_text_entry(question_dict, 0)
+            processed_question_list.append(question)
+            if not is_existed:
                 uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
-                original_question_id_list.append(original_question_id)
+            else:
+                uniqid_list.append(None)
+            original_question_id_list.append(original_question_id)
 
-            if question_type == 'course.group-quiz-true-false':
-                question_group, question_list, original_question_ids = self._process_group_quiz_true_false(question_dict)
+        if question_type == 'course.group-text-entry':
+            question_group, question_list, original_question_ids, is_existed = self._process_group_text_entry(question_dict)
+            original_question_id_list.extend(original_question_ids)
+            processed_question_list.extend(question_list)
+            if question_group:
                 group_question_list.append(question_group)
-                processed_question_list.extend(question_list)
                 for _ in question_list:
                     uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
-                original_question_id_list.extend(original_question_ids)
+            else:
+                for _ in question_list:
+                    uniqid_list.append(None)
+            
 
-        return group_question_list, processed_question_list, uniqid_list, original_question_id_list
+        if question_type == 'course.single-quiz-true-false':
+            question, original_question_id, is_existed = self._process_single_quiz_true_false(question_dict, 0)
+            processed_question_list.append(question)
+            if not is_existed:
+                uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+            else:
+                uniqid_list.append(None)
+            original_question_id_list.append(original_question_id)
+
+        if question_type == 'course.group-quiz-true-false':
+            question_group, question_list, original_question_ids, is_existed = self._process_group_quiz_true_false(question_dict)
+            original_question_id_list.extend(original_question_ids)
+            processed_question_list.extend(question_list)
+            if question_group:
+                group_question_list.append(question_group)
+                for _ in question_list:
+                    uniqid_list.append(Uniqid(uniqid_type=ObjectTypeStrMapping[QuizQuestionType]))
+            else:
+                for _ in question_list:
+                    uniqid_list.append(None)
+
+        return group_question_list, processed_question_list, uniqid_list, original_question_id_list, is_existed
 
 
 
-    def _process_collection(self, question_item_list): # TODO: return original_question_id_list, processed_question_list
+    def _process_collection(self, question_item_list):
         try:
+            id_map_list = []
+            # new_question_list = []
             logger.info(f"Start importing {len(question_item_list)} questions") 
-            group_question_list, processed_question_list, uniqid_list, original_question_id_list = self._process_questions(question_item_list)
 
-            self.session.add_all(uniqid_list)
-            self.session.commit()
+            for question_dict in question_item_list:
+                group_question_list, processed_question_list, uniqid_list, original_question_id_list, is_existed = self._process_question(question_dict)
 
-            ref_group = dict()
-            for group in group_question_list:
-                group_id = group.id
-                group.id = None
-                self.session.add(group)
-                self.session.commit()
-                ref_group[group_id] = group.id
+                if is_existed:
+                    for question_idx, question in enumerate(processed_question_list):
+                        id_map_list.append({'original_id': original_question_id_list[question_idx],
+                                            'new_id': question.id,
+                                            'level': question.level})
+                else:
+                    self.session.add_all(uniqid_list)
+                    self.session.commit()
 
-            for question_idx, question in enumerate(processed_question_list):
-                question.id = uniqid_list[question_idx].to_uniqid_number()
-                ref_group_id = question.quiz_question_group_id
-                if ref_group_id in ref_group:
-                    question.quiz_question_group_id = ref_group[ref_group_id]
+                    group_question_id = None
+                    if group_question_list:
+                        group_question_list[0].id = None # with 1 question, we only have 1 group question
+                        self.session.add(group_question_list[0])
+                        self.session.commit()
+                        group_question_id = group_question_list[0].id
+
+                    for question_idx, question in enumerate(processed_question_list):
+                        question.id = uniqid_list[question_idx].to_uniqid_number()
+                        if group_question_id:
+                            question.quiz_question_group_id = group_question_id
+                        # new_question_list.append(question)
+                        self.session.add(question)
+                        self.session.commit()
+                        id_map_list.append({'original_id': original_question_id_list[question_idx],
+                                            'new_id': question.id,
+                                            'level': question.level})
                 
-
-            self.session.add_all(processed_question_list)
-            self.session.commit()
+            # if new_question_list:
+            #     self.session.add_all(new_question_list)
+            #     self.session.commit()
 
             logger.info(f"Imported {len(processed_question_list)} questions")
-
-            return original_question_id_list, processed_question_list
+            return id_map_list
         
         except Exception as e:
             logger.error(f"Error processing questions: {e}")
-            return [], []
+            return []
         
-    def _create_collection(self, question_list, level, grade_id, subject_id):
+    def _create_collection(self, id_map_list, level, grade_id, subject_id):
         collection_name = {0: 'Cấp độ ngẫu nhiên', 1: 'Cấp độ nhận biết', 2: ' Cấp độ thông hiểu', 3: 'Cấp độ vận dụng', 4: 'Cấp độ vận dụng cao'}.get(level)
         try:   
-            if question_list:
+            if id_map_list:
                 collection = QuizCollectionGroup(
                     id = self._get_uniqid(ObjectTypeStrMapping[QuizCollectionGroupType]),
                     name = collection_name,
                     grade_id=grade_id,
                     subject_id=subject_id,
-                    quiz_count=len(question_list),
+                    quiz_count=len(id_map_list),
                 )
                 self.session.add(collection)
                 self.session.flush()
@@ -471,19 +557,19 @@ class Processor:
                 quiz_collection_list = []
                 question_id_list = []
 
-                for _question in question_list:
-                    question = _question[0]
-                    original_question_id = _question[1]
-                    question_id_list.append([original_question_id, question.id])
+                for id_map in id_map_list:
+                    question_id = id_map.get('new_id')
+                    original_question_id = id_map.get('original_id')
+                    question_id_list.append([original_question_id, question_id])
                     quiz_collection_list.append(QuizCollection(
                         id = self._get_uniqid(ObjectTypeStrMapping[QuizCollectionType]),
-                        quiz_id = question.id,
+                        quiz_id = question_id,
                         quiz_collection_group_id = collection.id
                     ))
                 self.session.add_all(quiz_collection_list)
                 self.session.commit()
 
-                logger.info(f"Created `{collection_name}` collection for {len(question_list)} questions")
+                logger.info(f"Created `{collection_name}` collection for {len(id_map_list)} questions")
                 collection_item = [collection, question_id_list]
                 return collection_item
         except Exception as e:
@@ -502,19 +588,19 @@ class Processor:
 
             logger.info(f"Start processing collections for {len(question_item_list)} questions")
 
-            original_question_id_list, processed_question_list = self._process_collection(question_item_list)
-            for current_position, question in enumerate(processed_question_list):
-                level = question.level
+            id_map_list = self._process_collection(question_item_list)
+            for id_map in id_map_list:
+                level = id_map.get('level')
                 if level == 0:
-                    nonlevel_question_list.append([question, original_question_id_list[current_position]])
+                    nonlevel_question_list.append(id_map)
                 elif level == 1:
-                    nb_level_question_list.append([question, original_question_id_list[current_position]])
+                    nb_level_question_list.append(id_map)
                 elif level == 2:
-                    th_level_question_list.append([question, original_question_id_list[current_position]])
+                    th_level_question_list.append(id_map)
                 elif level == 3:
-                    vd_level_question_list.append([question, original_question_id_list[current_position]])
+                    vd_level_question_list.append(id_map)
                 elif level == 4:
-                    vdc_level_question_list.append([question, original_question_id_list[current_position]])
+                    vdc_level_question_list.append(id_map)
 
             collection_list = []
             collection_list.append(self._create_collection(nonlevel_question_list, 0, grade_id, subject_id))
@@ -533,19 +619,20 @@ class Processor:
             logger.error(f"Error processing collections: {e}")
             return []
 
-    def process_theory_examples(self, theory_id: int, course_lecture_id: int, question_item_list):
+    def process_theory_examples(self, theory_id: int, course_lecture_id: int, question_item_list: List[Dict[str, Any]]) -> List[CourseIDMapping]:
         try:
             logger.info(f"Start processing theory examples for theory {theory_id}: {len(question_item_list)} questions")
-            original_question_id_list, processed_question_list = self._process_collection(question_item_list)
+            # original_question_id_list, processed_question_id_list = self._process_collection(question_item_list)
+            id_map_list = self._process_collection(question_item_list)
             theory_example_list = []
             question_id_mapping_list = []
-            for current_position, question in enumerate(processed_question_list):
+            for current_position, id_map in enumerate(id_map_list):
                 theory_example_list.append(TheoryExample(
                     theory_id = theory_id,
-                    question_id = question.id,
+                    question_id = id_map.get('new_id'),
                     position = current_position
                 ))
-                question_id_mapping_list.append(self.create_course_id_mapping(original_question_id_list[current_position], question.id, 'question', course_lecture_id, 'insert'))
+                question_id_mapping_list.append(self.create_course_id_mapping(id_map.get('original_id'), id_map.get('new_id'), 'question', course_lecture_id, 'insert'))
 
             self.session.add_all(theory_example_list)
             self.session.commit()
@@ -554,8 +641,8 @@ class Processor:
         except Exception as e:
             logger.error(f"Error processing theory examples: {e}")
             return []
-
-    def process_media(self, media_data: Dict[str, Any]):
+ 
+    def process_media(self, media_data: Dict[str, Any]) -> Media:
         try:
             media = Media(
                 id = self._get_uniqid(ObjectTypeStrMapping[MediaType]),
@@ -584,4 +671,24 @@ class Processor:
         logger.info(f"ID mapping for {task_name}: {parent_new_id} {entity_type}: {original_id} -> {new_id}")
 
         return course_id_mapping
+    
+
+
+    # Sync utils
+    def _get_id_mapping_list(self, original_id: int, entity_type: str) -> List[CourseIDMapping]:
+        try:
+            return self.session_import.query(CourseIDMapping).filter(
+                CourseIDMapping.original_id == original_id,
+                CourseIDMapping.entity_type == entity_type
+            ).all()
+        except Exception as e:
+            logger.error(f"Error finding id mapping list for `{entity_type}` - {original_id}: {e}")
+            return []
+        
+    def _is_changed(self, published_at: str, log: CourseIDMapping) -> bool:
+        converted_published_at = datetime.fromisoformat(published_at.rstrip('Z')) 
+        return converted_published_at > log.created_at
+    
+    def _get_current_position(self, course_id: int) -> int:
+        return 1 + self.session_import.query(CourseLecture).filter(CourseLecture.course_id == course_id).order_by(CourseLecture.id.desc()).first().position
     
