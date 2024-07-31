@@ -496,7 +496,7 @@ class Processor:
     def _process_collection(self, question_item_list):
         try:
             id_map_list = []
-            # new_question_list = []
+            new_question_list = []
             logger.info(f"Start importing {len(question_item_list)} questions") 
 
             for question_dict in question_item_list:
@@ -522,16 +522,15 @@ class Processor:
                         question.id = uniqid_list[question_idx].to_uniqid_number()
                         if group_question_id:
                             question.quiz_question_group_id = group_question_id
-                        # new_question_list.append(question)
-                        self.session.add(question)
-                        self.session.commit()
+                        new_question_list.append(question)
+
                         id_map_list.append({'original_id': original_question_id_list[question_idx],
                                             'new_id': question.id,
                                             'level': question.level})
                 
-            # if new_question_list:
-            #     self.session.add_all(new_question_list)
-            #     self.session.commit()
+            if new_question_list:
+                self.session.add_all(new_question_list)
+                self.session.commit()
 
             logger.info(f"Imported {len(processed_question_list)} questions")
             return id_map_list
