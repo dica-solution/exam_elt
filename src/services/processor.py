@@ -49,10 +49,10 @@ class Processor:
             links["audio_links"].append(question_audio)
         if guide_videos:
             for video in guide_videos:
-                links["video_links"].append(video.get('url', ''))
+                links["video_links"].append(video.get('url'))
         if question_images:
             for image in question_images:
-                links["image_links"].append(image.get('url', ''))
+                links["image_links"].append(image.get('url'))
 
         return links
 
@@ -63,8 +63,8 @@ class Processor:
             created_at = course_data.get('createdAt'),
             updated_at = course_data.get('updatedAt'),
             # published_at = course_data.get('publishedAt'), # unpublish course
-            title = course_data.get('title', ''),
-            description = course_data.get('description', ''),
+            title = course_data.get('title'),
+            description = course_data.get('description'),
             grade_id = self._get_mapped_id(course_data.get('grade').get('id'), GradeIDMapping),
             subject_id = self._get_mapped_id(course_data.get('subject').get('id'), SubjectIDMapping),
             lecture_count = len(course_data.get('table_of_contents')),
@@ -79,7 +79,7 @@ class Processor:
             id = uniqid,
             created_at = lecture_data.get('createdAt'),
             updated_at = lecture_data.get('updatedAt'),
-            title = lecture_data.get('title', ''),
+            title = lecture_data.get('title'),
             content_id = content_id,
             content_type = content_type
         )
@@ -162,9 +162,9 @@ class Processor:
         uniqid = self._get_uniqid(ObjectTypeStrMapping[TheoryType])
         theory = Theory(
             id = uniqid,
-            title = self.transform_text(theory_data.get('title', '')),
-            original_text = self.transform_text(theory_data.get('content', '')),
-            parsed_text = self.transform_text(theory_data.get('content', ''))
+            title = self.transform_text(theory_data.get('title')),
+            original_text = self.transform_text(theory_data.get('content')),
+            parsed_text = self.transform_text(theory_data.get('content'))
         )
         return theory
 
@@ -181,11 +181,11 @@ class Processor:
         if is_existed:
             return question, original_question_id, is_existed
         else:
-            original_text = self.transform_text(question_dict.get('question_content', ''))
+            original_text = self.transform_text(question_dict.get('question_content'))
             parsed_text = original_text
             quiz_type = QuizTypeSingleChoice if question_group_id == 0 else QuizTypeMultipleChoice
-            explanation = self.transform_text(question_dict.get('explanation', ''))
-            links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
+            explanation = self.transform_text(question_dict.get('explanation'))
+            links = self._process_links(question_dict.get('question_audio'), question_dict.get('guide_videos'), question_dict.get('question_images'))
             quiz_options = []
             for label_key in ['a', 'b', 'c', 'd']:
                 option_content = self.transform_text(question_dict.get(f'label_{label_key}'))
@@ -204,7 +204,7 @@ class Processor:
                 explanation = explanation,
                 links = json.dumps(links),
                 quiz_answer = quiz_answer,
-                level = self._process_level(question_dict.get('question_levels', [])),
+                level = self._process_level(question_dict.get('question_levels')),
             )
             return question, original_question_id, is_existed
     
@@ -214,13 +214,13 @@ class Processor:
         if is_existed:
             return question, original_question_id, is_existed
         else:
-            original_text = self.transform_text(question_dict.get('question_content', ''))
+            original_text = self.transform_text(question_dict.get('question_content'))
             parsed_text = original_text
             quiz_type = QuizTypeSingleEssay
-            explanation = self.transform_text(question_dict.get('explanation', ''))
-            links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
+            explanation = self.transform_text(question_dict.get('explanation'))
+            links = self._process_links(question_dict.get('question_audio'), question_dict.get('guide_videos'), question_dict.get('question_images'))
             quiz_options = ''
-            quiz_answer = self.transform_text(question_dict.get('answer', ''))
+            quiz_answer = self.transform_text(question_dict.get('answer'))
             
             question = QuizQuestion(
                 quiz_question_group_id = question_group_id,
@@ -231,7 +231,7 @@ class Processor:
                 explanation = explanation,
                 links = json.dumps(links),
                 quiz_answer = quiz_answer,
-                level = self._process_level(question_dict.get('question_levels', [])),
+                level = self._process_level(question_dict.get('question_levels')),
             )
             return question, original_question_id, is_existed
     
@@ -241,16 +241,16 @@ class Processor:
         original_question_ids = []
         question_group_id = group_question_dict.get('id')
         
-        for question_dict in group_question_dict.get('related_quizzes', []):
+        for question_dict in group_question_dict.get('related_quizzes'):
             question, original_question_id, is_existed = self._process_quiz(question_dict, question_group_id)
             question_list.append(question)
             original_question_ids.append(original_question_id)
             flag = flag and is_existed
 
         if flag is False:
-            original_text = self.transform_text(group_question_dict.get('group_content', ''))
+            original_text = self.transform_text(group_question_dict.get('group_content'))
             parsed_text = original_text
-            links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
+            links = self._process_links(group_question_dict.get('group_audio'), group_question_dict.get('guide_videos'), group_question_dict.get('group_images'))
             question_group = QuizQuestionGroup(
                 id = question_group_id,
                 original_text = original_text,
@@ -274,9 +274,9 @@ class Processor:
             flag = flag and is_existed
         
         if flag is False:
-            original_text = self.transform_text(group_question_dict.get('group_content', ''))
+            original_text = self.transform_text(group_question_dict.get('group_content'))
             parsed_text = original_text
-            links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
+            links = self._process_links(group_question_dict.get('group_audio'), group_question_dict.get('guide_videos'), group_question_dict.get('group_images'))
             question_group = QuizQuestionGroup(
                 id = question_group_id,
                 original_text = original_text,
@@ -294,13 +294,13 @@ class Processor:
         if is_existed:
             return question, original_question_id, is_existed
         else:
-            original_text = self.transform_text(question_dict.get('question_content', ''))
+            original_text = self.transform_text(question_dict.get('question_content'))
             parsed_text = original_text
             quiz_type = QuizTypeBlankFilling
-            explanation = self.transform_text(question_dict.get('explanation', ''))
-            links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
+            explanation = self.transform_text(question_dict.get('explanation'))
+            links = self._process_links(question_dict.get('question_audio'), question_dict.get('guide_videos'), question_dict.get('question_images'))
             quiz_options = ''
-            quiz_answer = self.transform_text(question_dict.get('answer', ''))
+            quiz_answer = self.transform_text(question_dict.get('answer'))
 
             question = QuizQuestion(
                 quiz_question_group_id = question_group_id,
@@ -311,7 +311,7 @@ class Processor:
                 explanation = explanation,
                 links = json.dumps(links),
                 quiz_answer = quiz_answer,
-                level = self._process_level(question_dict.get('question_levels', [])),
+                level = self._process_level(question_dict.get('question_levels')),
             )
             return question, original_question_id, is_existed
     
@@ -321,16 +321,16 @@ class Processor:
         original_question_ids = []
         question_group_id = group_question_dict.get('id')
         
-        for question_dict in group_question_dict.get('related_questions', []):
+        for question_dict in group_question_dict.get('related_questions'):
             question, original_question_id, is_existed = self._process_single_text_entry(question_dict, question_group_id)
             question_list.append(question)
             original_question_ids.append(original_question_id)
             flag = flag and is_existed
         
         if flag is False:
-            original_text = self.transform_text(group_question_dict.get('group_content', ''))
+            original_text = self.transform_text(group_question_dict.get('group_content'))
             parsed_text = original_text
-            links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
+            links = self._process_links(group_question_dict.get('group_audio'), group_question_dict.get('guide_videos'), group_question_dict.get('group_images'))
             question_group = QuizQuestionGroup(
                 id = question_group_id,
                 original_text = original_text,
@@ -347,11 +347,11 @@ class Processor:
         if is_existed:
             return question, original_question_id, is_existed
         else:
-            original_text = self.transform_text(question_dict.get('question_content', ''))
+            original_text = self.transform_text(question_dict.get('question_content'))
             parsed_text = original_text
             quiz_type = QuizTypeSingleChoice if question_group_id == 0 else QuizTypeMultipleChoice
-            explanation = self.transform_text(question_dict.get('explanation', ''))
-            links = self._process_links(question_dict.get('question_audio', ''), question_dict.get('guide_videos', []), question_dict.get('question_images', []))
+            explanation = self.transform_text(question_dict.get('explanation'))
+            links = self._process_links(question_dict.get('question_audio'), question_dict.get('guide_videos'), question_dict.get('question_images'))
             quiz_answer = question_dict.get('answer', False)
             quiz_options = []
             if quiz_answer is True:
@@ -370,7 +370,7 @@ class Processor:
                 explanation = explanation,
                 links = json.dumps(links),
                 quiz_answer = quiz_answer,
-                level = self._process_level(question_dict.get('question_levels', [])),
+                level = self._process_level(question_dict.get('question_levels')),
             )
             return question, original_question_id, is_existed
     
@@ -380,16 +380,16 @@ class Processor:
         original_question_ids = []
         question_group_id = group_question_dict.get('id')
         
-        for question_dict in group_question_dict.get('related_questions', []):
+        for question_dict in group_question_dict.get('related_questions'):
             question, original_question_id, is_existed = self._process_single_quiz_true_false(question_dict, question_group_id)
             question_list.append(question)
             original_question_ids.append(original_question_id)
             flag = flag and is_existed
         
         if flag is False:
-            original_text = self.transform_text(group_question_dict.get('group_content', ''))
+            original_text = self.transform_text(group_question_dict.get('group_content'))
             parsed_text = original_text
-            links = self._process_links(group_question_dict.get('group_audio', ''), group_question_dict.get('guide_videos', []), group_question_dict.get('group_images', []))
+            links = self._process_links(group_question_dict.get('group_audio'), group_question_dict.get('guide_videos'), group_question_dict.get('group_images'))
             question_group = QuizQuestionGroup(
                 id = question_group_id,
                 original_text = original_text,
@@ -496,7 +496,7 @@ class Processor:
     def _process_collection(self, question_item_list):
         try:
             id_map_list = []
-            # new_question_list = []
+            new_question_list = []
             logger.info(f"Start importing {len(question_item_list)} questions") 
 
             for question_dict in question_item_list:
@@ -522,16 +522,15 @@ class Processor:
                         question.id = uniqid_list[question_idx].to_uniqid_number()
                         if group_question_id:
                             question.quiz_question_group_id = group_question_id
-                        # new_question_list.append(question)
-                        self.session.add(question)
-                        self.session.commit()
+                        new_question_list.append(question)
+
                         id_map_list.append({'original_id': original_question_id_list[question_idx],
                                             'new_id': question.id,
                                             'level': question.level})
                 
-            # if new_question_list:
-            #     self.session.add_all(new_question_list)
-            #     self.session.commit()
+            if new_question_list:
+                self.session.add_all(new_question_list)
+                self.session.commit()
 
             logger.info(f"Imported {len(processed_question_list)} questions")
             return id_map_list
@@ -646,11 +645,11 @@ class Processor:
         try:
             media = Media(
                 id = self._get_uniqid(ObjectTypeStrMapping[MediaType]),
-                name = media_data.get('name', ''),
-                url = media_data.get('url', ''),
-                title = media_data.get('title', ''),
-                caption = media_data.get('caption', ''),
-                mine_type = media_data.get('mine_type', ''),
+                name = media_data.get('name'),
+                url = media_data.get('url'),
+                title = media_data.get('title'),
+                caption = media_data.get('caption'),
+                mine_type = media_data.get('mine_type'),
             )
             # self.session.add(media)
             # self.session.flush()
