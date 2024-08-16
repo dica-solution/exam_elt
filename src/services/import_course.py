@@ -90,7 +90,7 @@ class ImportCourse:
 
                                         course_lecture_lecture_theory, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=new_lecture_theory_id, 
                                                                                                                                 parent_id=course_lecture_chapter_lecture.id, 
-                                                                                                                                level=3, is_free=is_free, node_type=2, position=current_position)
+                                                                                                                                level=3, is_free=is_free, node_type=1, position=current_position)
                                         self.session_import.add(course_lecture_lecture_theory)
                                         self.session_import.flush()
                                         lecture_count += 1

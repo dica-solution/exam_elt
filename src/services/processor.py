@@ -5,11 +5,13 @@ import requests
 from datetime import datetime
 from typing import Any, Dict, List
 from sqlalchemy.orm import Session
+from sqlalchemy import update
 from src.models.exam_bank_models import Uniqid, QuizCollectionGroup, QuizCollection, TheoryExample, QuizQuestion, QuizQuestionGroup, Course, Lecture, \
     Theory, CourseLecture, Media, CourseIDMapping
 from src.commons import *
 from src.config.config import Settings
 from src.services.logger_config import setup_logger
+# from src.services.utils import Utils
 
 logger = setup_logger()
 
@@ -540,7 +542,7 @@ class Processor:
             return []
         
     def _create_collection(self, id_map_list, level, grade_id, subject_id):
-        collection_name = {0: 'Cấp độ ngẫu nhiên', 1: 'Cấp độ nhận biết', 2: ' Cấp độ thông hiểu', 3: 'Cấp độ vận dụng', 4: 'Cấp độ vận dụng cao'}.get(level)
+        collection_name = {0: 'Cấp độ ngẫu nhiên', 1: 'Cấp độ nhận biết', 2: 'Cấp độ thông hiểu', 3: 'Cấp độ vận dụng', 4: 'Cấp độ vận dụng cao'}.get(level)
         try:   
             if id_map_list:
                 collection = QuizCollectionGroup(
@@ -674,20 +676,102 @@ class Processor:
 
 
     # Sync utils
-    def _get_id_mapping_list(self, original_id: int, entity_type: str) -> List[CourseIDMapping]:
-        try:
-            return self.session_import.query(CourseIDMapping).filter(
-                CourseIDMapping.original_id == original_id,
-                CourseIDMapping.entity_type == entity_type
-            ).all()
-        except Exception as e:
-            logger.error(f"Error finding id mapping list for `{entity_type}` - {original_id}: {e}")
-            return []
+    # def _get_id_mapping_list(self, original_id: int, entity_type: str) -> List[CourseIDMapping]:
+    #     try:
+    #         return self.session.query(CourseIDMapping).filter(
+    #             CourseIDMapping.original_id == original_id,
+    #             CourseIDMapping.entity_type == entity_type
+    #         ).order_by(CourseIDMapping.id).all()
+    #     except Exception as e:
+    #         logger.error(f"Error finding id mapping list for `{entity_type}` - {original_id}: {e}")
+    #         print(e)
+    #         return []
         
-    def _is_changed(self, published_at: str, log: CourseIDMapping) -> bool:
-        converted_published_at = datetime.fromisoformat(published_at.rstrip('Z')) 
-        return converted_published_at > log.created_at
+    # def _is_changed(self, updated_at: str, log: CourseIDMapping) -> bool:
+    #     converted_updated_at = datetime.fromisoformat(updated_at.rstrip('Z')) 
+    #     return converted_updated_at > log.created_at
     
-    def _get_current_position(self, course_id: int) -> int:
-        return 1 + self.session_import.query(CourseLecture).filter(CourseLecture.course_id == course_id).order_by(CourseLecture.id.desc()).first().position
+    # # def _get_current_position(self, course_id: int) -> int:
+    # #     return 1 + self.session.query(CourseLecture).filter(CourseLecture.course_id == course_id).order_by(CourseLecture.id.desc()).first().position
+    
+    # def _update_positions(self, course_id, course_lecture_id):
+    #     position = self.session.query(CourseLecture).filter(CourseLecture.id == course_lecture_id).first().position
+    #     len_position = self.session.query(CourseLecture).filter(CourseLecture.course_id == course_id).count()
+    #     if position < len_position-1:
+    #         updated_list = self.session.query(CourseLecture).filter(
+    #             CourseLecture.course_id == course_id,
+    #             CourseLecture.position >= position
+    #         ).order_by(
+    #             CourseLecture.position.asc()
+    #         ).update(
+    #             {CourseLecture.position: CourseLecture.position + 1}, synchronize_session=False
+    #         )
+    #         logger.info(f"Updated positions for {len(updated_list)} lectures - course {course_id}")
+    #     else:
+    #         logger.info(f"No lectures to update positions - course {course_id}")
+    
+    # def _get_content_id(self, course_lecture_id):
+    #     lecture_id = self.session.query(CourseLecture).filter(CourseLecture.id == course_lecture_id).first().lecture_id
+    #     content_id = self.session.query(Lecture).filter(Lecture.id == lecture_id).first().content_id
+    #     return int(content_id)
+
+    # def _update_record(self, table_model, record_id, values):
+    #     try:
+    #         statement = update(table_model).where(table_model.id == record_id).values(**values)
+    #         self.session.execute(statement)
+    #         self.session.commit()
+    #         logger.info(f"Record with ID {record_id} in table {table_model.__tablename__} updated successfully.")
+    #         return True
+    #     except Exception as e:
+    #         logger.error(f"Error updating record {record_id} in table {table_model.__tablename__}: {e}")
+    #         print(e)
+    #         return False
+    
+    # def _update_guide_videos(self, math_type_data_dict, course_id, lecture_count):
+    #     guide_videos = math_type_data_dict.get('guide_videos')
+    #     if guide_videos:
+    #         for guide_video in guide_videos:
+    #             guide_video_id = guide_video.get('id')
+    #             id_mapping_list = self._get_id_mapping_list(guide_video_id, 'media')
+    #             if id_mapping_list: # The guide video is already in the database
+    #                 if self._is_changed(guide_video.get('updatedAt'), id_mapping_list[0]): # Need to update all of guide videos
+    #                     update_mapping_list = []
+    #                     guide_video_title = guide_video.get('title')
+    #                     guide_video_url = guide_video.get('url')
+    #                     for id_mapping in id_mapping_list:
+    #                         update_mapping = {
+    #                             'id': self._get_content_id(id_mapping.new_id),
+    #                             'title': guide_video_title,
+    #                             'url': guide_video_url
+    #                         }
+    #                         update_mapping_list.append(update_mapping)
+    #                     self.session.bulk_update_mappings(Media, update_mapping_list)
+    #             else:
+    #                 media = self.process_media(guide_video)
+    #                 if media:
+    #                     self.session.add(media)
+    #                     guide_video_data_dict = math_type_data_dict.copy()
+    #                     guide_video_data_dict['title'] = 'Video'
+
+    #                     lecture_math_type_media = self.processor.process_lecture(lecture_data=guide_video_data_dict, content_id=media.id, content_type='video')
+    #                     self.session.add(lecture_math_type_media)
+
+
+    #     else:
+    #         pass # TODO: Remove imported guide videos
+
+    # def _update_chapters(self, course_data_dict):
+    #     chapters = course_data_dict.get('table_of_contents')
+    #     if chapters:
+    #         for chapter_idx, chapter_dict in enumerate(chapters):
+    #             id_mapping_list = self._get_id_mapping_list(chapter_dict.get('id'), 'chapter')
+    #             if id_mapping_list:
+    #                 pass # TODO: Update chapter
+    #             else: # Import new chapter
+
+
+
+
+
+
     
