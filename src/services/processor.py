@@ -542,7 +542,7 @@ class Processor:
             return []
         
     def _create_collection(self, id_map_list, level, grade_id, subject_id):
-        collection_name = {0: 'Cấp độ ngẫu nhiên', 1: 'Cấp độ nhận biết', 2: ' Cấp độ thông hiểu', 3: 'Cấp độ vận dụng', 4: 'Cấp độ vận dụng cao'}.get(level)
+        collection_name = {0: 'Cấp độ ngẫu nhiên', 1: 'Cấp độ nhận biết', 2: 'Cấp độ thông hiểu', 3: 'Cấp độ vận dụng', 4: 'Cấp độ vận dụng cao'}.get(level)
         try:   
             if id_map_list:
                 collection = QuizCollectionGroup(
