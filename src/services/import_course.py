@@ -228,7 +228,7 @@ class ImportCourse:
                                         self.session_import.add(lecture_practice_collection)
 
                                         course_lecture_lecture_practice_collection, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=lecture_practice_collection.id, 
-                                                                                                                                    parent_id=course_lecture_chapter_lecture.id, level=3, is_free=is_free, node_type=2, position=current_position)
+                                                                                                                                    parent_id=course_lecture_chapter_lecture.id, level=3, is_free=is_free, node_type=1, position=current_position)
                                         self.session_import.add(course_lecture_lecture_practice_collection)
                                         self.session_import.flush()
                                         lecture_count += 1
@@ -254,7 +254,7 @@ class ImportCourse:
                                         self.session_import.add(lecture_lecture_exam)
 
                                         course_lecture_lecture_exam, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=lecture_lecture_exam.id, 
-                                                                                                            parent_id=course_lecture_chapter_lecture.id, level=3, is_free=is_free, node_type=2, position=current_position)
+                                                                                                            parent_id=course_lecture_chapter_lecture.id, level=3, is_free=is_free, node_type=1, position=current_position)
                                         self.session_import.add(course_lecture_lecture_exam)
                                         self.session_import.flush()
                                         lecture_count += 1
