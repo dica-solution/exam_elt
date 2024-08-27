@@ -12,6 +12,7 @@ from src.commons import *
 from src.config.config import Settings
 from src.services.logger_config import setup_logger
 # from src.services.utils import Utils
+from src.services.import_exam import ImportExam
 
 logger = setup_logger()
 
@@ -24,9 +25,10 @@ def retry(func):
 
 
 class Processor:
-    def __init__(self, session: Session, settings: Settings):
-        self.session = session
+    def __init__(self, session_import: Session, session_log: Session, settings: Settings):
+        self.session = session_import
         self.settings = settings
+        self.exam_importer = ImportExam(session_import, session_log, settings)
     
     def _get_mapped_id(self, id: int, mapped_dict: Dict[int, int]) -> int:
         return mapped_dict.get(id, 0)
@@ -138,6 +140,8 @@ class Processor:
             url = self.settings.api_type_of_maths_detail.replace('{TYPE_ID}', str(id))
         elif type == 'quiz_collection':
             url = self.settings.api_question_collection_detail.replace('{QUESTION_GROUP_ID}', str(id))
+        elif type == 'paper_exam_collection':
+            url = self.settings.api_paper_exam_collection_detail.replace('{PAPER_EXAM_COLLECTION_ID}', str(id))
         else:
             logger.error(f'Invalid type: {type}')
         
@@ -174,7 +178,12 @@ class Processor:
         flag = self.session.query(CourseIDMapping).filter(CourseIDMapping.original_id == original_question_id,
                                                            CourseIDMapping.entity_type == 'question').first()
         if flag is not None:
-            return self.session.query(QuizQuestion).filter(QuizQuestion.id == flag.new_id).first(), True
+            question = self.session.query(QuizQuestion).filter(QuizQuestion.id == flag.new_id).first()
+            if question is not None:
+                return question, True
+            else:
+                return None, False
+            # return self.session.query(QuizQuestion).filter(QuizQuestion.id == flag.new_id).first(), True
         return None, False
 
     def _process_quiz(self, question_dict: Dict[str, Any], question_group_id: int):
@@ -496,7 +505,7 @@ class Processor:
 
 
     def _process_collection(self, question_item_list):
-        try:
+        # try:
             id_map_list = []
             new_question_list = []
             logger.info(f"Start importing {len(question_item_list)} questions") 
@@ -521,6 +530,9 @@ class Processor:
                         group_question_id = group_question_list[0].id
 
                     for question_idx, question in enumerate(processed_question_list):
+                        if question is None:
+                            print(original_question_id_list)
+                            print(processed_question_list)
                         question.id = uniqid_list[question_idx].to_uniqid_number()
                         if group_question_id:
                             question.quiz_question_group_id = group_question_id
@@ -537,9 +549,9 @@ class Processor:
             logger.info(f"Imported {len(processed_question_list)} questions")
             return id_map_list
         
-        except Exception as e:
-            logger.error(f"Error processing questions: {e}")
-            return []
+        # except Exception as e:
+        #     logger.error(f"Error processing questions: {e}")
+        #     return []
         
     def _create_collection(self, id_map_list, level, grade_id, subject_id):
         collection_name = {0: 'Cấp độ ngẫu nhiên', 1: 'Cấp độ nhận biết', 2: 'Cấp độ thông hiểu', 3: 'Cấp độ vận dụng', 4: 'Cấp độ vận dụng cao'}.get(level)
@@ -675,100 +687,42 @@ class Processor:
     
 
 
-    # Sync utils
-    # def _get_id_mapping_list(self, original_id: int, entity_type: str) -> List[CourseIDMapping]:
-    #     try:
-    #         return self.session.query(CourseIDMapping).filter(
-    #             CourseIDMapping.original_id == original_id,
-    #             CourseIDMapping.entity_type == entity_type
-    #         ).order_by(CourseIDMapping.id).all()
-    #     except Exception as e:
-    #         logger.error(f"Error finding id mapping list for `{entity_type}` - {original_id}: {e}")
-    #         print(e)
-    #         return []
-        
-    # def _is_changed(self, updated_at: str, log: CourseIDMapping) -> bool:
-    #     converted_updated_at = datetime.fromisoformat(updated_at.rstrip('Z')) 
-    #     return converted_updated_at > log.created_at
-    
-    # # def _get_current_position(self, course_id: int) -> int:
-    # #     return 1 + self.session.query(CourseLecture).filter(CourseLecture.course_id == course_id).order_by(CourseLecture.id.desc()).first().position
-    
-    # def _update_positions(self, course_id, course_lecture_id):
-    #     position = self.session.query(CourseLecture).filter(CourseLecture.id == course_lecture_id).first().position
-    #     len_position = self.session.query(CourseLecture).filter(CourseLecture.course_id == course_id).count()
-    #     if position < len_position-1:
-    #         updated_list = self.session.query(CourseLecture).filter(
-    #             CourseLecture.course_id == course_id,
-    #             CourseLecture.position >= position
-    #         ).order_by(
-    #             CourseLecture.position.asc()
-    #         ).update(
-    #             {CourseLecture.position: CourseLecture.position + 1}, synchronize_session=False
-    #         )
-    #         logger.info(f"Updated positions for {len(updated_list)} lectures - course {course_id}")
-    #     else:
-    #         logger.info(f"No lectures to update positions - course {course_id}")
-    
-    # def _get_content_id(self, course_lecture_id):
-    #     lecture_id = self.session.query(CourseLecture).filter(CourseLecture.id == course_lecture_id).first().lecture_id
-    #     content_id = self.session.query(Lecture).filter(Lecture.id == lecture_id).first().content_id
-    #     return int(content_id)
+    def process_paper_exam_collection(self, paper_exam_collection_list, grade_id, subject_id):
+        paper_exam_collection_group_list = []
+        paper_exam_collections_list = []
+        for paper_exam_collection_data in paper_exam_collection_list:
+            des_exam_id_list = []
+            paper_exam_collections = self.get_data_dict(id=paper_exam_collection_data.get('id'), type='paper_exam_collection')
+            for paper_exam in paper_exam_collections.get('paperExams'):
+                exam_id = paper_exam.get('id')
+                imported_des_exam_id = self.exam_importer.import_exam(exam_id)
+                if imported_des_exam_id:
+                    des_exam_id_list.append(imported_des_exam_id)
 
-    # def _update_record(self, table_model, record_id, values):
-    #     try:
-    #         statement = update(table_model).where(table_model.id == record_id).values(**values)
-    #         self.session.execute(statement)
-    #         self.session.commit()
-    #         logger.info(f"Record with ID {record_id} in table {table_model.__tablename__} updated successfully.")
-    #         return True
-    #     except Exception as e:
-    #         logger.error(f"Error updating record {record_id} in table {table_model.__tablename__}: {e}")
-    #         print(e)
-    #         return False
-    
-    # def _update_guide_videos(self, math_type_data_dict, course_id, lecture_count):
-    #     guide_videos = math_type_data_dict.get('guide_videos')
-    #     if guide_videos:
-    #         for guide_video in guide_videos:
-    #             guide_video_id = guide_video.get('id')
-    #             id_mapping_list = self._get_id_mapping_list(guide_video_id, 'media')
-    #             if id_mapping_list: # The guide video is already in the database
-    #                 if self._is_changed(guide_video.get('updatedAt'), id_mapping_list[0]): # Need to update all of guide videos
-    #                     update_mapping_list = []
-    #                     guide_video_title = guide_video.get('title')
-    #                     guide_video_url = guide_video.get('url')
-    #                     for id_mapping in id_mapping_list:
-    #                         update_mapping = {
-    #                             'id': self._get_content_id(id_mapping.new_id),
-    #                             'title': guide_video_title,
-    #                             'url': guide_video_url
-    #                         }
-    #                         update_mapping_list.append(update_mapping)
-    #                     self.session.bulk_update_mappings(Media, update_mapping_list)
-    #             else:
-    #                 media = self.process_media(guide_video)
-    #                 if media:
-    #                     self.session.add(media)
-    #                     guide_video_data_dict = math_type_data_dict.copy()
-    #                     guide_video_data_dict['title'] = 'Video'
+            paper_exam_collection_group = QuizCollectionGroup(
+                id = self._get_uniqid(ObjectTypeStrMapping[QuizCollectionGroupType]),
+                name = paper_exam_collection_data.get('title'),
+                grade_id=grade_id,
+                subject_id=subject_id,
+                quiz_count=len(des_exam_id_list),
+            )
+            self.session.add(paper_exam_collection_group)
+            self.session.flush()
 
-    #                     lecture_math_type_media = self.processor.process_lecture(lecture_data=guide_video_data_dict, content_id=media.id, content_type='video')
-    #                     self.session.add(lecture_math_type_media)
+            quiz_collection_list = []
+            for des_exam_id in des_exam_id_list:
+                paper_exam_collection = QuizCollection(
+                    id = self._get_uniqid(ObjectTypeStrMapping[QuizCollectionType]),
+                    quiz_id = des_exam_id,
+                    quiz_collection_group_id = paper_exam_collection_group.id
+                )
+                quiz_collection_list.append(paper_exam_collection)
+            self.session.add_all(quiz_collection_list)
+            self.session.commit()
+            paper_exam_collection_group_list.append(paper_exam_collection_group)
+            paper_exam_collections_list.append(paper_exam_collections)
 
-
-    #     else:
-    #         pass # TODO: Remove imported guide videos
-
-    # def _update_chapters(self, course_data_dict):
-    #     chapters = course_data_dict.get('table_of_contents')
-    #     if chapters:
-    #         for chapter_idx, chapter_dict in enumerate(chapters):
-    #             id_mapping_list = self._get_id_mapping_list(chapter_dict.get('id'), 'chapter')
-    #             if id_mapping_list:
-    #                 pass # TODO: Update chapter
-    #             else: # Import new chapter
-
+        return paper_exam_collection_group_list, paper_exam_collections_list
 
 
 
