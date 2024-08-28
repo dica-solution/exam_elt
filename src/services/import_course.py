@@ -240,28 +240,6 @@ class ImportCourse:
                                             course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=question_ids[0], new_id=question_ids[1], entity_type='question',
                                                                                                                 parent_new_id=course_lecture_lecture_practice_collection.id, task_name='insert'))
 
-                            
-                            # exam_list = lecture_data_dict.get('paper_exams')
-                            # if exam_list:
-                            #     for exam in exam_list:
-                            #         exam_id = exam.get('id')
-                            #         imported_des_exam_id = self.exam_importer.import_exam(exam_id)
-
-                            #         if imported_des_exam_id:
-                            #             exam_data_dict = exam.copy()
-                            #             exam_data_dict['title'] = 'Exam'
-                            #             lecture_lecture_exam = self.processor.process_lecture(lecture_data=exam_data_dict, content_id=imported_des_exam_id, content_type='exams')
-                            #             self.session_import.add(lecture_lecture_exam)
-
-                            #             course_lecture_lecture_exam, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=lecture_lecture_exam.id, 
-                            #                                                                                 parent_id=course_lecture_chapter_lecture.id, level=3, is_free=is_free, node_type=1, position=current_position)
-                            #             self.session_import.add(course_lecture_lecture_exam)
-                            #             self.session_import.flush()
-                            #             lecture_count += 1
-
-                            #             course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=exam_id, new_id=course_lecture_lecture_exam.id,
-                            #                                                                                 entity_type='exam', parent_new_id=course_lecture_chapter_lecture.id, task_name='insert'))
-
                 print(chapter_dict.get('title'))
 
         paper_exam_collections = course_data_dict.get('paper_exam_collections')
@@ -292,6 +270,29 @@ class ImportCourse:
                                                                                     parent_new_id=new_course_id,
                                                                                     task_name='insert'))
                 print(paper_exam_collections[i].get('title'))
+
+        exam_list = lecture_data_dict.get('paper_exams')
+        if exam_list:
+            for exam in exam_list:
+                exam_id = exam.get('id')
+                imported_des_exam_id = self.exam_importer.import_exam(exam_id)
+
+                if imported_des_exam_id:
+                    exam_data_dict = exam.copy()
+                    exam_data_dict['title'] = exam.get('title')
+                    lecture_course_exam = self.processor.process_lecture(lecture_data=exam_data_dict, content_id=imported_des_exam_id, content_type='mock_test')
+                    self.session_import.add(lecture_course_exam)
+
+                    course_lecture_course_exam, current_position = self.processor.process_course_lecture(course_id=new_course_id, lecture_id=lecture_course_exam.id, 
+                                                                                        parent_id=0, level=1, is_free=is_free, node_type=1, position=current_position)
+                    self.session_import.add(course_lecture_course_exam)
+                    self.session_import.flush()
+                    lecture_count += 1
+
+                    course_id_mapping_list.append(self.processor.create_course_id_mapping(original_id=exam_id, new_id=course_lecture_course_exam.id,
+                                                                                        entity_type='exam', parent_new_id=new_course_id, task_name='insert'))
+                    print(exam.get('title'))
+
 
 
             
