@@ -257,7 +257,7 @@ class ImportCourse:
                     parent_id=0,
                     level=1,
                     is_free=is_free,
-                    node_type=1,
+                    node_type=2,
                     position=current_position
                 )
                 self.session_import.add(course_lecture_course_paper_exam_collection)
